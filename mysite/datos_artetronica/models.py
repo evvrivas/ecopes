@@ -35,7 +35,7 @@ from io import BytesIO
 
 import sys
 from sys import getsizeof
-
+from django.conf import settings
 
 TIPO_USUARIO=(
 			('EL_LECTOR', 'EL_LECTOR'),			
@@ -57,7 +57,7 @@ ESTADO_USUARIO=(
 
 
 class UserProfile(models.Model):
-		 usuario=models.ForeignKey(settings.AUTH_USER_MODEL)
+		 usuario=models.ForeignKey(settings.AUTH_PROFILE_MODULE)
 		 tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_LECTOR",null=True)
 		 codigo=models.CharField(max_length=30,blank=True,null=True)
 		 def __unicode__(self):
@@ -68,7 +68,7 @@ class UserProfile(models.Model):
 
 
 class Codigo(models.Model):
-	usuario=models.ForeignKey('User',unique=True)
+	usuario=models.ForeignKey(settings.AUTH_PROFILE_MODULE)
 	codigo=models.CharField(max_length=30,null=True,blank=True)
 	def __str__(self):
 		return  self.codigo
