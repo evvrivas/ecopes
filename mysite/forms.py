@@ -38,14 +38,15 @@ class OpcionesForm(ModelForm):
 	
 	def __init__(self, nombre_pregunta,*args, **kwargs):
 		super(OpcionesForm, self).__init__(*args, **kwargs)		
-		self.fields['pregunta'].queryset=Preguntas.objects.filter(nombre=nombre_pregunta)
+		self.fields['pregunta'].queryset=Preguntas.objects.filter(pregunta=nombre_pregunta)
 
 
 class RespuestasForm(ModelForm):
 	class Meta:
 		model= Respuestas
+		exclude=[]
 		
 	def __init__(self, nombre_opcion,*args, **kwargs):
 		super(RespuestasForm, self).__init__(*args, **kwargs)		
-		self.fields['opcion'].queryset=Opciones.objects.filter(tienda=nombre_opcion)
+		self.fields['opcion'].queryset=Opciones.objects.filter(opcion=nombre_opcion)
 
