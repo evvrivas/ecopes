@@ -57,7 +57,7 @@ ESTADO_USUARIO=(
 
 
 class UserProfile(models.Model):
-		 usuario=models.ForeignKey('User',unique=True)
+		 usuario=models.ForeignKey(settings.AUTH_USER_MODEL)
 		 tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_LECTOR",null=True)
 		 codigo=models.CharField(max_length=30,blank=True,null=True)
 		 def __unicode__(self):
