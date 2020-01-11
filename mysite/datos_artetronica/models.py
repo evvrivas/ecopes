@@ -158,13 +158,12 @@ class Opciones(models.Model):
 
 
 class Respuestas(models.Model):
-		 opcion=models.ForeignKey('Opciones',blank=True,null=True)
-         respuesta=models.CharField(max_length=60,blank=True)
-                  
-         def __str__(self):
-         	return  self.respuesta
-         class Admin:
-         	list_display = ('respuesta')
+	opcion=models.ForeignKey('Opciones',blank=True,null=True)
+	respuesta=models.CharField(max_length=60,blank=True)
+	def __str__(self):
+		return  self.respuesta
+	class Admin:
+		list_display = ('respuesta')
 
 
 
