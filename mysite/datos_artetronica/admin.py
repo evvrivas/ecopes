@@ -76,7 +76,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = RespuestasForm
 class RespuestasAdmin(admin.ModelAdmin):
         model = Respuestas
-        list_display = ['nombre_opcion','pregunta']
+        list_display = ['nombre_opcion','respuesta']
         
         def nombre_opcion(self,instance):
                 return instance.opcion.opcion
