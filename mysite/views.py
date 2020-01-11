@@ -58,14 +58,87 @@ def logout(request):
     auth.logout(request)
     
     return HttpResponseRedirect("/")
-          
-
-
+       
 #@login_required
 def pagina_principal(request):   
                          
         return render(request,'principal.html',locals())  
                           
+                
+                       
+
+def crear_usuario(request): 
+        #!/usr/bin/python
+        # -*- coding: latin-1 -*-       
+
+        import os, sys
+       
+        if request.method == 'POST': # si el usuario est enviando el formulario con datos
+               
+              
+                    form = UserProfileForm(request.POST,request.FILES)                      
+                    
+                    if form.is_valid() :                        
+                            
+                            whatsapp = form.cleaned_data['id_usuario']
+                            contra = form.cleaned_data['clave'] 
+
+                            user = User.objects.create_user(username=whatsapp, password=contra)
+                            user.save()                             
+                                                      
+                            #usuario = form.save(commit=False)
+                            #usuario.id_usuario = user.username # Set the user object here
+                            #usuario.save() # Now you can send it to DB
+                            
+                            form.save() 
+
+                            
+                            connection.close()
+                            return render(request,'confirmar_usuario.html',locals())                  
+                
+
+        else:            
                          
-                         
+                         form=UserProfileForm()
+        connection.close()                  
+        return render(request,'formulario_ingreso.html',locals()) 
+
+
+@login_required
+def editar_usuario(request):   
+              
+             f = UserProfile.objects.get(id_usuario=request.user.username)           
+             
+             if request.method == 'POST':
+                  
+                  form = UserProfileForm(request.POST,request.FILES,instance=f)
+             
+                  if form.is_valid():
+
+                          contra = form.cleaned_data['clave']
+                          whatsapp = form.cleaned_data['id_usuario']                       
+
+                          user = User.objects.get(username=request.user.username)
+                          user.set_password(contra)
+                          user.username=whatsapp                          
+
+                          user.save()
+
+                          #usu=form.save(commit=False)
+                          #usu.id_usuario = request.user.username
+                          #usu.save() # Guardar los datos en la base de datos 
+                          
+                          form.save() 
+                            
+                          connection.close()
+                          return render(request,'confirmar.html',locals())             
+                  
+             else:
+                  
+                  form = UserProfileForm(instance=f)               
+         
+             connection.close()
+             #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+           
+             return render(request,'formulario_ingreso.html',locals())
 

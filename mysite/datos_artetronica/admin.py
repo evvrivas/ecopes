@@ -58,3 +58,11 @@ admin.site.register(Preguntas,PreguntasAdmin)
 ####################################################
 
 
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = Configuracion_sistemaForm
+class Configuracion_sistemaAdmin(admin.ModelAdmin):
+    model = Configuracion_sistema
+    list_display = ['n_visitas','mensaje_bienvenida']   
+admin.site.register(Configuracion_sistema,Configuracion_sistemaAdmin)
+####################################################

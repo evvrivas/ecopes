@@ -50,3 +50,11 @@ class RespuestasForm(ModelForm):
 		super(RespuestasForm, self).__init__(*args, **kwargs)		
 		self.fields['opcion'].queryset=Opciones.objects.filter(opcion=nombre_opcion)
 
+
+
+class Configuracion_sistemaForm(ModelForm):
+	class Meta:
+			
+		model=Configuracion_sistema
+		widgets = {'mensaje_bienvenida': Textarea(attrs={'cols': 30, 'rows': 2}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
+		exclude=[]

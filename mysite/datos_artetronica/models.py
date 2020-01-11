@@ -42,24 +42,11 @@ TIPO_USUARIO=(
 			('ENCUESTADOR', 'ENCUESTADOR'),							
 			)
 
-PLAN= (
-	        ('GRATIS', 'GRATIS (Solo puedes ver limitadamente)  '), 
-			('MUNICIPAL', 'MUNICIPAL (Solo puedes ver los estudios de un Municipio)'),
-			('DEPARTAMENTAL', 'DEPARTAMENTAL (Solo puedes ver los estudios del departamento)'),
-			('NACIONAL', 'NACIONAL (Ver todos los estudios del pais))'),						       
-			)
-
-                                                                                           
-ESTADO_USUARIO=(
-			('DE_ALTA', 'DE_ALTA'),			
-			('DE_BAJA', 'DE_BAJA'),							
-			)				
-
-
 class UserProfile(models.Model):
-		 usuario=models.CharField(max_length=30)
-		 tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_LECTOR",null=True)
-		 codigo=models.CharField(max_length=30,blank=True,null=True)
+		 id_usuario=models.CharField(max_length=30)
+		 clave=models.CharField(max_length=4)
+		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
+		 
 		 def __unicode__(self):
 		 	return u'Profile of user: %s' % self.usuario.username
 		 class Admin:
@@ -75,7 +62,10 @@ class Codigo(models.Model):
 	class Admin:
 		list_display = ('codigo')
 	    
-
+TIPO_ESTUDIO=(
+			('LIBRE', 'LIBRE'),			
+			('DE_PAGO', 'DE_PAGO'),							
+			)
 
 class Estudios(models.Model):
 
@@ -87,12 +77,10 @@ class Estudios(models.Model):
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
 		 codigo= models.CharField(max_length=150)
+		 tipo_de_estudio= models.CharField(max_length=150,default="EL_LECTOR")
 
 		 n_muestras= models.IntegerField(blank=True)
 		 universo= models.IntegerField(blank=True)
-
-		 patrocinador_1= models.CharField(max_length=150)
-		 patrocinador_2= models.CharField(max_length=150)
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
@@ -118,16 +106,23 @@ class Preguntas(models.Model):
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
-
+	     imagen4 = ImageField(upload_to='tmp',blank=True)
+	     imagen5 = ImageField(upload_to='tmp',blank=True)
+	     imagen6 = ImageField(upload_to='tmp',blank=True)
 
 	     def save(self, *args,**kwargs):
 	     	if self.imagen1:
-	     		self.image=self.imagen1
-	     		
+	     		self.image=self.imagen1	     		
 	     	elif self.imagen2:
 	     		self.image=self.imagen2
 	     	elif self.imagen3:
 	     		self.image=self.imagen3
+	     	elif self.imagen4:
+	     		self.image=self.imagen4
+	     	elif self.imagen5:
+	     		self.image=self.imagen5
+	     	elif self.imagen6:
+	     		self.image=self.imagen6
 	     	else:
 	     		pass
 	     	
@@ -167,3 +162,11 @@ class Respuestas(models.Model):
 
 
 
+class Configuracion_sistema(models.Model):
+	     mensaje_bienvenida=models.TextField(blank=True)	
+	     n_visitas=models.IntegerField(blank=True,default=0) 
+	               
+	     def __str__(self):
+		    		return  self.mensaje_bienvenida
+	     class Admin:
+		    		list_display = ('mensaje_bienvenida')

@@ -37,6 +37,9 @@ urlpatterns = [
     url(r'^accounts/logout/$', logout),
     url(r'^accounts/profile/$', pagina_principal),    
     url(r'^$', pagina_principal),
+
+    url(r'^crear_usuario/$',crear_usuario),
+    url(r'^editar_usuario/$',editar_usuario),
    
 
 ]
