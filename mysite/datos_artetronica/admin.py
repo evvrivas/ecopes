@@ -64,10 +64,10 @@ class OpcionesAdmin(admin.ModelAdmin):
         model = Opciones
         list_display = ['nombre_pregunta','pregunta']
         
-        def nombre_estudio(self,instance):
+        def nombre_pregunta(self,instance):
                 return instance.pregunta.pregunta
 
-admin.site.register(Preguntas,PreguntasAdmin)
+admin.site.register(Opciones,OpcionesAdmin)
 ####################################################
 
 
@@ -76,9 +76,9 @@ class RulesAdmin(admin.ModelAdmin):
     form = RespuestasForm
 class RespuestasAdmin(admin.ModelAdmin):
         model = Respuestas
-        list_display = ['nombre_pregunta','pregunta']
+        list_display = ['nombre_opcion','pregunta']
         
-        def nombre_estudio(self,instance):
+        def nombre_opcion(self,instance):
                 return instance.opcion.opcion
 
 admin.site.register(Respuestas,RespuestasAdmin)
