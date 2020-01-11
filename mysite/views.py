@@ -94,7 +94,7 @@ def crear_usuario(request):
 
                             
                             connection.close()
-                            return render(request,'confirmar_usuario.html',locals())                  
+                            return render(request,'confirmar.html',locals())                  
                 
 
         else:            
@@ -107,7 +107,7 @@ def crear_usuario(request):
 @login_required
 def editar_usuario(request):   
               
-             f = UserProfile.objects.get(id_usuario=request.user.username)           
+             f = UserProfile.objects.get(whatsapp=request.user.username)           
              
              if request.method == 'POST':
                   

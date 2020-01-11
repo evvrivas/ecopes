@@ -57,6 +57,33 @@ class PreguntasAdmin(admin.ModelAdmin):
 admin.site.register(Preguntas,PreguntasAdmin)
 ####################################################
 
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = OpcionesForm
+class OpcionesAdmin(admin.ModelAdmin):
+        model = Opciones
+        list_display = ['nombre_pregunta','pregunta']
+        
+        def nombre_estudio(self,instance):
+                return instance.pregunta.pregunta
+
+admin.site.register(Preguntas,PreguntasAdmin)
+####################################################
+
+
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = RespuestasForm
+class RespuestasAdmin(admin.ModelAdmin):
+        model = Respuestas
+        list_display = ['nombre_pregunta','pregunta']
+        
+        def nombre_estudio(self,instance):
+                return instance.opcion.opcion
+
+admin.site.register(Respuestas,RespuestasAdmin)
+####################################################
+
 
 ####################################################
 class RulesAdmin(admin.ModelAdmin):

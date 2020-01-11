@@ -47,15 +47,15 @@ class UserProfile(models.Model):
 		 clave=models.CharField(max_length=4)
 		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
 		 
-		 def __unicode__(self):
-		 	return u'Profile of user: %s' % self.usuario.username
+		 def __str__(self):
+				return  self.watsapp
 		 class Admin:
-		 	list_display = ('tipo_usuario')
+		 	list_display = ('watsapp')
 
 
 
 class Codigo(models.Model):
-	usuario=models.CharField(max_length=30)
+	usuario=models.ForeignKey('UserProfile')
 	codigo=models.CharField(max_length=30,null=True,blank=True)
 	def __str__(self):
 		return  self.codigo
@@ -64,23 +64,24 @@ class Codigo(models.Model):
 	    
 TIPO_ESTUDIO=(
 			('LIBRE', 'LIBRE'),			
-			('DE_PAGO', 'DE_PAGO'),							
+			('DE_PAGO', 'DE_PAGO'),
+			('PRIVADO', 'PRIVADO'),							
 			)
 
 class Estudios(models.Model):
 
 		 nombre=models.CharField(max_length=150)
-		 descripcion= models.TextField(blank=True)
-		 descripcion_publica= models.TextField(blank=True)
+		 descripcion= models.TextField(blank=True,null=True)
+		 descripcion_publica= models.TextField(blank=True,null=True)
 		 imagen1 = ImageField(upload_to='tmp',blank=True)
 
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
 		 codigo= models.CharField(max_length=150)
-		 tipo_de_estudio= models.CharField(max_length=150,default="EL_LECTOR")
+		 tipo_de_estudio= models.CharField(max_length=150,default="LIBRE",choices=TIPO_ESTUDIO)
 
-		 n_muestras= models.IntegerField(blank=True)
-		 universo= models.IntegerField(blank=True)
+		 n_muestras= models.IntegerField(blank=True,null=True)
+		 universo= models.IntegerField(blank=True,null=True)
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
@@ -91,7 +92,7 @@ class Estudios(models.Model):
 		 		t_image.save(output,format='JPEG',quality=75)
 		 		output.seek(0)
 		 		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-		 	super(Tiendas,self).save(*args,**kwargs)
+		 	super(Estudios,self).save(*args,**kwargs)
 		 def __str__(self):
 		 	return  self.nombre
 		 class Admin:
@@ -133,13 +134,13 @@ class Preguntas(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Productos,self).save(*args,**kwargs)
+	     	super(Preguntas,self).save(*args,**kwargs)
 
 
 	     def __str__(self):
-		    		return  self.nombre
+		    		return  self.pregunta
 	     class Admin:
-		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
+		    		list_display = ('pregunta')
 		    		
 
 class Opciones(models.Model):
@@ -164,7 +165,7 @@ class Respuestas(models.Model):
 
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField()	
-	     n_visitas=models.IntegerField(blank=True,default=0) 
+	     n_visitas=models.IntegerField(blank=True,default=0,null=True) 
 	               
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
