@@ -95,8 +95,8 @@ class Estudios(models.Model):
 		 patrocinador_2= models.CharField(max_length=150)
 
 		 def save(self, *args,**kwargs):
-	     	self.image=self.imagen1
-	     	if self.image:
+		 	self.image=self.imagen1
+		 	if self.image:
 	     		t_image=Img.open(BytesIO(self.image.read()))
 	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
 	     		output=BytesIO()
