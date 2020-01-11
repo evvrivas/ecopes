@@ -49,7 +49,7 @@ PLAN= (
 			('NACIONAL', 'NACIONAL (Ver todos los estudios del pais))'),						       
 			)
 
-                                                                                           1``
+                                                                                           
 ESTADO_USUARIO=(
 			('DE_ALTA', 'DE_ALTA'),			
 			('DE_BAJA', 'DE_BAJA'),							
