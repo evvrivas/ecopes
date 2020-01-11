@@ -6,7 +6,13 @@
 {% block content %}
   
 <div class="row">  
-       <div class="alert alert-info">         
+       <div class="alert alert-info">        
+<center>
+        <a href="/"> <h1>  <font color="blue">ECOPES</font> </h1> </a>
+        <p><font color="blue">Estudios y cuestionarios de opinion publica</font></p>  
+        <p><font color="blue">de EL SALVADOR</font></p>  
+</center>
+<br>
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
                          
          {%  if user.is_authenticated %}
@@ -15,7 +21,7 @@
              <br>                                
              <li><a href="/accounts/login">Entrar aqui..! </a></li>
               <br>
-            <li><a href="/crear_usuario">Quieres ver los estudios..?   Registrarte Aqui...!</a></li>
+            <li><a href="/crear_usuario">Quieres ver los estudios..?   Registrarte Aqui...GRATIS !</a></li>
          {% endif %}  
 
 <!--   quita este parar color de fondo -->

@@ -43,7 +43,7 @@ TIPO_USUARIO=(
 			)
 
 class UserProfile(models.Model):
-		 id_usuario=models.CharField(max_length=30)
+		 watsapp=models.CharField(max_length=30)
 		 clave=models.CharField(max_length=4)
 		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
 		 
@@ -101,7 +101,7 @@ class Estudios(models.Model):
 
 class Preguntas(models.Model):	     
 	     estudio=models.ForeignKey('Estudios',blank=True,null=True)
-	     pregunta = models.TextField(blank=True)
+	     pregunta = models.TextField()
      
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
@@ -144,7 +144,7 @@ class Preguntas(models.Model):
 
 class Opciones(models.Model):
 		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
-		 opcion=models.CharField(max_length=60,blank=True)
+		 opcion=models.CharField(max_length=60)
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:
@@ -153,7 +153,7 @@ class Opciones(models.Model):
 
 class Respuestas(models.Model):
 	opcion=models.ForeignKey('Opciones',blank=True,null=True)
-	respuesta=models.CharField(max_length=60,blank=True)
+	respuesta=models.CharField(max_length=60)
 	def __str__(self):
 		return  self.respuesta
 	class Admin:
@@ -163,7 +163,7 @@ class Respuestas(models.Model):
 
 
 class Configuracion_sistema(models.Model):
-	     mensaje_bienvenida=models.TextField(blank=True)	
+	     mensaje_bienvenida=models.TextField()	
 	     n_visitas=models.IntegerField(blank=True,default=0) 
 	               
 	     def __str__(self):

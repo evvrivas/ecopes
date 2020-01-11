@@ -80,7 +80,7 @@ def crear_usuario(request):
                     
                     if form.is_valid() :                        
                             
-                            whatsapp = form.cleaned_data['id_usuario']
+                            whatsapp = form.cleaned_data['watsapp']
                             contra = form.cleaned_data['clave'] 
 
                             user = User.objects.create_user(username=whatsapp, password=contra)
@@ -116,7 +116,7 @@ def editar_usuario(request):
                   if form.is_valid():
 
                           contra = form.cleaned_data['clave']
-                          whatsapp = form.cleaned_data['id_usuario']                       
+                          whatsapp = form.cleaned_data['watsapp']                       
 
                           user = User.objects.get(username=request.user.username)
                           user.set_password(contra)
@@ -141,4 +141,3 @@ def editar_usuario(request):
              #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
            
              return render(request,'formulario_ingreso.html',locals())
-
