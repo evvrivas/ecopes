@@ -1,0 +1,266 @@
+{% load staticfiles %}   
+{% load thumbnail %} 
+
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+         
+    <link href='{% static  "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet" media="screen"'></script>
+    <link href='{% static  "bootstrap/css/jquery.dataTables.css" %}' rel="stylesheet"></script>
+    <link href='{% static  "css/style.css" %}' rel="stylesheet"></script>
+
+
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  
+  
+  </head>
+
+
+
+
+
+
+
+
+<body > 
+
+
+
+
+ <div class="panel panel-primary"> 
+            
+                                
+
+
+ <div class="panel-heading">
+
+                    
+             <div class="col-md-6">  
+
+                <center>   
+                     <a href="/">  <img src ='{% static "logo45.png" %}' alt='img' > </a>                          
+
+ 
+                     {%  if user.is_authenticated %}   
+                         <a href="/ver_las_preferidas/">  <img src ='{% static "corazon45.png" %}' alt='img' > </a>
+                         <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito45.png" %}' alt='img' > </a> 
+                         <!--<a href="/ver_las_preferidas/" class="btn btn-warning" role="button">♥</a>    -->  
+                         <!--<a href="/accounts/logout/" class="btn btn-danger" role="button">ⓧ</a>-->
+
+                     {%  else  %}   
+                        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+                        <a href="/crear_usuario" class="btn btn-info" role="button">Registro</a>
+                        <a href="/informacion" class="btn btn-warning" role="button">?</a>                         
+                                           
+                     {% endif %}   
+
+
+
+                       {%  if user.is_authenticated %}    
+              
+                                  <div class="btn-group">
+                                            <button type="button" class="btn btn btn-info dropdown-toggle"
+                                                    data-toggle="dropdown">
+                                              == <span class="caret"></span>
+                                            </button>
+                                           
+                                            <ul class="dropdown-menu" role="menu">
+
+
+                                                                                                                 
+
+                                                   <li><a href="/editar_usuario/">Editar Usuario/cambiar Plan </a></li>                                                   
+                                                    
+                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li> 
+
+                                                   <li><a href="/{{user.username}}">Ver mis tiendas</a></li>
+
+                                                    
+<!--  -->                                      
+                                                    
+
+
+                                       <br>
+
+                                     {%  for i in mis_tiendas %}
+                                        <li><a href="/{{user.username}}/{{i.nombre_tienda}}">{{i.nombre_tienda}}</a></li>
+                                     {%  endfor %} 
+                                      <br>
+
+                                     <li><a href="/configurar_vista_pagina_principal">Cambiar vista principal</a></li> 
+                                     <li><a href="/admin">Administrar</a></li>
+                                      <br>
+
+                                    <li><a href="/informacion">?</a></li> 
+                                    <li><a href="/accounts/logout/">Salir</a></li>                                                                                  
+
+                                            </ul>
+                                   </div>
+                 {% endif %} 
+
+                   
+                     
+                                  
+                  
+         </center>   
+      </div>
+      
+
+      
+ </div>
+
+  
+
+
+
+
+
+
+  <div class="panel-body">   
+
+
+  <center><form action="/busqueda/NORMAL/" method="post">
+                       {% csrf_token %}                                                  
+                                                    
+                    <div class="col-md-12">              
+          
+
+                                                    <select name="ciudad_busqueda" value="{{ciudad}}" style="font-size:12pt;width:110px;background-color:white;color:blue;">
+                                                      <option value="TODOS">CIUDAD</option>
+                                                      <option value="AHUACHAPAN">AHUACHAPAN</option>
+                                                      <option value="SANTA_ANA">SANTA_ANA</option>
+                                                      <option value="SONSONATE">SONSONATE</option>
+                                                      <option value="CHALATENANGO">CHALATENANGO</option>
+                                                      <option value="CABAÑAS">CABAÑAS</option>
+                                                      <option value="LA_LIBERTAD">LA_LIBERTAD</option>
+                                                      <option value="LA_PAZ">LA_PAZ</option>
+                                                      <option value="MORAZAN">MORAZAN</option>
+                                                      <option value="CUSCATLAN">CUSCATLAN</option>
+                                                      <option value="SAN_MIGUEL">SAN_MIGUEL</option>
+                                                      <option value="LA_UNION">LA_UNION</option>
+                                                      <option value="USULUTAN">USULUTAN</option>
+                                                      <option value="SAN_VICENTE">SAN_VICENTE</option>
+                                                       <option value="SAN_SALVADOR">SAN_SALVADOR</option>
+                                                     </select> 
+
+
+             <select name="categoria_busqueda" style="font-size:12pt;width:160px;background-color:white;color:blue;">
+             <option value="TODOS">CATEGORIAS</option>
+             <option value="Productos Ventas Varias">Productos Ventas Varias</option>
+             <option value="Alimentos Bebidas">Alimentos Bebidas</option>
+             <option value="Antiguedades Artesanias Adornos">Antiguedades Artesanias Adornos</option>
+             <option value="Mascotas Acsesorios Veterinarios">Mascotas Acsesorios Veterinarios</option>
+             <option value="Bienes raices Alquileres Ventas">Bienes raices Alquileres Ventas</option>
+             <option value="Tecnologia Informatica Informacion">Tecnologia Informatica Informacion</option>
+             <option value="Educacion Ciencia Academias">Educacion Ciencia Academias</option>
+             <option value="Deportes Ocio Acsesorios">Deportes Ocio Acsesorios</option>
+             <option value="Herramientas Maquinaria Equipo">Herramientas Maquinaria Equipo</option>
+             <option value="Agro Ferreteria Maderas">Agro Ferreteria Maderas</option>
+             <option value="Materias primas varias">Materias primas varias</option>
+             <option value="Mateiales de construccion">Mateiales de construccion</option>
+             <option value="Muebles Electrodomesticos">Muebles Electrodomesticos</option>
+             <option value="Productos para el hogar">Productos para el hogar</option>
+             <option value="Productos de consumo diario">Productos de consumo diario</option>
+             <option value="Productos para la industria">Productos para la industria</option>
+             <option value="Industria Acsesorios Repuestos">Industria Acsesorios Repuestos</option>
+             <option value="Ropa Moda calzado">Ropa Moda calzado</option>
+             <option value="Salud Belleza">Salud Belleza</option>             
+             <option value="Usados de todos">Usados de todos</option>
+             <option value="Vehiculos acsesorios repuestos">Vehiculos acsesorios repuestos</option>
+             <option value="Productos y Sevicios varios">Productos y Sevicios varios</option>
+             <option value="Servicios domesticos">Servicios domesticos</option>
+             <option value="Servicios personales">Servicios personales</option>
+             <option value="Servicios pofesionales">Servicios pofesionales</option>
+             <option value="Servicios de Ensenanza">Servicios de Ensenanza</option>
+             <option value="Sevicios financieros">Sevicios financieros</option>
+             <option value="Servicios publicitarios">Servicios publicitarios</option>
+             <option value="Servicio de reparaciones">Servicio de reparaciones</option>
+             <option value="Servicio de hotel alojamiento">AServicio de hotel alojamiento</option>
+             <option value="Otros Servicios">Otros Servicios</option>         
+            
+             </select> 
+
+              
+               </div>
+
+             <div class="col-md-12">              
+            
+
+                    <input type="text" id="name" name="nombre" size="20" placeholder="Que buscas?"/>
+                    <input type="submit" value="Buscar/ver">
+                                                                                                        
+             </form> </center>          
+
+
+
+           <div class="col-md-12">              
+                
+                  {%  if user.is_authenticated %}          
+                      <center>    <li>{{ciudad}} Hola.!.{{ user.username }} </li>   </center>         
+                             
+                            
+
+                  {% endif %}  
+                      <h6>
+                          <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
+                          <a href="#">User <span class="badge">{{n_usuarios}}</span></a>
+                   <!-- <a href="#">Tiendas <span class="badge">{{n_tiendas}}</span></  a>      -->   
+                   <!--   <a href="#">Prod <span class="badge">{{n_productos}}</span></a> -->
+                          <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">Pedidos <span class="badge">{{n_pedidos}}</span></a>
+                             
+                       </h6>
+            </div>
+
+
+             <br>
+        
+
+            <div class="col-md-12">                           
+                  {% block content %}
+                   {% endblock %}
+            </div>
+       
+   </div>
+
+   </div>
+
+        
+
+
+        
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+       <h2 class="panel-title"><center>DETODONEGOCIO.........El Salvador (+503) 7821 8224 </center></h2>    
+       
+        <a href='whatsapp://send?text= http://detodonegocio.com' data-action='share/whatsapp/share'> <img src='{% static "whatssapp-sharing.png" %}' style='height:20px !important;' title='Compartir por whatsapp' /></a>                  
+
+       <div class="fb-share-button" data-href="https://detodonegocio.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdetodonegocio.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+             
+       
+                                        
+      </div>
+
+  
+  </div>
+  
+
+   
+    <script src='{% static "bootstrap/js/jquery.min.js" %}' ></script>
+    <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
+
+  </body>
+</html>
+
+
+
+

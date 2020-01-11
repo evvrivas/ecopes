@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% load staticfiles %} 
+{% block content %}
+     
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DE INTERES </center></h2>
+
+             
+      </div>
+
+
+    <div class="panel-body">
+
+            <div class="row">
+
+               <div class="col-md-3">
+               </div> 
+
+             <div class="col-md-6">
+                <div class="thumbnail">                                    
+                  <div class="caption">                    
+                    <h4><center>Entrada de datos importantes</center></h4>     
+                  </div>                  
+
+
+
+
+
+<h1>Crear una cuenta de usuario</h1>
+<form action="." method="post">
+{ % if form.error_dict %}
+<p class="error">Please correct the errors below.</p>
+{ % endif %}
+{ % if form.username.errors %}
+{{ form.username.html_error_list }}
+{ % endif %}
+<label for="id_username">Username:</label> {{ form.username }}
+{ % if form.password1.errors %}
+{{ form.password1.html_error_list }}
+{ % endif %}
+<label for="id_password1">Password: {{ form.password1 }}
+{ % if form.password2.errors %}
+{{ form.password2.html_error_list }}
+{ % endif %}
+<label for="id_password2">Password (again): {{ form.password2 }}
+<input type="submit" value="Crear Usuario" />
+</label>
+
+
+
+
+                                   
+                </div>
+            </div>
+
+            <div class="col-md-3">
+            </div>  
+
+
+          </div>
+
+        </div>
+  </div>
+           
+
+        
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+         
+          
+
+
+
+
+
+
+
+ 

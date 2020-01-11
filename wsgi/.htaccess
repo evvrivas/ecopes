@@ -1,0 +1,7 @@
+# htaccess for wsgi
+# 
+#
+
+
+RewriteEngine On
+RewriteRule ^application/media/(.+)$ /static/$1 [L]
