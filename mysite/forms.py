@@ -8,7 +8,7 @@ from django import forms
 
 class UserProfileForm(ModelForm):
 	class Meta:
-		model= Usuarios	
+		model= UserProfile
 		exclude=[]
 
 class CodigoForm(ModelForm):
