@@ -59,13 +59,11 @@ ESTADO_USUARIO=(
 class UserProfile(models.Model):
 		 usuario=models.ForeignKey('User',unique=True)
 		 tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_LECTOR",null=True)
-	     codigo=models.CharField(max_length=30,blank=True,null=True)
-   	     
-	     def __unicode__(self):
-        	return u'Profile of user: %s' % self.usuario.username
-	     
-	     class Admin:
-	     		list_display = ('tipo_usuario')
+		 codigo=models.CharField(max_length=30,blank=True,null=True)
+		 def __unicode__(self):
+		 	return u'Profile of user: %s' % self.usuario.username
+		 class Admin:
+		 	list_display = ('tipo_usuario')
 
 
 
@@ -73,9 +71,9 @@ class Codigo(models.Model):
 	usuario=models.ForeignKey('User',unique=True)
 	codigo=models.CharField(max_length=30,null=True,blank=True)
 	def __str__(self):
-         	return  self.codigo
-     class Admin:
-         	list_display = ('codigo')
+		return  self.codigo
+	class Admin:
+		list_display = ('codigo')
 	    
 
 
