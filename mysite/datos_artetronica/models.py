@@ -56,7 +56,7 @@ class UserProfile(models.Model):
 
 class Codigo(models.Model):
 	usuario=models.ForeignKey('UserProfile')
-	codigo=models.CharField(max_length=30,null=True,blank=True)
+	codigo=models.CharField(max_length=8,null=True,blank=True)
 	def __str__(self):
 		return  self.codigo
 	class Admin:
@@ -77,7 +77,7 @@ class Estudios(models.Model):
 
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
-		 codigo= models.CharField(max_length=150)
+		 codigo= models.CharField(max_length=8)
 		 tipo_de_estudio= models.CharField(max_length=150,default="LIBRE",choices=TIPO_ESTUDIO)
 
 		 n_muestras= models.IntegerField(blank=True,null=True)
@@ -152,15 +152,6 @@ class Opciones(models.Model):
 		 	list_display = ('opcion')
 
 
-class Respuestas(models.Model):
-	opcion=models.ForeignKey('Opciones',blank=True,null=True)
-	respuesta=models.CharField(max_length=60)
-	def __str__(self):
-		return  self.respuesta
-	class Admin:
-		list_display = ('respuesta')
-
-
 
 
 class Configuracion_sistema(models.Model):
@@ -171,3 +162,45 @@ class Configuracion_sistema(models.Model):
 		    		return  self.mensaje_bienvenida
 	     class Admin:
 		    		list_display = ('mensaje_bienvenida')
+
+
+
+class Cuestionario_principal(models.Model):
+		 estudio=models.ForeignKey('Estudios',blank=True,null=True)
+		 respuesta_1=models.CharField(max_length=60)
+		 respuesta_2=models.CharField(max_length=60)
+		 respuesta_3=models.CharField(max_length=60)
+		 respuesta_4=models.CharField(max_length=60)
+		 respuesta_5=models.CharField(max_length=60)
+		 respuesta_6=models.CharField(max_length=60)
+		 respuesta_7=models.CharField(max_length=60)
+		 respuesta_8=models.CharField(max_length=60)
+		 respuesta_9=models.CharField(max_length=60)
+		 respuesta_10=models.CharField(max_length=60)
+		 respuesta_11=models.CharField(max_length=60)
+		 respuesta_12=models.CharField(max_length=60)
+		 respuesta_13=models.CharField(max_length=60)
+		 respuesta_14=models.CharField(max_length=60)
+		 respuesta_15=models.CharField(max_length=60)
+		 respuesta_16=models.CharField(max_length=60)
+		 respuesta_17=models.CharField(max_length=60)
+		 respuesta_18=models.CharField(max_length=60)
+		 respuesta_19=models.CharField(max_length=60)
+		 respuesta_20=models.CharField(max_length=60)
+		 respuesta_21=models.CharField(max_length=60)
+		 respuesta_22=models.CharField(max_length=60)
+		 respuesta_23=models.CharField(max_length=60)
+		 respuesta_24=models.CharField(max_length=60)
+		 respuesta_25=models.CharField(max_length=60)
+		 respuesta_26=models.CharField(max_length=60)
+		 respuesta_27=models.CharField(max_length=60)
+		 respuesta_28=models.CharField(max_length=60)
+		 respuesta_29=models.CharField(max_length=60)
+		 respuesta_30=models.CharField(max_length=60)
+
+		 def __str__(self):
+		 	return  self.respuesta_1
+		 class Admin:
+		 	list_display = ('respuesta_1')
+
+

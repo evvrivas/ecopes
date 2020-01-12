@@ -141,3 +141,40 @@ def editar_usuario(request):
              #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
            
              return render(request,'formulario_ingreso.html',locals())
+
+
+def poner_lista_de_estudios(request):
+
+        usuario=request.user.username
+        lista_de_codigos=Codigos.objects.filter(whatsapp=usuario)
+
+        estudios_libres=Estudios.objects.filter(tipo_de_estudio="LIBRE")
+        
+        vector_de_estudios=[]
+
+        for i in lista_de_codigos:
+              estudio=Estudios.objects.get(codigo=i.codigo)
+              vector_de_estudios.append(estudio)
+
+        return render(request,'lista_de_estudios.html',locals())
+     
+
+
+def poner_cuestionario(request,id_estudio):
+
+      vector_de_preguntas=[]
+      
+      estudio_actual=Estudios.objects.get(id=id_estudio)
+      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)
+
+      for i in las_preguntas:
+            las_opciones=Opciones.objects.filter(pregunta=i)
+            vector_de_opciones=[]
+            
+            for j in las_opciones:
+                vector_de_opciones.append(j.opcion)
+            vector_de_opciones.append(j.pregunta.pregunta)      
+
+      vector_de_preguntas.append(vector_de_opciones)
+      connection.close()
+      return render(request,'cuestionario.html',locals()) 

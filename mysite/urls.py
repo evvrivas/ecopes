@@ -40,6 +40,9 @@ urlpatterns = [
 
     url(r'^crear_usuario/$',crear_usuario),
     url(r'^editar_usuario/$',editar_usuario),
+
+    url(r'^poner_lista_de_estudios/$',poner_lista_de_estudios),
+    url(r'^poner_cuestionario/(\d+)$',poner_cuestionario),    
    
 
 ]

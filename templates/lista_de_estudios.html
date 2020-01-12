@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %} 
+{% load thumbnail %}
+
+{% block content %}
+  
+<div class="row">  
+       <div class="alert alert-info">        
+<center>
+        
+        <p><h3><font color="blue">Estudios de opinion publica</font></h3>h3></p>  
+          
+</center>
+<br>
+        
+        <center><h3><p>Estudios de opinion publica *GRATUITOS</p></h3></center>
+
+        {% for j in estudios_libres %} 
+       		
+        		<a href="/poner_cuestionario/j.id"> <h5>  <font color="green">{{ j.nombre }} -->  {{j.descripcion}}</font> </h5> </a>
+
+
+        {% endfor %}
+
+        <center><h3><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h3></center>
+        
+        {% for j in vector_de_estudios %} 
+
+        		<a href="/poner_cuestionario/j.id"> <h5>  <font color="red">{{j.nombre}} -->  {{j.1}}</font> </h5> </a>
+
+        		
+
+
+        {% endfor %} 
+
+
+
+       
+
+
+
+
+{% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior  and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
+
+{% else %}
+
+
+         {%  if user.is_authenticated and %}
+                                
+         {%  else  %} 
+            
+         {% endif %}  
+
+
+
+</div>
+</div>
+ {% endblock %}
