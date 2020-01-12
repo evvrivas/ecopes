@@ -146,7 +146,7 @@ def editar_usuario(request):
 def poner_lista_de_estudios(request):
 
         usuario_actual=request.user.username
-        lista_de_codigos=Codigo.objects.filter(usuario=usuario_actual)
+        lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
 
         estudios_libres=Estudios.objects.filter(tipo_de_estudio="LIBRE")
         
@@ -178,3 +178,60 @@ def poner_cuestionario(request,id_estudio):
       vector_de_preguntas.append(vector_de_opciones)
       connection.close()
       return render(request,'cuestionario.html',locals()) 
+
+
+
+def crear_estudio():
+
+        date=datetime.datetime.now()
+        import random  
+        for i in range(10):
+
+            a=random.randint(0,2)
+            if a==0:
+                tipo_estudio="LIBRE"
+
+            elif a==1:
+                tipo_estudio="DE_PAGO"
+
+            elif a==1:
+                tipo_estudio="PRIVADO"
+
+            else:
+              tipo_estudio="BUENO"
+
+            nombre_estudio="ELECCION alcalde"+ str(i)+str(i)+str(i)+str(i)+str(i)
+            codigo=str(1000000+i)
+
+            p1=Estudios(nombre=nombre_estudio   ,descripcion="Este se realiza en ahuachapan municipio",    descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=date,fecha_final=date,codigo=i,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
+            p1.save() 
+
+            pregunta="que es eso "+str(i) +str(i)+str(i)+str(i) 
+            p21=Preguntas(estudio=p1, pregunta="QUE ES ")
+            p21.save()
+            
+            la_opcion="Opcion A"+str(i) +str(i)+str(i)+str(i)              
+            p31=Opciones(pregunta=p21,opcion=la_opcion)
+            p31.save()
+
+            la_opcion="Opcion B"+str(i) +str(i)+str(i)+str(i) 
+            p31=Opciones(pregunta=p21,opcion=la_opcion)
+            p31.save()
+            
+            la_opcion="Opcion C"+str(i) +str(i)+str(i)+str(i) 
+            p31=Opciones(pregunta=p21,opcion=la_opcion)
+            p31.save()
+            
+            la_opcion="Opcion D"+str(i) +str(i)+str(i)+str(i) 
+            p31=Opciones(pregunta=p21,opcion=la_opcion)
+            p31.save()
+            
+            la_opcion="Opcion E"+str(i) +str(i)+str(i)+str(i) 
+            p31=Opciones(pregunta=p21,opcion=la_opcion)
+            p31.save()
+
+
+
+     
+     
+       
