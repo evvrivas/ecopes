@@ -16,9 +16,8 @@ class RulesAdmin(admin.ModelAdmin):
     form = UserProfileForm
 class UserProfileAdmin(admin.ModelAdmin):
         model = UserProfile
-        list_display = ['nombre_usuario','tipo_usuario']
-        def nombre_usuario(self,instance):
-                return instance.usuario.username    
+        list_display = ['watsapp','tipo_usuario']
+          
 admin.site.register(UserProfile,UserProfileAdmin)
 ####################################################
 
@@ -29,7 +28,7 @@ class CodigoAdmin(admin.ModelAdmin):
         model = Codigo
         list_display = ['nombre_usuario','codigo']
         def nombre_usuario(self,instance):
-                return instance.usuario.username    
+                return instance.usuario.watsapp   
 admin.site.register(Codigo,CodigoAdmin)
 ####################################################
         

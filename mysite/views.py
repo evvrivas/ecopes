@@ -80,10 +80,10 @@ def crear_usuario(request):
                     
                     if form.is_valid() :                        
                             
-                            whatsapp = form.cleaned_data['watsapp']
+                            watsapp = form.cleaned_data['watsapp']
                             contra = form.cleaned_data['clave'] 
 
-                            user = User.objects.create_user(username=whatsapp, password=contra)
+                            user = User.objects.create_user(username=watsapp, password=contra)
                             user.save()                             
                                                       
                             #usuario = form.save(commit=False)
@@ -107,7 +107,7 @@ def crear_usuario(request):
 @login_required
 def editar_usuario(request):   
               
-             f = UserProfile.objects.get(whatsapp=request.user.username)           
+             f = UserProfile.objects.get(watsapp=request.user.username)           
              
              if request.method == 'POST':
                   
@@ -116,11 +116,11 @@ def editar_usuario(request):
                   if form.is_valid():
 
                           contra = form.cleaned_data['clave']
-                          whatsapp = form.cleaned_data['watsapp']                       
+                          watsapp = form.cleaned_data['watsapp']                       
 
                           user = User.objects.get(username=request.user.username)
                           user.set_password(contra)
-                          user.username=whatsapp                          
+                          user.username=watsapp                          
 
                           user.save()
 
@@ -145,8 +145,8 @@ def editar_usuario(request):
 
 def poner_lista_de_estudios(request):
 
-        usuario=request.user.username
-        lista_de_codigos=Codigos.objects.filter(whatsapp=usuario)
+        usuario_actual=request.user.username
+        lista_de_codigos=Codigo.objects.filter(usuario=usuario_actual)
 
         estudios_libres=Estudios.objects.filter(tipo_de_estudio="LIBRE")
         
