@@ -181,9 +181,10 @@ def poner_cuestionario(request,id_estudio):
 
 
 
-def crear_estudio():
+def crear_estudio(request):
 
-        date=datetime.datetime.now()
+        
+              
         import random  
         for i in range(10):
 
@@ -203,7 +204,7 @@ def crear_estudio():
             nombre_estudio="ELECCION alcalde"+ str(i)+str(i)+str(i)+str(i)+str(i)
             codigo=str(1000000+i)
 
-            p1=Estudios(nombre=nombre_estudio   ,descripcion="Este se realiza en ahuachapan municipio",    descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=date,fecha_final=date,codigo=i,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
+            p1=Estudios(nombre=nombre_estudio   ,descripcion="Este se realiza en ahuachapan municipio",    descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=datetime.now,fecha_final=datetime.now,codigo=i,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
             p1.save() 
 
             pregunta="que es eso "+str(i) +str(i)+str(i)+str(i) 
@@ -229,6 +230,9 @@ def crear_estudio():
             la_opcion="Opcion E"+str(i) +str(i)+str(i)+str(i) 
             p31=Opciones(pregunta=p21,opcion=la_opcion)
             p31.save()
+
+            connection.close()
+            return render(request,'principal.html',locals()) 
 
 
 
