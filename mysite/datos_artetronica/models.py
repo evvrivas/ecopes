@@ -129,12 +129,12 @@ class Preguntas(models.Model):
 	     	
 	     	if self.image:
 	     	  try:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	  	t_image=Img.open(BytesIO(self.image.read()))
+	     	  	t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     	  	output=BytesIO()
+	     	  	t_image.save(output,format='JPEG',quality=75)
+	     	  	output.seek(0)
+	     	  	self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	  except:
 	     	  	pass
 	     	super(Preguntas,self).save(*args,**kwargs)
