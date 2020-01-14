@@ -150,11 +150,18 @@ def poner_lista_de_estudios(request):
 
         estudios_libres=Estudios.objects.filter(tipo_de_estudio="LIBRE")
         
-        vector_de_estudios=[]
+        vector_de_estudios_de_pago=[]
+        vector_de_estudios_privados=[]
 
         for i in lista_de_codigos:
-              estudio=Estudios.objects.get(codigo=i.codigo)
-              vector_de_estudios.append(estudio)
+              
+              estudio=Estudios.objects.get(codigo=i.codigo,tipo_de_estudio="DE_PAGO")
+             
+              if estudio.tipo_de_estudio=="DE_PAGO":
+                  vector_de_estudiosde_pago.append(estudio)
+              else:
+                  vector_de_estudios_privado.append(estudio)
+             
 
         return render(request,'lista_de_estudios.html',locals())
      
@@ -183,7 +190,8 @@ def poner_cuestionario(request,id_estudio):
 
 def crear_estudio(request):        
               
-        import random  
+        import random
+        import datetime  
         for i in range(10):
 
             a=random.randint(0,2)
@@ -230,8 +238,8 @@ def crear_estudio(request):
             p31=Opciones(pregunta=p21,opcion=la_opcion)
             p31.save()
 
-            connection.close()
-            return render(request,'principal.html',locals()) 
+        connection.close()
+        return render(request,'principal.html',locals()) 
 
 
 

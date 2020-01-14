@@ -38,7 +38,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = EstudiosForm
 class EstudiosAdmin(admin.ModelAdmin):
         model = Estudios
-        list_display = ['nombre','fecha_inicio','fecha_final', 'codigo','n_muestras']
+        list_display = ['nombre','tipo_de_estudio','fecha_inicio','fecha_final', 'codigo','n_muestras']
 
 admin.site.register(Estudios,EstudiosAdmin)
 ####################################################

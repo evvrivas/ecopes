@@ -13,7 +13,7 @@
 </center>
 <br>
         
-        <center><h2><p>Estudios de opinion publica *GRATUITOS</p></h2></center>
+        <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>
 
         {% for j in estudios_libres %} 
        		
@@ -22,21 +22,32 @@
 
         {% endfor %}
 
-        <center><h2><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h2></center>
+        <center><h4><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h4></center>
         
-        {% for j in vector_de_estudios %} 
+        {% for j in vector_de_estudios_de_pago %} 
 
-        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>
-
-        		
+        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>       		
 
 
         {% endfor %} 
 
 
 
+        <center><h4><p>Estudios de opinion publica PRIVADOS</p></h24></center>
+        <center><h6><p>(SOLO USTED PUEDE VER ESTOS ESTUDIOS) </p></h6></center>
+        
+        {% for j in vector_de_estudios_privado %} 
+
+                <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>               
+
+
+        {% endfor %} 
+
+
+
+
        
-{{vector_de_estudios}}
+
 
 
          

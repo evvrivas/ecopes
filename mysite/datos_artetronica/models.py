@@ -129,7 +129,7 @@ class Preguntas(models.Model):
 	     	elif self.imagen6:
 	     		self.image=self.imagen6
 	     	else:
-	     		pass
+	     		self.image=False
 	     	
 	     	if self.image:
 	     	  try:
