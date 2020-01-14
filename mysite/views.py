@@ -202,9 +202,9 @@ def crear_estudio(request):
               tipo_estudio="BUENO"
 
             nombre_estudio="ELECCION alcalde"+ str(i)+str(i)+str(i)+str(i)+str(i)
-            codigo=str(1000000+i)
+            codigo_del_estudio=str(1000000+i)
 
-            p1=Estudios(nombre=nombre_estudio   ,descripcion="Este se realiza en ahuachapan municipio",    descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=datetime.now,fecha_final=datetime.now,codigo=i,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
+            p1=Estudios(nombre=nombre_estudio   ,descripcion="Este se realiza en ahuachapan municipio",    descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=datetime.now,fecha_final=datetime.now,codigo=codigo_del_estudio,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
             p1.save() 
 
             pregunta="que es eso "+str(i) +str(i)+str(i)+str(i) 

@@ -86,12 +86,15 @@ class Estudios(models.Model):
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
 		 	if self.image:
+		 	 try:
 		 		t_image=Img.open(BytesIO(self.image.read()))
 		 		t_image.thumbnail((360,360),Img.ANTIALIAS)
 		 		output=BytesIO()
 		 		t_image.save(output,format='JPEG',quality=75)
 		 		output.seek(0)
 		 		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+		 	 except:
+		 	 	pass
 		 	super(Estudios,self).save(*args,**kwargs)
 		 def __str__(self):
 		 	return  self.nombre
