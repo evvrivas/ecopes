@@ -73,7 +73,7 @@ class Estudios(models.Model):
 		 nombre=models.CharField(max_length=150)
 		 descripcion= models.TextField(blank=True,null=True)
 		 descripcion_publica= models.TextField(blank=True,null=True)
-		 
+		 imagen1 = ImageField(upload_to='tmp',blank=True)
 
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
@@ -83,7 +83,20 @@ class Estudios(models.Model):
 		 n_muestras= models.IntegerField(blank=True,null=True)
 		 universo= models.IntegerField(blank=True,null=True)
 
-		 
+		 def save(self, *args,**kwargs):
+		 	self.image=self.imagen1
+		 	if self.image:
+		 	 try:
+		 	 	t_image=Img.open(BytesIO(self.image.read()))
+		 	 	t_image.thumbnail((360,360),Img.ANTIALIAS)
+		 	 	output=BytesIO()
+		 	 	t_image.save(output,format='JPEG',quality=75)
+		 	 	output.seek(0)
+		 	 	self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+
+		 	 except:
+		 	 	pass
+		 	super(Estudios,self).save(*args,**kwargs)
 		 def __str__(self):
 		 	return  self.nombre
 		 class Admin:
