@@ -24,15 +24,18 @@
 
      {% for j in i  %} 
         {% if forloop.first %}
-                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>                
+                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
+                <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">              
         {% else %}                
         {% endif %}
      {% endfor %}
 
 
-      <select name={{i.pregunta.pregunta}} value="{{i.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
+      
                                                      
              {% for j in i  %} 
+
+
                 <option value={{j.opcion}}>{{j.opcion}}</option>                              
              {% endfor %}
                                                      

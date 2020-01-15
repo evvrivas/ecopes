@@ -263,9 +263,12 @@ def agregar_encuesta(request,id_estudio):
             seleccionadas=[]
                   
             for i in vector_de_preguntas:
-              for j in i:
-                   opcion_s = request.POST.get(j.pregunta.pregunta)
-                   seleccionadas.append(opcion_s)
+              for k in i:
+                 opcion_s = request.POST.get(k.pregunta.pregunta)
+                 seleccionadas.append(opcion_s)
+                 break
+
+             
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             connection.close()
             return render(request,'resultado.html',locals())             
