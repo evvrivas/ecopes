@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %} 
+{% load thumbnail %}
+
+{% block content %}
+  
+<div class="row">  
+       <div class="alert alert-info">        
+<center>
+        <a href="/"> <h4>  <font color="blue">CONFIRMADO.</font> </h4> </a>
+       
+</center>
+<br>
+
+<h5><center>Su acción fue exitosa !!</center></h5>  
+   <br>
+     
+     <li><a href="/agregar_encuesta/{{id_estudio}}"> Seguir encuestando.. </a></li>
+     <br>
+     <li><a href="/">Regresar a pagina principal </a></li>
+
+
+</div>
+</div>
+
+
+
+ {% endblock %}
+

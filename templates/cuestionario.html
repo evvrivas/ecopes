@@ -28,20 +28,18 @@
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">              
         {% else %}                
         {% endif %}
-     {% endfor %}
-
-
-      
+     {% endfor %}      
                                                      
              {% for j in i  %} 
-
-
-                <option value={{j.opcion}}>{{j.opcion}}</option>                              
+                <option value="{{j.opcion}}">{{j.opcion}}</option>                              
              {% endfor %}
                                                      
       </select> 
- {% endfor %} 
+      
+      <hr>
+      <br>
 
+ {% endfor %} 
 
 
 <br>

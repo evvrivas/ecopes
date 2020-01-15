@@ -249,6 +249,7 @@ def crear_estudio(request):
 def agregar_encuesta(request,id_estudio):
     
     if request.POST:
+            id_estudio=id_estudio
             vector_de_preguntas=[]
             
             estudio_actual=Estudios.objects.get(id=id_estudio)
@@ -271,7 +272,7 @@ def agregar_encuesta(request,id_estudio):
              
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             connection.close()
-            return render(request,'resultado.html',locals())             
+            return render(request,'confirmar_encuesta.html',locals())             
 
     connection.close()
     return render(request,'principal.html',locals())        
