@@ -246,4 +246,30 @@ def crear_estudio(request):
 
      
      
-       
+  def agregar_encuesta(request,id_estudio):
+    
+    if request.POST:
+            vector_de_preguntas=[]
+            
+            estudio_actual=Estudios.objects.get(id=id_estudio)
+            las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
+            
+            for i in las_preguntas:
+                  
+                  las_opciones=Opciones.objects.filter(pregunta=i)
+
+                  vector_de_preguntas.append(las_opciones)
+           
+           seleccionadas=[]
+                  
+           for i in vector_de_preguntas:
+              for j in i:
+                   opcion_s = request.POST.get(j.pregunta.pregunta)
+                   seleccionadas.append(opcion_s)
+                #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+           
+           print (seleccionadas)   
+
+
+     connection.close()
+     return render(request,'resultado.html',locals())        

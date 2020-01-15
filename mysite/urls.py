@@ -43,6 +43,7 @@ urlpatterns = [
 
     url(r'^poner_lista_de_estudios/$',poner_lista_de_estudios),
     url(r'^poner_cuestionario/(\d+)$',poner_cuestionario),
+    url(r'^agregar_encuesta/(\d+)$',agregar_encuesta),
 
     url(r'^crear_estudio/$',crear_estudio),    
 

@@ -7,26 +7,46 @@
 <div class="row">  
        <div class="alert alert-info">        
 <center>
-        <a href="/"> <h3>  <font color="blue">CUESTIONARIO</font> </h3> </a>
+        <a href="/"> <h4>  <font color="blue">CUESTIONARIO</font> </h4> </a>
        
 </center>
 <br>
 
 
+<center><form action="/agregar_encuesta/{{id_estudio}}" method="post">
+                       {% csrf_token %}                                                  
+                                                    
+                <div class="col-md-12">   
+
+
  {% for i in vector_de_preguntas %} 
 
-        {% if forloop.first %}
-                <p> <font color="blue">{{i.pregunta.pregunta}} </font> </p>
-        {% else %}
-                <p> <font color="blue">{{i.opcion}} </font> </p>
-        {% endif %}
-                          
 
+     {% for j in i  %} 
+        {% if forloop.first %}
+                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>                
+        {% else %}                
+        {% endif %}
+     {% endfor %}
+
+
+      <select name={{i.pregunta.pregunta}} value="{{i.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
+                                                     
+             {% for j in i  %} 
+                <option value={{j.opcion}}>{{j.opcion}}</option>                              
+             {% endfor %}
+                                                     
+      </select> 
  {% endfor %} 
 
-<br>
-<!--   quita este parar color de fondo -->
 
+
+<br>
+<br>
+ 
+                    <input type="submit" value="FINALIZAR ENCUESTA">
+                                                                                                        
+             </form> </center> 
 
 </div>
 </div>
