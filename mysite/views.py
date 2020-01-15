@@ -172,17 +172,16 @@ def poner_cuestionario(request,id_estudio):
       vector_de_preguntas=[]
       
       estudio_actual=Estudios.objects.get(id=id_estudio)
-      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)
-
+      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
+      
       for i in las_preguntas:
-            las_opciones=Opciones.objects.filter(pregunta=i)
-            vector_de_opciones=[]
             
-            for j in las_opciones:
-                vector_de_opciones.append(j.opcion)
-            vector_de_opciones.append(j.pregunta.pregunta)      
+            las_opciones=Opciones.objects.filter(pregunta=i)
 
-      vector_de_preguntas.append(vector_de_opciones)
+            vector_de_preguntas.append(las_opciones)
+      
+
+      
       connection.close()
       return render(request,'cuestionario.html',locals()) 
 
@@ -205,38 +204,40 @@ def crear_estudio(request):
                 tipo_estudio="PRIVADO"
 
             else:
-              tipo_estudio="BUENO"
+                tipo_estudio="BUENO"
 
-            nombre_estudio="ELECCION alcalde"
+            nombre_estudio="ELECCION alcalde "+ str(i)
             codigo_del_estudio=str(i)
             date=datetime.datetime.now()
 
             p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio",descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
             p1.save() 
 
-            pregunta_est="que es eso "+str(i) +str(i)+str(i)+str(i) 
-            p21=Preguntas(estudio=p1, pregunta=pregunta_est)
-            p21.save()
-            
-            la_opcion="Opcion A"+str(i) +str(i)+str(i)+str(i)              
-            p31=Opciones(pregunta=p21,opcion=la_opcion)
-            p31.save()
+            for j in range(10):
 
-            la_opcion="Opcion B"+str(i) +str(i)+str(i)+str(i) 
-            p31=Opciones(pregunta=p21,opcion=la_opcion)
-            p31.save()
-            
-            la_opcion="Opcion C"+str(i) +str(i)+str(i)+str(i) 
-            p31=Opciones(pregunta=p21,opcion=la_opcion)
-            p31.save()
-            
-            la_opcion="Opcion D"+str(i) +str(i)+str(i)+str(i) 
-            p31=Opciones(pregunta=p21,opcion=la_opcion)
-            p31.save()
-            
-            la_opcion="Opcion E"+str(i) +str(i)+str(i)+str(i) 
-            p31=Opciones(pregunta=p21,opcion=la_opcion)
-            p31.save()
+                    pregunta_est="que es eso "+str(i) +str(j)
+                    p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+                    p21.save()
+                    
+                    la_opcion="Opcion A "+str(i) +str(j)           
+                    p31=Opciones(pregunta=p21,opcion=la_opcion)
+                    p31.save()
+
+                    la_opcion="Opcion B "+str(i) +str(j)
+                    p32=Opciones(pregunta=p21,opcion=la_opcion)
+                    p32.save()
+                    
+                    la_opcion="Opcion C "+str(i) +str(j)
+                    p33=Opciones(pregunta=p21,opcion=la_opcion)
+                    p33.save()
+                    
+                    la_opcion="Opcion D "+str(i) +str(j)
+                    p34=Opciones(pregunta=p21,opcion=la_opcion)
+                    p34.save()
+                    
+                    la_opcion="Opcion E "+str(i) +str(j)
+                    p35=Opciones(pregunta=p21,opcion=la_opcion)
+                    p35.save()
 
         connection.close()
         return render(request,'principal.html',locals()) 

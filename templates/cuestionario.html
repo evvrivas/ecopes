@@ -13,13 +13,14 @@
 <br>
 
 
+ {% for i in vector_de_preguntas %} 
 
- {% for j in vector_de_preguntas %} 
-                <p> <font color="blue">i.pregunta </font> </p>
-                  
-                {% for j in vector_de_opciones %} 
-                     <p> <font color="blue">i.opcion </font> </p>
-                {% endfor %}                 
+        {% if forloop.first %}
+                <p> <font color="blue">{{i.pregunta.pregunta}} </font> </p>
+        {% else %}
+                <p> <font color="blue">{{i.opcion}} </font> </p>
+        {% endif %}
+                          
 
  {% endfor %} 
 
