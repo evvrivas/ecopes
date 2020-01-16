@@ -258,19 +258,191 @@ def agregar_encuesta(request,id_estudio):
             for i in las_preguntas:
                   
                   las_opciones=Opciones.objects.filter(pregunta=i)
-
                   vector_de_preguntas.append(las_opciones)
            
+           
+            respuesta_1=""
+            respuesta_2=""
+            respuesta_3=""
+            respuesta_4=""
+            respuesta_5=""
+            respuesta_6=""
+            respuesta_7=""
+            respuesta_8=""
+            respuesta_9=""
+            respuesta_10=""
+
+            respuesta_11=""
+            respuesta_12=""
+            respuesta_13=""
+            respuesta_14=""
+            respuesta_15=""
+            respuesta_16=""
+            respuesta_17=""
+            respuesta_18=""
+            respuesta_19=""
+            respuesta_20=""
+
+            respuesta_21=""
+            respuesta_22=""
+            respuesta_23=""
+            respuesta_24=""
+            respuesta_25=""
+            respuesta_26=""
+            respuesta_27=""
+            respuesta_28=""
+            respuesta_29=""
+            respuesta_30=""
+
+            respuesta_31=""
+            respuesta_32=""
+            respuesta_33=""
+            respuesta_34=""
+            respuesta_35=""
+            respuesta_36=""
+            respuesta_37=""
+            respuesta_38=""
+            respuesta_39=""
+            respuesta_40=""
+
+            respuesta_41=""
+            respuesta_42=""
+            respuesta_43=""
+            respuesta_44=""
+            respuesta_45=""
+            respuesta_46=""
+            respuesta_47=""
+            respuesta_48=""
+            respuesta_49=""
+            respuesta_50=""
+
             seleccionadas=[]
-                  
+            x=1 
+
             for i in vector_de_preguntas:
               for k in i:
                  opcion_s = request.POST.get(k.pregunta.pregunta)
-                 seleccionadas.append(opcion_s)
-                 break
+                                  
+                 if x==1:
+                    respuesta_1=opcion_s
+                 elif x==2:
+                    respuesta_2=opcion_s
+                 elif x==3:
+                    respuesta_3=opcion_s
+                 elif x==4:
+                    respuesta_4=opcion_s
+                 elif x==5:
+                    respuesta_5=opcion_s
+                 elif x==6:
+                    respuesta_6=opcion_s
+                 elif x==7:
+                    respuesta_7=opcion_s
+                 elif x==8:
+                    respuesta_8=opcion_s
+                 elif x==9:
+                    respuesta_9=opcion_s
+                 elif x==10:
+                    respuesta_10=opcion_s
+                 if x==11:
+                    respuesta_11=opcion_s
+                 elif x==12:
+                    respuesta_12=opcion_s
+                 elif x==13:
+                    respuesta_13=opcion_s
+                 elif x==14:
+                    respuesta_14=opcion_s
+                 elif x==15:
+                    respuesta_15=opcion_s
+                 elif x==16:
+                    respuesta_16=opcion_s
+                 elif x==17:
+                    respuesta_17=opcion_s
+                 elif x==18:
+                    respuesta_18=opcion_s
+                 elif x==19:
+                    respuesta_19=opcion_s
+                 elif x==20:
+                    respuesta_20=opcion_s
+                 if x==21:
+                    respuesta_21=opcion_s
+                 elif x==22:
+                    respuesta_22=opcion_s
+                 elif x==23:
+                    respuesta_23=opcion_s
+                 elif x==24:
+                    respuesta_24=opcion_s
+                 elif x==25:
+                    respuesta_25=opcion_s
+                 elif x==26:
+                    respuesta_26=opcion_s
+                 elif x==27:
+                    respuesta_27=opcion_s
+                 elif x==28:
+                    respuesta_28=opcion_s
+                 elif x==29:
+                    respuesta_29=opcion_s
+                 elif x==30:
+                    respuesta_30=opcion_s
+                 if x==31:
+                    respuesta_31=opcion_s
+                 elif x==32:
+                    respuesta_32=opcion_s
+                 elif x==33:
+                    respuesta_33=opcion_s
+                 elif x==34:
+                    respuesta_34=opcion_s
+                 elif x==35:
+                    respuesta_35=opcion_s
+                 elif x==36:
+                    respuesta_36=opcion_s
+                 elif x==37:
+                    respuesta_37=opcion_s
+                 elif x==38:
+                    respuesta_38=opcion_s
+                 elif x==39:
+                    respuesta_39=opcion_s
+                 elif x==40:
+                    respuesta_40=opcion_s
+                 if x==41:
+                    respuesta_41=opcion_s
+                 elif x==42:
+                    respuesta_42=opcion_s
+                 elif x==43:
+                    respuesta_43=opcion_s
+                 elif x==44:
+                    respuesta_44=opcion_s
+                 elif x==45:
+                    respuesta_45=opcion_s
+                 elif x==46:
+                    respuesta_46=opcion_s
+                 elif x==47:
+                    respuesta_47=opcion_s
+                 elif x==48:
+                    respuesta_48=opcion_s
+                 elif x==49:
+                    respuesta_49=opcion_s
+                 elif x==50:
+                    respuesta_50=opcion_s   
+                 else:
+                    pass
 
-             
+                 break
+              x=x+1   
+
+            p1=Cuestionario_principal(respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
+                                      respuesta_6=respuesta_6,respuesta_7=respuesta_7,respuesta_8=respuesta_8,respuesta_9=respuesta_9,respuesta_10=respuesta_10,
+                                      respuesta_11=respuesta_11,respuesta_12=respuesta_12,respuesta_13=respuesta_13,respuesta_14=respuesta_14,respuesta_15=respuesta_15,
+                                      respuesta_16=respuesta_16,respuesta_17=respuesta_17,respuesta_18=respuesta_18,respuesta_19=respuesta_19,respuesta_20=respuesta_20,
+                                      respuesta_21=respuesta_21,respuesta_22=respuesta_22,respuesta_23=respuesta_23,respuesta_24=respuesta_24,respuesta_25=respuesta_25,
+                                      respuesta_26=respuesta_26,respuesta_27=respuesta_27,respuesta_28=respuesta_28,respuesta_29=respuesta_29,respuesta_30=respuesta_30,
+                                      respuesta_31=respuesta_31,respuesta_32=respuesta_32,respuesta_33=respuesta_33,respuesta_34=respuesta_34,respuesta_35=respuesta_35,
+                                      respuesta_36=respuesta_36,respuesta_37=respuesta_37,respuesta_38=respuesta_38,respuesta_39=respuesta_39,respuesta_40=respuesta_40,
+                                      respuesta_41=respuesta_41,respuesta_42=respuesta_42,respuesta_43=respuesta_43,respuesta_44=respuesta_44,respuesta_45=respuesta_45,
+                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50) 
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+            p1.save()
+
+            tabla_datos=Cuestionario_principal.objects.all()
             connection.close()
             return render(request,'confirmar_encuesta.html',locals())             
 

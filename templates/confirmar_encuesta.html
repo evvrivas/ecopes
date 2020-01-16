@@ -14,8 +14,10 @@
 
 <h5><center>Su acción fue exitosa !!</center></h5>  
    <br>
-     
-     <li><a href="/agregar_encuesta/{{id_estudio}}"> Seguir encuestando.. </a></li>
+     {% for i in tabla_datos %}
+        <p> {{i}}  </p>
+     {% endfor %}
+     <li><a href="/poner_cuestionario/{{id_estudio}}"> Seguir encuestando.. </a></li>
      <br>
      <li><a href="/">Regresar a pagina principal </a></li>
 
