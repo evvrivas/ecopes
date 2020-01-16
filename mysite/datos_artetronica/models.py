@@ -173,7 +173,7 @@ class Configuracion_sistema(models.Model):
 
 
 class Cuestionario_principal(models.Model):
-		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
+		 estudio=models.ForeignKey('Estudios',blank=True,null=True)
 		 respuesta_1=models.CharField(max_length=100)
 		 respuesta_2=models.CharField(max_length=100)
 		 respuesta_3=models.CharField(max_length=100)
@@ -226,8 +226,8 @@ class Cuestionario_principal(models.Model):
 		 respuesta_50=models.CharField(max_length=100)
 		 
 		 def __str__(self):
-		 	return  self.respuesta_1
+		 	return  self.estudio.nombre
 		 class Admin:
-		 	list_display = ('respuesta_1')
+		 	list_display = ('estudio.nombre')
 
 
