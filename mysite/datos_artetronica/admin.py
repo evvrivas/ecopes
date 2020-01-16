@@ -70,7 +70,14 @@ admin.site.register(Opciones,OpcionesAdmin)
 ####################################################
 
 
-
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = Cuestionario_principalForm
+class Cuestionario_principalAdmin(admin.ModelAdmin):
+        model = Cuestionario_principal
+        list_display = ['respuesta_1','respuesta_2','respuesta_3','respuesta_4','respuesta_5']
+admin.site.register(Cuestionario_principal,Cuestionario_principalAdmin)
+####################################################
 
 
 ####################################################

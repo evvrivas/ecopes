@@ -40,6 +40,12 @@ class OpcionesForm(ModelForm):
 		super(OpcionesForm, self).__init__(*args, **kwargs)		
 		self.fields['pregunta'].queryset=Preguntas.objects.filter(pregunta=nombre_pregunta)
 
+class Cuestionario_principalForm(ModelForm):
+	class Meta:
+		model= Cuestionario_principal	
+		exclude=[]
+	
+	
 
 class Configuracion_sistemaForm(ModelForm):
 	class Meta:
