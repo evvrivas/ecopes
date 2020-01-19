@@ -33,7 +33,7 @@ class PreguntasForm(ModelForm):
 
 class Opciones_acumuladasForm(ModelForm):
 	class Meta:
-		model= _acumuladas		
+		model= Opciones_acumuladas		
 		exclude=[]
 	
 	def __init__(self, nombre_pregunta,*args, **kwargs):
