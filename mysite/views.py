@@ -51,7 +51,7 @@ from django.db.models import Q
 from django.db import connection
 
 from random import sample
-
+from collections import Counter
 
 
 def logout(request):
@@ -343,7 +343,7 @@ def agregar_encuesta(request,id_estudio):
                     respuesta_9=opcion_s
                  elif x==10:
                     respuesta_10=opcion_s
-                 if x==11:
+                 elif x==11:
                     respuesta_11=opcion_s
                  elif x==12:
                     respuesta_12=opcion_s
@@ -363,7 +363,7 @@ def agregar_encuesta(request,id_estudio):
                     respuesta_19=opcion_s
                  elif x==20:
                     respuesta_20=opcion_s
-                 if x==21:
+                 elif x==21:
                     respuesta_21=opcion_s
                  elif x==22:
                     respuesta_22=opcion_s
@@ -383,7 +383,7 @@ def agregar_encuesta(request,id_estudio):
                     respuesta_29=opcion_s
                  elif x==30:
                     respuesta_30=opcion_s
-                 if x==31:
+                 elif x==31:
                     respuesta_31=opcion_s
                  elif x==32:
                     respuesta_32=opcion_s
@@ -403,7 +403,7 @@ def agregar_encuesta(request,id_estudio):
                     respuesta_39=opcion_s
                  elif x==40:
                     respuesta_40=opcion_s
-                 if x==41:
+                 elif x==41:
                     respuesta_41=opcion_s
                  elif x==42:
                     respuesta_42=opcion_s
@@ -442,7 +442,7 @@ def agregar_encuesta(request,id_estudio):
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             p1.save()
 
-            tabla_datos=Cuestionario_principal.objects.all()
+            tabla_datos=Cuestionario_temporal.objects.all()
             connection.close()
             return render(request,'confirmar_encuesta.html',locals())             
 
@@ -459,36 +459,41 @@ def actualizar_previo_a_graficar(request,id_estudio):
 
 
       datos_temporales=Cuestionario_temporal.objects.filter(estudio_id=id_estudio)
-      #texto=["respuesta_1","respuesta_2","respuesta_3","respuesta_4","respuesta_5","respuesta_6","respuesta_7","respuesta_8","respuesta_9","respuesta_10",
-      #"respuesta_11","respuesta_12","respuesta_13","respuesta_14","respuesta_15","respuesta_16","respuesta_17","respuesta_18","respuesta_19","respuesta_20",
-      #"respuesta_21","respuesta_22","respuesta_23","respuesta_24","respuesta_25","respuesta_26","respuesta_27","respuesta_28","respuesta_29","respuesta_30",
-      #"respuesta_31","respuesta_32","respuesta_33","respuesta_34","respuesta_35","respuesta_36","respuesta_37","respuesta_38","respuesta_39","respuesta_40",
-      #"respuesta_41","respuesta_42","respuesta_43","respuesta_44","respuesta_45","respuesta_46","respuesta_47","respuesta_48","respuesta_49","respuesta_50"]         
+      
       texto=[field.name for field in Cuestionario_temporal._meta.get_fields()]
                  
-      i=1  
+      i=2  
       for j in las_preguntas:
                         las_opciones=Opciones.objects.filter(pregunta=j)
-                        lista_respuesta=datos_temporales.values_list(texto[i], flat=True)                       
-                        
-                        vector_de_acumulados=[]
+                        lista_respuesta=datos_temporales.values_list(texto[i], flat=True) 
+
+                        list_freq= (Counter(lista_respuesta))
+                        vector_de_acumulados=[]                        
                         for k in las_opciones:
-                              repeticiones=lista_respuesta.count(k.opcion)
+                              x=k.opcion
+                              repeticiones=list_freq[x]
+                              vector_de_acumulados.append(repeticiones)
+
                               valor_actual=k.cantidad
                               k.cantidad=valor_actual+repeticiones
                               k.save()                              
-                              
-                              vector_de_acumulados.append(k.cantidad)
-                        
+                                                                                 
 
                         i=i+1
                         guardar_en_acumulados(vector_de_acumulados,j)  
-                        
+
       return render(request,'confirmar_encuesta.html',locals())
 
 
 def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
-             
+         
+             #keys = list_freq.keys();
+             #values = list_freq.values()
+         
+             #for key, value in list_freq.items():
+                 #print(key, " has count ", value)
+                 #vector_de_acumulados.append(value)
+
              va=vector_de_acumulados
              t=len(vector_de_acumulados)
              a=0
