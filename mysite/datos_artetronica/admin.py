@@ -94,7 +94,7 @@ class Cuestionario_temporalAdmin(admin.ModelAdmin):
                 return instance.estudio.nombre
 
 
-admin.site.register(Cuestionario_principal,Cuestionario_principalAdmin)
+admin.site.register(Cuestionario_temporal,Cuestionario_temporalAdmin)
 ####################################################
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
