@@ -31,6 +31,16 @@ class PreguntasForm(ModelForm):
 		widgets = {'pregunta': Textarea(attrs={'cols': 30, 'rows': 2}),}
 		
 
+class Opciones_acumuladasForm(ModelForm):
+	class Meta:
+		model= _acumuladas		
+		exclude=[]
+	
+	def __init__(self, nombre_pregunta,*args, **kwargs):
+		super(OpcionesForm, self).__init__(*args, **kwargs)		
+		self.fields['pregunta'].queryset=Preguntas.objects.filter(pregunta=nombre_pregunta)
+
+
 class OpcionesForm(ModelForm):
 	class Meta:
 		model= Opciones		
@@ -45,7 +55,11 @@ class Cuestionario_principalForm(ModelForm):
 		model= Cuestionario_principal	
 		exclude=[]
 	
-	
+class Cuestionario_temporalForm(ModelForm):
+	class Meta:
+		model= Cuestionario_temporal	
+		exclude=[]
+		
 
 class Configuracion_sistemaForm(ModelForm):
 	class Meta:
