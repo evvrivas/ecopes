@@ -72,21 +72,16 @@ admin.site.register(Opciones,OpcionesAdmin)
 
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
-    form = OpcionesForm
+    form = Opciones_acumuladasForm
 class OpcionesAdmin(admin.ModelAdmin):
-        model = Opciones
+        model = Opciones_acumuladas
         list_display = ['nombre_pregunta','pregunta']
         
         def nombre_pregunta(self,instance):
                 return instance.pregunta.pregunta
 
-admin.site.register(Opciones,OpcionesAdmin)
+admin.site.register(Opciones_acumuladas,Opciones_acumuladasAdmin)
 ####################################################
-
-
-
-
-
 
 
 ####################################################
