@@ -37,7 +37,7 @@ class Opciones_acumuladasForm(ModelForm):
 		exclude=[]
 	
 	def __init__(self, nombre_pregunta,*args, **kwargs):
-		super(OpcionesForm, self).__init__(*args, **kwargs)		
+		super(Opciones_acumuladasForm, self).__init__(*args, **kwargs)		
 		self.fields['pregunta'].queryset=Preguntas.objects.filter(pregunta=nombre_pregunta)
 
 
