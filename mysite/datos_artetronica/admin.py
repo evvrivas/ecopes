@@ -73,7 +73,7 @@ admin.site.register(Opciones,OpcionesAdmin)
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = Opciones_acumuladasForm
-class OpcionesAdmin(admin.ModelAdmin):
+class Opciones_acumuladasAdmin(admin.ModelAdmin):
         model = Opciones_acumuladas
         list_display = ['nombre_pregunta','pregunta']
         
