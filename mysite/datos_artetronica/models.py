@@ -153,11 +153,39 @@ class Preguntas(models.Model):
 class Opciones(models.Model):
 		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
 		 opcion=models.CharField(max_length=60)
+		 cantidad= models.IntegerField(blank=True,null=True)
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:
 		 	list_display = ('opcion')
 
+class Opciones_acumuladas(models.Model):
+		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
+		 opcion_1=models.CharField(max_length=60)
+		 opcion_2=models.CharField(max_length=60)
+		 opcion_3=models.CharField(max_length=60)
+		 opcion_4=models.CharField(max_length=60)
+		 opcion_5=models.CharField(max_length=60)
+		 opcion_6=models.CharField(max_length=60)
+		 opcion_7=models.CharField(max_length=60)
+		 opcion_8=models.CharField(max_length=60)
+		 opcion_9=models.CharField(max_length=60)
+		 opcion_10=models.CharField(max_length=60)
+		 opcion_11=models.CharField(max_length=60)
+		 opcion_12=models.CharField(max_length=60)
+		 opcion_13=models.CharField(max_length=60)
+		 opcion_14=models.CharField(max_length=60)
+		 opcion_15=models.CharField(max_length=60)
+		 opcion_16=models.CharField(max_length=60)
+		 opcion_17=models.CharField(max_length=60)
+		 opcion_18=models.CharField(max_length=60)
+		 opcion_19=models.CharField(max_length=60)
+		 opcion_20=models.CharField(max_length=60)
+	 
+		 def __str__(self):
+		 	return  self.pregunta.pregunta
+		 class Admin:
+		 	list_display = ('pregunta')
 
 
 
@@ -172,7 +200,8 @@ class Configuracion_sistema(models.Model):
 
 
 
-class Cuestionario_principal(models.Model):
+	
+class Cuestionario_temporal(models.Model):
 		 estudio=models.ForeignKey('Estudios',blank=True,null=True)
 		 respuesta_1=models.CharField(max_length=100)
 		 respuesta_2=models.CharField(max_length=100)

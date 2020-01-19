@@ -429,7 +429,7 @@ def agregar_encuesta(request,id_estudio):
                  break
               x=x+1   
 
-            p1=Cuestionario_principal(estudio=estudio_actual,respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
+            p1=Cuestionario_temporal(estudio=estudio_actual,respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
                                       respuesta_6=respuesta_6,respuesta_7=respuesta_7,respuesta_8=respuesta_8,respuesta_9=respuesta_9,respuesta_10=respuesta_10,
                                       respuesta_11=respuesta_11,respuesta_12=respuesta_12,respuesta_13=respuesta_13,respuesta_14=respuesta_14,respuesta_15=respuesta_15,
                                       respuesta_16=respuesta_16,respuesta_17=respuesta_17,respuesta_18=respuesta_18,respuesta_19=respuesta_19,respuesta_20=respuesta_20,
@@ -447,4 +447,75 @@ def agregar_encuesta(request,id_estudio):
             return render(request,'confirmar_encuesta.html',locals())             
 
     connection.close()
-    return render(request,'principal.html',locals())        
+    return render(request,'principal.html',locals())
+
+
+
+def actualizar_previo_a_graficar(request,id_estudio):
+
+      id_estudio=id_estudio
+      estudio_actual=Estudios.objects.get(id=id_estudio)
+      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
+
+
+      datos_temporales=Cuestionario_temporal.objects.filter(estudio_id=id_estudio)
+      #texto=["respuesta_1","respuesta_2","respuesta_3","respuesta_4","respuesta_5","respuesta_6","respuesta_7","respuesta_8","respuesta_9","respuesta_10",
+      #"respuesta_11","respuesta_12","respuesta_13","respuesta_14","respuesta_15","respuesta_16","respuesta_17","respuesta_18","respuesta_19","respuesta_20",
+      #"respuesta_21","respuesta_22","respuesta_23","respuesta_24","respuesta_25","respuesta_26","respuesta_27","respuesta_28","respuesta_29","respuesta_30",
+      #"respuesta_31","respuesta_32","respuesta_33","respuesta_34","respuesta_35","respuesta_36","respuesta_37","respuesta_38","respuesta_39","respuesta_40",
+      #"respuesta_41","respuesta_42","respuesta_43","respuesta_44","respuesta_45","respuesta_46","respuesta_47","respuesta_48","respuesta_49","respuesta_50"]         
+      texto=[field.name for field in Cuestionario_temporal._meta.get_fields()]
+                 
+      i=1  
+      for j in las_preguntas:
+                        las_opciones=Opciones.objects.filter(pregunta=j)
+                        lista_respuesta=datos_temporales.values_list(texto[i], flat=True)                       
+                        
+                        vector_de_acumulados=[]
+                        for k in las_opciones:
+                              repeticiones=lista_respuesta.count(k.opcion)
+                              valor_actual=k.cantidad
+                              k.cantidad=valor_actual+repeticiones
+                              k.save()                              
+                              
+                              vector_de_acumulados.append(k.cantidad)
+                        
+
+                        i=i+1
+                        guardar_en_acumulados(vector_de_acumulados,j)  
+                        
+      return render(request,'confirmar_encuesta.html',locals())
+
+
+def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
+             
+             va=vector_de_acumulados
+             t=len(vector_de_acumulados)
+             a=0
+             if t==1:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0])
+             elif t==2:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1])
+             elif t==3:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2])
+             elif t==4:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3])
+             elif t==5:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4])
+             elif t==6:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5])
+             elif t==7:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6])
+             elif t==8:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7])
+             elif t==9:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8])
+             elif t==10:
+                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8],opcion_10=va[9])
+
+             else:
+                 a=1
+
+             if a==0:
+                  Opciones_acumuladas.save() 
+

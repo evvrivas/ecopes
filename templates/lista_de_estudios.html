@@ -19,6 +19,12 @@
        		
         		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="green">{{ j.nombre }} -->  {{j.descripcion}}</font> </h5> </a>
 
+                <a href="/actualizar_previo_a_graficar /{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
+
+                <p>Ultima actualizacion  xx:xx pm</p>
+
+                
+
 
         {% endfor %}
 
@@ -26,7 +32,11 @@
         
         {% for j in vector_de_estudios_de_pago %} 
 
-        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>       		
+        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a> 
+
+                <a href="/actualizar_previo_a_graficar /{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
+
+                <p>Ultima actualizacion  xx:xx pm</p>      		
 
 
         {% endfor %} 
@@ -38,7 +48,11 @@
         
         {% for j in vector_de_estudios_privado %} 
 
-                <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>               
+                <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>  
+
+                <a href="/actualizar_previo_a_graficar /{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
+
+                <p>Ultima actualizacion  xx:xx pm</p>             
 
 
         {% endfor %} 
