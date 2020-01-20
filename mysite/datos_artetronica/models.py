@@ -153,7 +153,7 @@ class Preguntas(models.Model):
 class Opciones(models.Model):
 		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
 		 opcion=models.CharField(max_length=60)
-		 cantidad= models.IntegerField(blank=True,null=True)
+		 cantidad= models.IntegerField(blank=True,default=0)
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:

@@ -471,12 +471,15 @@ def actualizar_previo_a_graficar(request,id_estudio):
                         vector_de_acumulados=[]                        
                         for k in las_opciones:
                               x=k.opcion
+                              k
                               repeticiones=list_freq[x]
                               vector_de_acumulados.append(repeticiones)
 
                               valor_actual=k.cantidad
                               k.cantidad=valor_actual+repeticiones
-                              k.save()                              
+                              k.save()
+
+                                                            
                                                                                  
 
                         i=i+1
