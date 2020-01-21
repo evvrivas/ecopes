@@ -46,6 +46,12 @@ urlpatterns = [
     url(r'^agregar_encuesta/(\d+)$',agregar_encuesta),
 
     url(r'^actualizar_previo_a_graficar/(\d+)$',actualizar_previo_a_graficar),
+    
+    url(r'^pagina_de_analisis/(\d+)$',pagina_de_analisis),
+    url(r'^hacer_grafico_de_barras/(\d+)$',hacer_grafico_de_barras),
+
+
+
 
     
 

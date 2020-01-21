@@ -19,13 +19,16 @@
                 <div class="col-md-12">   
 
 
- {% for i in vector_de_preguntas %} 
+ {% for i in vector_de_opciones %} 
 
 
      {% for j in i  %} 
         {% if forloop.first %}
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
-                <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">              
+                <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
+
+                 <a href="/pagina_de_analisis/{{j.id}}"> <h5>  <font color="blue">Graficar</font> </h5> </a>
+              
         {% else %}                
         {% endif %}
      {% endfor %}      

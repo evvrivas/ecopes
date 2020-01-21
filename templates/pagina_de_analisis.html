@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% load staticfiles %} 
+{% load thumbnail %}
+
+{% block content %}
+  
+<div class="row">  
+       <div class="alert alert-info">        
+<center>
+        <a href="/"> <h1>  <font color="blue">ANALISIS DE RESULTADOS</font> </h1> </a>
+         
+</center>
+<br>
+
+<center><h3>p>  <font color="blue">{{la_pregunta}}</font></p></h3></center>
+
+<center><div class="container">
+                        <img src="/hacer_grafico_de_barras/{{id_opciones}}">
+                        </div></center>
+
+</div>
+</div>
+
+
+
+ {% endblock %}

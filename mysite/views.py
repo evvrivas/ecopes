@@ -169,7 +169,7 @@ def poner_lista_de_estudios(request):
 
 def poner_cuestionario(request,id_estudio):
 
-      vector_de_preguntas=[]
+      vector_de_opciones=[]
       
       estudio_actual=Estudios.objects.get(id=id_estudio)
       las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
@@ -178,7 +178,7 @@ def poner_cuestionario(request,id_estudio):
             
             las_opciones=Opciones.objects.filter(pregunta=i)
 
-            vector_de_preguntas.append(las_opciones)
+            vector_de_opciones.append(las_opciones)
       
 
       
@@ -483,8 +483,11 @@ def actualizar_previo_a_graficar(request,id_estudio):
                                                                                  
 
                         i=i+1
-                        guardar_en_acumulados(vector_de_acumulados,j)  
+                        guardar_en_acumulados(vector_de_acumulados,j)
 
+
+      Cuestionario_temporal.objects.filter(estudio_id=id_estudio).delete()
+      
       return render(request,'confirmar_encuesta.html',locals())
 
 
@@ -501,29 +504,95 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
              t=len(vector_de_acumulados)
              a=0
              if t==1:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0])
              elif t==2:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1])
              elif t==3:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2])
              elif t==4:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3])
              elif t==5:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4])
              elif t==6:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5])
              elif t==7:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6])
              elif t==8:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7])
              elif t==9:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8])
              elif t==10:
-                 Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8],opcion_10=va[9])
+                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8],opcion_10=va[9])
 
              else:
                  a=1
 
              if a==0:
-                  Opciones_acumuladas.save() 
+                  p.save() 
 
+
+
+
+
+
+
+def pagina_de_analisis(request, id_opciones):
+    opcion=Opciones.objects.get(id=id_opciones)
+    la_pregunta=opcion.pregunta.pregunta
+    id_opciones=id_opciones
+
+    return render(request,'pagina_de_analisis.html',locals())
+
+def hacer_grafico_de_barras(request,id_opciones):
+    opcion=Opciones.objects.get(id=id_opciones)
+    vector_de_repeticiones=[]
+    vector_de_opciones=[]
+
+    for i in opcion:
+        vector_de_repeticiones.append(i.cantidad) 
+        vector_de_opciones.append(i.opcion)
+
+
+
+       
+        X= np.arange(len(vector_de_opciones))
+        
+        Y1 = np.asarray(vector_de_repeticiones)  
+           
+                   
+               
+        f=plt.figure()
+       
+        #plt.gca().set_yscale('log')
+
+       
+        bar_width = 0.45
+        plt.bar(X, Y1, bar_width, color='b')
+
+               
+      
+        z=0 
+        for x, y in zip(X, Y1):
+            plt.text(x, y+1 ,str(y)+ "\n"+vector_de_opciones[z], ha='center', va= 'bottom')
+            z=z+1
+ 
+      
+        plt.xlabel('\nOpciones disponibles a esta pregunta')
+        plt.ylabel('Cantidad de respuestas/opcion ')
+        titulo=""
+        plt.title(titulo)
+        plt.xticks(())
+
+        subplots_adjust(left=0.21)
+      
+
+        buffer = io.BytesIO()
+        canvas = pylab.get_current_fig_manager().canvas
+        canvas.draw()        
+        graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+        graphIMG.save(buffer, "PNG")
+        pylab.close()  
+
+        f.clear()
+        
+        return HttpResponse (buffer.getvalue(), content_type="Image/png")
