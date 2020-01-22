@@ -54,6 +54,20 @@ from random import sample
 from collections import Counter
 
 
+from django.shortcuts import render
+from matplotlib import pylab
+from pylab import *
+import PIL
+import PIL.Image
+import io
+from io import *
+
+##########################
+import numpy as np
+import matplotlib.pyplot as plt
+#################################
+import pylab as pl
+
 def logout(request):
     auth.logout(request)
     
@@ -471,7 +485,6 @@ def actualizar_previo_a_graficar(request,id_estudio):
                         vector_de_acumulados=[]                        
                         for k in las_opciones:
                               x=k.opcion
-                              k
                               repeticiones=list_freq[x]
                               vector_de_acumulados.append(repeticiones)
 
@@ -532,39 +545,25 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 
 
-
-
-
-
-def pagina_de_analisis(request, id_opciones):
-    opcion=Opciones.objects.get(id=id_opciones)
-    op=opcion.pregunta.id
-    opcion=Opciones.objects.filter(pregunta_id=op)
-    la_pregunta=opcion.pregunta.pregunta
-    id_opciones=id_opciones
-
+def pagina_de_analisis(request, id_pregunta):
+    pregunta=Preguntas.objects.get(id=id_pregunta)
+    nombre_de_pregunta=pregunta.pregunta   
+    id_pregunta=id_pregunta
     return render(request,'pagina_de_analisis.html',locals())
 
-def hacer_grafico_de_barras(request,id_opciones):
-    opcion=Opciones.objects.get(id=id_opciones)
-    op=opcion.pregunta.id
-    opcion=Opciones.objects.filter(pregunta_id=op)
-    
-    vector_de_repeticiones=[]
-    vector_de_opciones=[]
-
-    for i in opcion:
-        vector_de_repeticiones.append(i.cantidad) 
-        vector_de_opciones.append(i.opcion)
-
-
-
-       
+def hacer_grafico_de_barras(request,id_pregunta):
+        vector_de_opciones=[]
+        vector_de_repeticiones=[]
+        opci=Opciones.objects.filter(pregunta_id=id_pregunta)       
+        
+        for i in opci:
+            vector_de_opciones.append(i.opcion)
+            vector_de_repeticiones.append(i.cantidad)    
+          
         X= np.arange(len(vector_de_opciones))
         
         Y1 = np.asarray(vector_de_repeticiones)  
-           
-                   
+                    
                
         f=plt.figure()
        
