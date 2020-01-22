@@ -538,6 +538,8 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 def pagina_de_analisis(request, id_opciones):
     opcion=Opciones.objects.get(id=id_opciones)
+    op=opcion.pregunta.id
+    opcion=Opciones.objects.filter(pregunta_id=op)
     la_pregunta=opcion.pregunta.pregunta
     id_opciones=id_opciones
 
@@ -545,6 +547,9 @@ def pagina_de_analisis(request, id_opciones):
 
 def hacer_grafico_de_barras(request,id_opciones):
     opcion=Opciones.objects.get(id=id_opciones)
+    op=opcion.pregunta.id
+    opcion=Opciones.objects.filter(pregunta_id=op)
+    
     vector_de_repeticiones=[]
     vector_de_opciones=[]
 
