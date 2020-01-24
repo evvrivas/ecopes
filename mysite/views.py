@@ -614,7 +614,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
- def hacer_grafico_de_secuencia(request,id_pregunta):
+def hacer_grafico_de_secuencia(request,id_pregunta):
 
        
        opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
