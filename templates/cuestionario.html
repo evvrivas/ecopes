@@ -26,11 +26,14 @@
         {% if forloop.first %}
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
 
-                <a href="/pagina_de_analisis/{{j.id}}"> <h5>  <font color="blue">Graficar</font> </h5> </a>
+                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS"> <h5>  <font color="blue">Graficar barras</font> </h5> </a>
+
+                <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA"> <h5>  <font color="blue">Graficar secuencia</font> </h5> </a>
+
+               
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
 
-                <a href="/pagina_de_analisis/{{j.pregunta.id}}"> <h5>  <font color="blue">Graficar</font> </h5> </a>
-                                
+                                              
 
                  
               

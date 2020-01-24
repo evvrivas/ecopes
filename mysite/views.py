@@ -477,6 +477,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       texto=[field.name for field in Cuestionario_temporal._meta.get_fields()]
                  
       i=2  
+      
       for j in las_preguntas:
                         las_opciones=Opciones.objects.filter(pregunta=j)
                         lista_respuesta=datos_temporales.values_list(texto[i], flat=True) 
@@ -545,25 +546,36 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 
 
-def pagina_de_analisis(request, id_pregunta):
+def pagina_de_analisis(request, id_pregunta,badera):
     pregunta=Preguntas.objects.get(id=id_pregunta)
+    opci=Opciones.objects.filter(pregunta_id=id_pregunta) 
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
+    badera=bandera
     return render(request,'pagina_de_analisis.html',locals())
 
 def hacer_grafico_de_barras(request,id_pregunta):
         vector_de_opciones=[]
         vector_de_repeticiones=[]
         opci=Opciones.objects.filter(pregunta_id=id_pregunta)       
-        
+      
+
+        x=1
         for i in opci:
-            vector_de_opciones.append(i.opcion)
-            vector_de_repeticiones.append(i.cantidad)    
-          
+            xx=str(x)
+            vector_de_opciones.append(xx)
+            vector_de_repeticiones.append(i.cantidad)
+            x=x+1    
+
+        total=sum(vector_de_repeticiones)
+        a=np.array(vector_de_repeticiones)
+        b=a*100/total
+  
         X= np.arange(len(vector_de_opciones))
+        X=X+1
         
-        Y1 = np.asarray(vector_de_repeticiones)  
-                    
+        Y1 = np.asarray(b)  
+     
                
         f=plt.figure()
        
@@ -575,10 +587,10 @@ def hacer_grafico_de_barras(request,id_pregunta):
 
                
       
-        z=0 
-        for x, y in zip(X, Y1):
-            plt.text(x, y+1 ,str(y)+ "\n"+vector_de_opciones[z], ha='center', va= 'bottom')
-            z=z+1
+        #z=0 
+        #for x, y in zip(X, Y1):
+        #    plt.text(x, y+1 ,str(y)+ "\n"+vector_de_opciones[z], ha='center', va= 'bottom')
+        #    z=z+1
  
       
         plt.xlabel('\nOpciones disponibles a esta pregunta')
@@ -600,3 +612,78 @@ def hacer_grafico_de_barras(request,id_pregunta):
         f.clear()
         
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
+
+
+ def hacer_grafico_de_secuencia(request,id_pregunta):
+
+       
+       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
+       texto=[field.name for field in Opciones_acumuladas._meta.get_fields()]
+
+       nombre_opcion=Opciones.objects.filter(pregunta_id=id_pregunta)
+       
+       vector_de_secuencias=[]
+
+       x=len(nombre_opcion)+2
+       for i in range(2,x):
+            vector1=opcion_secuencial.values_list(texto[i], flat=True)
+            vector2=np.asarray(vector1)
+            vector3=[]
+
+            for j in range(len(vector2)):
+                if j ==0:
+                    vector3.append(vector2[j])
+                
+                else:
+                    b=j-1
+                    c=vector2[j]+vector3[b]
+                    vector3.append(c)
+                                     
+           
+            vector_de_secuencias.append(vector3)
+
+
+        print (vector_de_secuencias) 
+        X= np.arange(len(vector2))      
+
+
+               
+        #barh(pos,datos,align = 'center')
+        f=plt.figure()
+        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
+        b=0
+        for i in vector_de_secuencias:
+                plt.plot(X,i, color[b])
+                b=b+1
+               
+
+        plt.grid()     
+        
+
+        leyenda="Secuencia de variacion de la misma pregunta en el tiempo"
+        plt.xlabel(leyenda)
+           
+        plt.ylabel('PREFERENCIAS')
+        titulo="Tendencia del las preferencias"
+        plt.xticks(())
+        plt.yticks(())
+      
+        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
+        plt.title(titulo)  
+                     
+        subplots_adjust(left=0.21)      
+
+        buffer = io.BytesIO()
+        canvas = pylab.get_current_fig_manager().canvas
+        canvas.draw()        
+        graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+        graphIMG.save(buffer, "PNG")
+        pylab.close()  
+
+        f.clear()
+        
+        return HttpResponse (buffer.getvalue(), content_type="Image/png")
+
+
+
+

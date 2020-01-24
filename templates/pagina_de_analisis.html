@@ -15,10 +15,16 @@
 
 <center><h3>p>  <font color="blue">{{nombre_de_pregunta}}</font></p></h3></center>
 
-<center><div class="container">
-                        <img src="/hacer_grafico_de_barras/{{id_pregunta}}">
-                        </div></center>
+{% if bandera=='BARRAS' %}
+	<center><div class="container"> <img src="/hacer_grafico_de_barras/{{id_pregunta}}">
+		         </div></center>
+{% else %}
 
+
+<center><div class="container"> <img src="/hacer_grafico_de_secuencia/{{id_pregunta}}">
+         </div></center>
+
+{% endif %}
 </div>
 </div>
 
