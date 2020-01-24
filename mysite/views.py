@@ -643,11 +643,9 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
             vector_de_secuencias.append(vector3)
 
 
-        print (vector_de_secuencias) 
-        X= np.arange(len(vector2))      
-
-
-               
+         
+        X= np.arange(len(vector2))
+        print(vector_de_secuencias)
         #barh(pos,datos,align = 'center')
         f=plt.figure()
         color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
