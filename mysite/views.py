@@ -638,49 +638,44 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
                     b=j-1
                     c=vector2[j]+vector3[b]
                     vector3.append(c)
-                                     
-           
             vector_de_secuencias.append(vector3)
-
-
-         
-        X= np.arange(len(vector2))
-        print(vector_de_secuencias)
-        #barh(pos,datos,align = 'center')
-        f=plt.figure()
-        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
-        b=0
-        for i in vector_de_secuencias:
+        
+       X= np.arange(len(vector2))
+       print(vector_de_secuencias)
+       #barh(pos,datos,align = 'center')
+       f=plt.figure()
+       color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
+       b=0
+       for i in vector_de_secuencias:
                 plt.plot(X,i, color[b])
                 b=b+1
                
 
-        plt.grid()     
+       plt.grid()     
         
 
-        leyenda="Secuencia de variacion de la misma pregunta en el tiempo"
-        plt.xlabel(leyenda)
+       leyenda="Secuencia de variacion de la misma pregunta en el tiempo"
+       plt.xlabel(leyenda)
            
-        plt.ylabel('PREFERENCIAS')
-        titulo="Tendencia del las preferencias"
-        plt.xticks(())
-        plt.yticks(())
+       plt.ylabel('PREFERENCIAS')
+       titulo="Tendencia del las preferencias"
+       plt.xticks(())
+       plt.yticks(())
       
-        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
-        plt.title(titulo)  
-                     
-        subplots_adjust(left=0.21)      
+       #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
+       plt.title(titulo)  
+                    
+       subplots_adjust(left=0.21)      
 
-        buffer = io.BytesIO()
-        canvas = pylab.get_current_fig_manager().canvas
-        canvas.draw()        
-        graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
-        graphIMG.save(buffer, "PNG")
-        pylab.close()  
-
-        f.clear()
+       buffer = io.BytesIO()
+       canvas = pylab.get_current_fig_manager().canvas
+       canvas.draw()        
+       graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+       graphIMG.save(buffer, "PNG")
+       pylab.close()  
+       f.clear()
         
-        return HttpResponse (buffer.getvalue(), content_type="Image/png")
+       return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
 
