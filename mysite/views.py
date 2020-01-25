@@ -614,8 +614,66 @@ def hacer_grafico_de_barras(request,id_pregunta):
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
-def hacer_grafico_de_secuencia(request,id_pregunta):
 
+
+def hacer_grafico_de_pastel(request,id_pregunta):
+        vector_de_opciones=[]
+        vector_de_repeticiones=[]
+        opci=Opciones.objects.filter(pregunta_id=id_pregunta)       
+      
+
+        x=1
+        for i in opci:
+            xx=str(x)
+            vector_de_opciones.append(xx)
+            vector_de_repeticiones.append(i.cantidad)
+            x=x+1    
+
+        total=sum(vector_de_repeticiones)
+        a=np.array(vector_de_repeticiones)
+        b=a*100/total
+  
+        X= np.arange(len(vector_de_opciones))
+        X=X+1
+        
+        Y1 = np.asarray(b)  
+     
+               
+        f=plt.figure()
+
+
+        desfase = (0.1, 0, 0, 0, 0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray"] 
+      
+        
+        plt.pie(X, labels=vector_de_opciones, autopct="%0.1f %%", colors=color, explode=desfase)
+        plt.axis("equal")
+        plt.show()      
+              
+      
+        plt.xlabel('\nOpciones disponibles a esta pregunta')
+        plt.ylabel('Cantidad de respuestas/opcion ')
+        titulo=""
+        plt.title(titulo)
+        plt.xticks(())
+
+        subplots_adjust(left=0.21)
+      
+
+        buffer = io.BytesIO()
+        canvas = pylab.get_current_fig_manager().canvas
+        canvas.draw()        
+        graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+        graphIMG.save(buffer, "PNG")
+        pylab.close()  
+
+        f.clear()
+        
+        return HttpResponse (buffer.getvalue(), content_type="Image/png")
+
+
+def hacer_grafico_de_secuencia(request,id_pregunta):
        
        opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
        texto=[field.name for field in Opciones_acumuladas._meta.get_fields()]
@@ -638,7 +696,12 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
                     b=j-1
                     c=vector2[j]+vector3[b]
                     vector3.append(c)
-            vector_de_secuencias.append(vector3)
+                
+
+                total=sum(vector3)
+                vector33=vector3*100/total
+
+            vector_de_secuencias.append(vector33)
         
        X= np.arange(len(vector2))
        print(vector_de_secuencias)
@@ -647,18 +710,18 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
        b=0
        for i in vector_de_secuencias:
-                plt.plot(X,i, color[b])
+                plt.plot(X,i, color[b],"o-")
                 b=b+1
                
 
        plt.grid()     
         
 
-       leyenda="Secuencia de variacion de la misma pregunta en el tiempo"
+       leyenda="Variacion de la respuesta"
        plt.xlabel(leyenda)
            
        plt.ylabel('PREFERENCIAS')
-       titulo="Tendencia del las preferencias"
+       titulo="Variacion del las preferencias"
        plt.xticks(())
        plt.yticks(())
       
@@ -678,5 +741,67 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
+def hacer_grafico_de_tendencia(request,id_pregunta):
+       
+       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
+       texto=[field.name for field in Opciones_acumuladas._meta.get_fields()]
+
+       nombre_opcion=Opciones.objects.filter(pregunta_id=id_pregunta)
+       
+       vector_de_secuencias=[]
+
+       x=len(nombre_opcion)+2
+       for i in range(2,x):
+            vector1=opcion_secuencial.values_list(texto[i], flat=True)
+            vector2=np.asarray(vector1)
+            vector3=vector2
+            total=sum(vector2)
+            vector3=vector2*100/total
+            #for j in range(len(vector2)):
+                #if j ==0:
+                    #vector3.append(vector2[j])
+                
+                #else:
+                    #b=j-1
+                    #c=vector2[j]+vector3[b]
+                    #vector3.append(c)
+            vector_de_secuencias.append(vector3)
+        
+       X= np.arange(len(vector2))
+       print(vector_de_secuencias)
+       #barh(pos,datos,align = 'center')
+       f=plt.figure()
+       color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
+       b=0
+       for i in vector_de_secuencias:
+                plt.plot(X,i, color[b],"o-")
+                b=b+1
+               
+
+       plt.grid()     
+        
+
+       leyenda="Variacion de la respuesta"
+       plt.xlabel(leyenda)
+           
+       plt.ylabel('PREFERENCIAS')
+       titulo="Variacion del las preferencias"
+       plt.xticks(())
+       plt.yticks(())
+      
+       #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
+       plt.title(titulo)  
+                    
+       subplots_adjust(left=0.21)      
+
+       buffer = io.BytesIO()
+       canvas = pylab.get_current_fig_manager().canvas
+       canvas.draw()        
+       graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+       graphIMG.save(buffer, "PNG")
+       pylab.close()  
+       f.clear()
+        
+       return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 

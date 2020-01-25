@@ -47,9 +47,11 @@ urlpatterns = [
 
     url(r'^actualizar_previo_a_graficar/(\d+)$',actualizar_previo_a_graficar),
     
-    url(r'^pagina_de_analisis/(\d+)$',pagina_de_analisis),
-    url(r'^hacer_grafico_de_barras/(\d+)/([^/]+)/$',hacer_grafico_de_barras),
-    url(r'^hacer_grafico_de_secuencia/(\d+)/([^/]+)/$',hacer_grafico_de_secuencia),
+    url(r'^pagina_de_analisis/(\d+)/([^/]+)$',pagina_de_analisis),
+    url(r'^hacer_grafico_de_barras/(\d+)/$',hacer_grafico_de_barras),
+    url(r'^hacer_grafico_de_secuencia/(\d+)/$',hacer_grafico_de_secuencia),
+    url(r'^hacer_grafico_de_tendencia/(\d+)/$',hacer_grafico_de_tendencia),
+    url(r'^hacer_grafico_de_pastel/(\d+)/$',hacer_grafico_de_pastel),
     
 
     url(r'^crear_estudio/$',crear_estudio),    
