@@ -546,12 +546,12 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 
 
-def pagina_de_analisis(request, id_pregunta,badera):
+def pagina_de_analisis(request, id_pregunta,bandera):
     pregunta=Preguntas.objects.get(id=id_pregunta)
     opci=Opciones.objects.filter(pregunta_id=id_pregunta) 
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
-    badera=bandera
+    bandera=bandera
     return render(request,'pagina_de_analisis.html',locals())
 
 def hacer_grafico_de_barras(request,id_pregunta):
@@ -685,23 +685,26 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        x=len(nombre_opcion)+2
        for i in range(2,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
-            vector2=np.asarray(vector1)
+            #vector2=np.asarray(vector1)
+            vector2=vector1
             vector3=[]
 
             for j in range(len(vector2)):
                 if j ==0:
+                    
                     vector3.append(vector2[j])
                 
                 else:
                     b=j-1
+
                     c=vector2[j]+vector3[b]
                     vector3.append(c)
                 
 
-                total=sum(vector3)
-                vector33=vector3*100/total
+            #total=sum(vector3)
+            #vector33=vector3*100/total
 
-            vector_de_secuencias.append(vector33)
+            vector_de_secuencias.append(vector3)
         
        X= np.arange(len(vector2))
        print(vector_de_secuencias)
@@ -754,7 +757,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        for i in range(2,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
             vector2=np.asarray(vector1)
-            vector3=vector2
+            vector3=eval(vector2)
             total=sum(vector2)
             vector3=vector2*100/total
             #for j in range(len(vector2)):
