@@ -32,6 +32,16 @@ class CodigoAdmin(admin.ModelAdmin):
 admin.site.register(Codigo,CodigoAdmin)
 ####################################################
         
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = CategoriaForm
+class CategoriaAdmin(admin.ModelAdmin):
+    model = Categoria
+    list_display = ['categoria']      
+admin.site.register(Categoria,CategoriaAdmin)
+####################################################
+
+
 
 ####################################################
 class RulesAdmin(admin.ModelAdmin):

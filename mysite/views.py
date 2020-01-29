@@ -78,8 +78,9 @@ def pagina_principal(request):
                          
         return render(request,'principal.html',locals())  
                           
-                
-                       
+def informacion(request):  
+  return render(request,'informacion.html',locals())   
+                                     
 
 def crear_usuario(request): 
         #!/usr/bin/python
@@ -157,24 +158,72 @@ def editar_usuario(request):
              return render(request,'formulario_ingreso.html',locals())
 
 
-def poner_lista_de_estudios(request):
+def poner_lista_de_estudios(request,bandera):
 
         usuario_actual=request.user.username
         lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
-
-        estudios_libres=Estudios.objects.filter(tipo_de_estudio="LIBRE")
         
-        vector_de_estudios_de_pago=[]
-        vector_de_estudios_privados=[]
+        vector_de_estudios_publicos=[]
+        
+        vector_de_estudios_de_pago_habilitados=[]
+        vector_de_estudios_de_pago_deshabilitados=[]
+        
+        vector_de_estudios_privados_habilitados=[]
+        
+          
+        if bandera=="TODOS":
+                 
+                estudios=Estudios.objects.filter(tipo_estudio="PUBLICO")
+                vector_de_estudios_publicos=estudios
 
-        for i in lista_de_codigos:
-              
-              estudio=Estudios.objects.get(codigo=i.codigo,tipo_de_estudio="DE_PAGO")
-             
-              if estudio.tipo_de_estudio=="DE_PAGO":
-                  vector_de_estudiosde_pago.append(estudio)
-              else:
-                  vector_de_estudios_privado.append(estudio)
+                estudios=Estudios.objects.filter(tipo_estudio="DEPAGO")
+                for i in lista_de_codigos:
+                      for j in estudios:             
+                     
+                              if j.codigo==i.codigo:
+                                  vector_de_estudios_de_pago_habilitados.append(j)
+                              else:
+                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+
+                estudios=Estudios.objects.filter(tipo_estudio="PRIVADO")
+                for i in lista_de_codigos:
+                      for j in estudios:          
+                     
+                              if j.codigo==i.codigo:
+                                  vector_de_estudios_privados_habilitados.append(j)
+                              else:
+                                  pass                  
+
+
+        elif bandera=="PUBLICO":
+                estudios=Estudios.objects.filter(tipo_estudio=bandera)
+                vector_de_estudios_publicos=estudios
+
+        
+        elif bandera=="DE_PAGO":
+                estudios=Estudios.objects.filter(tipo_estudio=bandera)
+                for i in lista_de_codigos:
+                      for j in estudios:             
+                     
+                              if j.codigo==i.codigo:
+                                  vector_de_estudios_de_pago_habilitados.append(j)
+                              else:
+                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+
+        elif bandera=="PRIVADO":
+                estudios=Estudios.objects.filter(tipo_estudio=bandera)
+                for i in lista_de_codigos:
+                      for j in estudios:          
+                     
+                              if j.codigo==i.codigo:
+                                  vector_de_estudios_privados_habilitados.append(j)
+                              else:
+                                  pass
+        else:
+               pass
+                              
+     
+    
              
 
         return render(request,'lista_de_estudios.html',locals())
@@ -189,13 +238,10 @@ def poner_cuestionario(request,id_estudio):
       las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
       
       for i in las_preguntas:
-            
+           
             las_opciones=Opciones.objects.filter(pregunta=i)
-
             vector_de_opciones.append(las_opciones)
-      
-
-      
+            
       connection.close()
       return render(request,'cuestionario.html',locals()) 
 
@@ -209,7 +255,7 @@ def crear_estudio(request):
 
             a=random.randint(0,2)
             if a==0:
-                tipo_estudio="LIBRE"
+                tipo_estudio="PUBLICO"
 
             elif a==1:
                 tipo_estudio="DE_PAGO"
@@ -272,8 +318,7 @@ def agregar_encuesta(request,id_estudio):
             for i in las_preguntas:
                   
                   las_opciones=Opciones.objects.filter(pregunta=i)
-                  vector_de_preguntas.append(las_opciones)
-           
+                  vector_de_preguntas.append(las_opciones)           
            
             respuesta_1=""
             respuesta_2=""
@@ -443,6 +488,10 @@ def agregar_encuesta(request,id_estudio):
                  break
               x=x+1   
 
+
+            usuario_actual=request.user.username
+
+
             p1=Cuestionario_temporal(estudio=estudio_actual,respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
                                       respuesta_6=respuesta_6,respuesta_7=respuesta_7,respuesta_8=respuesta_8,respuesta_9=respuesta_9,respuesta_10=respuesta_10,
                                       respuesta_11=respuesta_11,respuesta_12=respuesta_12,respuesta_13=respuesta_13,respuesta_14=respuesta_14,respuesta_15=respuesta_15,
@@ -452,9 +501,10 @@ def agregar_encuesta(request,id_estudio):
                                       respuesta_31=respuesta_31,respuesta_32=respuesta_32,respuesta_33=respuesta_33,respuesta_34=respuesta_34,respuesta_35=respuesta_35,
                                       respuesta_36=respuesta_36,respuesta_37=respuesta_37,respuesta_38=respuesta_38,respuesta_39=respuesta_39,respuesta_40=respuesta_40,
                                       respuesta_41=respuesta_41,respuesta_42=respuesta_42,respuesta_43=respuesta_43,respuesta_44=respuesta_44,respuesta_45=respuesta_45,
-                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50) 
+                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,pago_encuesta="PENDIENTE") 
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             p1.save()
+           
 
             tabla_datos=Cuestionario_temporal.objects.all()
             connection.close()
@@ -469,8 +519,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
 
       id_estudio=id_estudio
       estudio_actual=Estudios.objects.get(id=id_estudio)
-      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
-
+      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)    
 
       datos_temporales=Cuestionario_temporal.objects.filter(estudio_id=id_estudio)
       
@@ -491,14 +540,10 @@ def actualizar_previo_a_graficar(request,id_estudio):
 
                               valor_actual=k.cantidad
                               k.cantidad=valor_actual+repeticiones
-                              k.save()
-
-                                                            
-                                                                                 
-
+                              k.save()                                                          
+                                                                                
                         i=i+1
                         guardar_en_acumulados(vector_de_acumulados,j)
-
 
       Cuestionario_temporal.objects.filter(estudio_id=id_estudio).delete()
       
@@ -552,6 +597,7 @@ def pagina_de_analisis(request, id_pregunta,bandera):
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
     bandera=bandera
+
     return render(request,'pagina_de_analisis.html',locals())
 
 def hacer_grafico_de_barras(request,id_pregunta):
@@ -647,7 +693,7 @@ def hacer_grafico_de_pastel(request,id_pregunta):
         color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray"] 
       
         
-        plt.pie(X, labels=vector_de_opciones, autopct="%0.1f %%", colors=color, explode=desfase)
+        plt.pie(Y1, labels=vector_de_opciones, autopct="%0.1f %%", colors=color, explode=desfase)
         plt.axis("equal")
         plt.show()      
               
@@ -685,7 +731,6 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        x=len(nombre_opcion)+2
        for i in range(2,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
-            #vector2=np.asarray(vector1)
             vector2=vector1
             vector3=[]
 
@@ -703,11 +748,14 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
 
             #total=sum(vector3)
             #vector33=vector3*100/total
+            total=sum(vector3)            
+            vector22=np.array(vector3)
+            vector2=vector22*100/total 
 
-            vector_de_secuencias.append(vector3)
+            vector_de_secuencias.append(vector2)
         
        X= np.arange(len(vector2))
-       print(vector_de_secuencias)
+       
        #barh(pos,datos,align = 'center')
        f=plt.figure()
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
@@ -722,11 +770,11 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
 
        leyenda="Variacion de la respuesta"
        plt.xlabel(leyenda)
-           
+       plt.ylim(0, 100)    
        plt.ylabel('PREFERENCIAS')
        titulo="Variacion del las preferencias"
        plt.xticks(())
-       plt.yticks(())
+       #plt.yticks()
       
        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
        plt.title(titulo)  
@@ -756,19 +804,12 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        x=len(nombre_opcion)+2
        for i in range(2,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
-            vector2=np.asarray(vector1)
-            vector3=eval(vector2)
-            total=sum(vector2)
-            vector3=vector2*100/total
-            #for j in range(len(vector2)):
-                #if j ==0:
-                    #vector3.append(vector2[j])
-                
-                #else:
-                    #b=j-1
-                    #c=vector2[j]+vector3[b]
-                    #vector3.append(c)
-            vector_de_secuencias.append(vector3)
+            
+            total=sum(vector1)            
+            vector22=np.array(vector1)
+            vector2=vector22*100/total
+                        
+            vector_de_secuencias.append(vector2)
         
        X= np.arange(len(vector2))
        print(vector_de_secuencias)
@@ -790,7 +831,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        plt.ylabel('PREFERENCIAS')
        titulo="Variacion del las preferencias"
        plt.xticks(())
-       plt.yticks(())
+       #plt.yticks(())
       
        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
        plt.title(titulo)  

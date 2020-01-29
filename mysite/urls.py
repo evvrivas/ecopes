@@ -41,17 +41,20 @@ urlpatterns = [
     url(r'^crear_usuario/$',crear_usuario),
     url(r'^editar_usuario/$',editar_usuario),
 
-    url(r'^poner_lista_de_estudios/$',poner_lista_de_estudios),
-    url(r'^poner_cuestionario/(\d+)$',poner_cuestionario),
-    url(r'^agregar_encuesta/(\d+)$',agregar_encuesta),
+    url(r'^poner_lista_de_estudios/([^/]+)/$',poner_lista_de_estudios),
+    url(r'^poner_cuestionario/(\d+)/$',poner_cuestionario),
+    url(r'^agregar_encuesta/(\d+)/$',agregar_encuesta),
 
-    url(r'^actualizar_previo_a_graficar/(\d+)$',actualizar_previo_a_graficar),
+    url(r'^actualizar_previo_a_graficar/(\d+)/$',actualizar_previo_a_graficar),
     
-    url(r'^pagina_de_analisis/(\d+)/([^/]+)$',pagina_de_analisis),
+    url(r'^pagina_de_analisis/(\d+)/([^/]+)/$',pagina_de_analisis),
     url(r'^hacer_grafico_de_barras/(\d+)/$',hacer_grafico_de_barras),
     url(r'^hacer_grafico_de_secuencia/(\d+)/$',hacer_grafico_de_secuencia),
     url(r'^hacer_grafico_de_tendencia/(\d+)/$',hacer_grafico_de_tendencia),
     url(r'^hacer_grafico_de_pastel/(\d+)/$',hacer_grafico_de_pastel),
+
+
+    url(r'^informacion/$',informacion),
     
 
     url(r'^crear_estudio/$',crear_estudio),    

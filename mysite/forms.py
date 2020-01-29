@@ -16,6 +16,10 @@ class CodigoForm(ModelForm):
 		model= Codigo	
 		exclude=[]
 
+class CategoriaForm(ModelForm):
+	class Meta:
+		model= Categoria
+		exclude=[]
 
 class EstudiosForm(ModelForm):
 	class Meta:

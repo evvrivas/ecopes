@@ -7,30 +7,41 @@
 <div class="row">  
        <div class="alert alert-info">        
 <center>
-        <a href="/"> <h4>  <font color="blue">CUESTIONARIO</font> </h4> </a>
+        <a href="/"> <h4>  <font color="blue">{{estudio_actua.nombre}}l</font> </h4> </a>
+        <a href="/pagina_de_analisis/100/INFORMACION">  <img  src ='{% static "informacion.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+         <a href="/pagina_de_analisis/100/TABLITA">  <img  src ='{% static "TABLITA.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+<center><form action="/agregar_encuesta/{{id_estudio}}" method="post">
        
 </center>
 <br>
 
 
-<center><form action="/agregar_encuesta/{{id_estudio}}" method="post">
                        {% csrf_token %}                                                  
                                                     
                 <div class="col-md-12">   
 
-
  {% for i in vector_de_opciones %} 
-
 
      {% for j in i  %} 
         {% if forloop.first %}
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
 
-                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS"> <h5>  <font color="blue">Graficar barras</font> </h5> </a>
 
-                <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA"> <h5>  <font color="blue">Graficar secuencia</font> </h5> </a>
 
+                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                  <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                            
+                    <a href="/pagina_de_analisis/{{j.pregunta.id}}/TABLITA">  <img  src ='{% static "tablita.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
                
+
+
+
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
 
                                               

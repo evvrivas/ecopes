@@ -43,7 +43,7 @@ TIPO_USUARIO=(
 			)
 
 class UserProfile(models.Model):
-		 watsapp=models.CharField(max_length=30)
+		 watsapp=models.CharField(max_length=15)
 		 clave=models.CharField(max_length=4)
 		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
 		 
@@ -62,26 +62,39 @@ class Codigo(models.Model):
 	class Admin:
 		list_display = ('codigo')
 	    
+
+class Categoria(models.Model):
+         nombre=models.CharField(max_length=30,blank=True,null=True)
+                         
+         def __str__(self):
+         	return  self.categoria
+         class Admin:
+         	list_display = ('categoria')
+
+
+
 TIPO_ESTUDIO=(
-			('LIBRE', 'LIBRE'),			
+			('PUBLICO', 'PUBLICO'),			
 			('DE_PAGO', 'DE_PAGO'),
 			('PRIVADO', 'PRIVADO'),							
 			)
 
 class Estudios(models.Model):
 
-		 nombre=models.CharField(max_length=150)
-		 descripcion= models.TextField(blank=True,null=True)
-		 descripcion_publica= models.TextField(blank=True,null=True)
-		 imagen1 = ImageField(upload_to='tmp',blank=True)
+		 categoria=models.ForeignKey('Categoria',blank=True,null=True)
 
+		 nombre=models.CharField(max_length=150)
+		 descripcion= models.TextField(blank=True,null=True)		 
+		 imagen1 = ImageField(upload_to='tmp',blank=True)
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
 		 codigo= models.CharField(max_length=8)
-		 tipo_de_estudio= models.CharField(max_length=150,default="LIBRE",choices=TIPO_ESTUDIO)
+		 tipo_de_estudio= models.CharField(max_length=150,default="PUBLICO",choices=TIPO_ESTUDIO)
 
 		 n_muestras= models.IntegerField(blank=True,null=True)
 		 universo= models.IntegerField(blank=True,null=True)
+		 error= models.CharField(max_length=8)
+		 confianza= models.CharField(max_length=8)
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
@@ -150,10 +163,36 @@ class Preguntas(models.Model):
 		    		list_display = ('pregunta')
 		    		
 
+COLORES=(
+			('red', 'ROJO'),	
+			('mediumseagrenn', 'TURQUESA'),		
+			('blue', 'AZUL'),
+			('green', 'VERDE'),
+			('cyan', 'ACUA'),
+			('orange', 'ANARANJADO'),
+			('gray', 'GRIS'),
+			('yelow', 'AMARILLO'),			
+			('magenta', 'MAGENTA'),
+			('pink', 'ROSADO'),
+			('darkviolt', 'MORADO'),
+			('maroon', 'CAFE'),	
+			('lime', 'VERDE LIMA'),		
+			('navy', 'AZUL NAVI'),
+			('gold', 'MOZTAZA'),
+			('lightgray', 'GRIS CLARO'),
+			('darkkhaki', 'KAKY'),
+			('royalblue', 'AZUL ROYAL'),
+			('mmediumpurple', 'MORADO CLARO'),
+			('lightsteelblue', 'CELESTE'),
+		)
+
+
+      
 class Opciones(models.Model):
 		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
-		 opcion=models.CharField(max_length=60)
+		 opcion=models.CharField(max_length=100)
 		 cantidad= models.IntegerField(blank=True,default=0)
+		 color=models.CharField(max_length=30,choices=COLORES)
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:
@@ -181,7 +220,8 @@ class Opciones_acumuladas(models.Model):
 		 opcion_18=models.IntegerField(blank=True,default=0)
 		 opcion_19=models.IntegerField(blank=True,default=0)
 		 opcion_20=models.IntegerField(blank=True,default=0)
-	 
+
+
 		 def __str__(self):
 		 	return  self.pregunta.pregunta
 		 class Admin:
@@ -197,8 +237,6 @@ class Configuracion_sistema(models.Model):
 		    		return  self.mensaje_bienvenida
 	     class Admin:
 		    		list_display = ('mensaje_bienvenida')
-
-
 
 	
 class Cuestionario_temporal(models.Model):
@@ -253,6 +291,9 @@ class Cuestionario_temporal(models.Model):
 		 respuesta_48=models.CharField(max_length=100)
 		 respuesta_49=models.CharField(max_length=100)
 		 respuesta_50=models.CharField(max_length=100)
+
+		 encuestador=models.CharField(max_length=15)
+		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
 		 
 		 def __str__(self):
 		 	return  self.estudio.nombre
@@ -311,6 +352,9 @@ class Cuestionario_principal(models.Model):
 		 respuesta_48=models.CharField(max_length=100)
 		 respuesta_49=models.CharField(max_length=100)
 		 respuesta_50=models.CharField(max_length=100)
+
+		 encuestador=models.CharField(max_length=15)
+		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
 		 
 		 def __str__(self):
 		 	return  self.estudio.nombre

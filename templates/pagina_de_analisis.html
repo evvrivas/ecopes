@@ -15,19 +15,72 @@
 
 <center><h3>p>  <font color="blue">{{nombre_de_pregunta}}</font></p></h3></center>
 
+{% if bandera == 'BARRAS' %}
 
 	<center><div class="container"> <img src="/hacer_grafico_de_barras/{{id_pregunta}}">
 		         </div></center>
 
+{% else %}
+{% endif %}
+
+{% if bandera == 'PASTEL' %}
 <center><div class="container"> <img src="/hacer_grafico_de_pastel/{{id_pregunta}}">
 		         </div></center>
 
+{% else %}
+{% endif %}
 
+
+{% if bandera == 'SECUENCIA' %}
 <center><div class="container"> <img src="/hacer_grafico_de_secuencia/{{id_pregunta}}">
          </div></center>
 
+
+{% else %}
+{% endif %}
+
+{% if bandera == 'TENDENCIA' %}
 <center><div class="container"> <img src="/hacer_grafico_de_tendencia/{{id_pregunta}}">
          </div></center>
+{% else %}
+{% endif %}
+
+
+{% if bandera == 'TABLITA' %}
+      <P>TABLA DE DATOS</P>
+
+{% else %}
+{% endif %}
+
+
+
+
+{% if bandera == 'INFORMACION' %}
+      
+
+      <P>{{nombre}}</P>
+      <P>{{categoria.nombre}}</P>
+      <P>{{descripcion}}</P>
+      <P>{{fecha_inicio}}</P>
+      <P>{{fecha_final}}</P>
+      <P>{{codigo}}</P>
+      <P>{{tipo_de_estudio}}</P>
+      <P>{{n_muestras}}</P>
+      <P>{{universo}}</P>
+      <P>{{confianza}}</P>
+      
+
+
+      
+		 	 
+		
+{% else %}
+{% endif %}
+
+
+
+
+
 
 
 </div>

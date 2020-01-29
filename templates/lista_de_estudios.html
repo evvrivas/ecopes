@@ -13,37 +13,34 @@
 </center>
 <br>
         
-        <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>
-
-        {% for j in estudios_libres %} 
+        <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>  
+                       
+        {% for j in vector_de_estudios_publicos %} 
        		
-        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="green">{{ j.nombre }} -->  {{j.descripcion}}</font> </h5> </a>
+        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a>
 
                 <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-
                
                 <p>Ultima actualizacion  xx:xx pm</p>
 
                 
-
-
         {% endfor %}
 
         <center><h4><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h4></center>
         
-        {% for j in vector_de_estudios_de_pago %} 
-
-        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a> 
+        {% for j in vector_de_estudios_de_pago_habilitados %} 
+         		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}</font> </h5> </a> 
+                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
+                <p>Ultima actualizacion  xx:xx pm</p>      		
+        {% endfor %} 
+        
+        
+        {% for j in vector_de_estudios_de_pago_deshabilitados %} 
+                <a href="informacion"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>
 
                 <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-
-               
-                <p>Ultima actualizacion  xx:xx pm</p>      		
-
-
+                <p>Ultima actualizacion  xx:xx pm</p>           
         {% endfor %} 
-
-
 
         <center><h4><p>Estudios de opinion publica PRIVADOS</p></h24></center>
         <center><h6><p>(SOLO USTED PUEDE VER ESTOS ESTUDIOS) </p></h6></center>
@@ -53,8 +50,6 @@
                 <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>  
 
                 <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-
-                 
                 <p>Ultima actualizacion  xx:xx pm</p>             
 
 
