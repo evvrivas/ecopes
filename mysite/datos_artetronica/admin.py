@@ -37,7 +37,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = CategoriaForm
 class CategoriaAdmin(admin.ModelAdmin):
     model = Categoria
-    list_display = ['categoria']      
+    list_display = ['nombre']      
 admin.site.register(Categoria,CategoriaAdmin)
 ####################################################
 
