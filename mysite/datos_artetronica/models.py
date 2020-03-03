@@ -46,7 +46,7 @@ class UserProfile(models.Model):
 		 watsapp=models.CharField(max_length=15)
 		 clave=models.CharField(max_length=4)
 		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
-		 
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 def __str__(self):
 				return  self.watsapp
 		 class Admin:
@@ -57,6 +57,13 @@ class UserProfile(models.Model):
 class Codigo(models.Model):
 	usuario=models.ForeignKey('UserProfile')
 	codigo=models.CharField(max_length=8,null=True,blank=True)
+	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
+	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
+	cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
+	costos_por_muestra = models.FloatField(default=0,blank=True,null=True)
+	comodin=models.CharField(max_length=12,blank=True,null=True)
+
+
 	def __str__(self):
 		return  self.codigo
 	class Admin:
@@ -65,6 +72,7 @@ class Codigo(models.Model):
 
 class Categoria(models.Model):
          nombre=models.CharField(max_length=30,blank=True,null=True)
+         comodin=models.CharField(max_length=12,blank=True,null=True)
                          
          def __str__(self):
          	return  self.nombre
@@ -95,6 +103,7 @@ class Estudios(models.Model):
 		 universo= models.IntegerField(blank=True,null=True)
 		 error= models.CharField(max_length=8)
 		 confianza= models.CharField(max_length=8)
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
@@ -193,6 +202,7 @@ class Opciones(models.Model):
 		 opcion=models.CharField(max_length=100)
 		 cantidad= models.IntegerField(blank=True,default=0)
 		 color=models.CharField(max_length=30,choices=COLORES)
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:
@@ -220,6 +230,7 @@ class Opciones_acumuladas(models.Model):
 		 opcion_18=models.IntegerField(blank=True,default=0)
 		 opcion_19=models.IntegerField(blank=True,default=0)
 		 opcion_20=models.IntegerField(blank=True,default=0)
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 
 		 def __str__(self):
@@ -231,7 +242,8 @@ class Opciones_acumuladas(models.Model):
 
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField()	
-	     n_visitas=models.IntegerField(blank=True,default=0,null=True) 
+	     n_visitas=models.IntegerField(blank=True,default=0,null=True)
+	     comodin=models.CharField(max_length=12,blank=True,null=True) 
 	               
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
@@ -294,6 +306,7 @@ class Cuestionario_temporal(models.Model):
 
 		 encuestador=models.CharField(max_length=15)
 		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 
 		 def __str__(self):
 		 	return  self.estudio.nombre
@@ -355,6 +368,7 @@ class Cuestionario_principal(models.Model):
 
 		 encuestador=models.CharField(max_length=15)
 		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
+		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 
 		 def __str__(self):
 		 	return  self.estudio.nombre

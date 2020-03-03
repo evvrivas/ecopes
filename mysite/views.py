@@ -270,7 +270,7 @@ def crear_estudio(request):
             codigo_del_estudio=str(i)
             date=datetime.datetime.now()
 
-            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio",descripcion_publica="ALCALDES DE AHUACHAPAN", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
+            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
             p1.save() 
 
             for j in range(10):
