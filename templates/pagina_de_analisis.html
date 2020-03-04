@@ -13,7 +13,13 @@
 </center>
 <br>
 
-<center><h3>p>  <font color="blue">{{nombre_de_pregunta}}</font></p></h3></center>
+<center><h3>  <font color="blue">{{nombre_de_pregunta}}</font></p></h3></center>
+<br>
+{% for i in lista_de_opciones %}
+<p>{{i}}</p>
+{% endfor %}
+
+<br>
 
 {% if bandera == 'BARRAS' %}
 
@@ -48,6 +54,26 @@
 
 {% if bandera == 'TABLITA' %}
       <P>TABLA DE DATOS</P>
+      <P>{{nombre_de_pregunta}}</P>
+      <br>
+
+      {% for i in lista_de_opciones %}
+
+           <p>{{i}}</p>
+
+      {% endfor %}
+
+       <br>
+          
+      {% for i in tabla_resultados %}
+
+        <p>{{i.respuesta_1}}</p>  
+        <p>{{i.respuesta_2}}</p>     
+        <p>{{i.respuesta_3}}</p>     
+        <p>{{i.respuesta_4}}</p>        
+
+      {% endfor %}
+
 
 {% else %}
 {% endif %}

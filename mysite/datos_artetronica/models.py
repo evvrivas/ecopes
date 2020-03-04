@@ -39,7 +39,8 @@ from sys import getsizeof
 
 TIPO_USUARIO=(
 			('EL_LECTOR', 'EL_LECTOR'),			
-			('ENCUESTADOR', 'ENCUESTADOR'),							
+			('ENCUESTADOR', 'ENCUESTADOR'),	
+			('ADMINISTRADOR', 'ADMINISTRADOR'),
 			)
 
 class UserProfile(models.Model):
@@ -92,7 +93,8 @@ class Estudios(models.Model):
 		 categoria=models.ForeignKey('Categoria',blank=True,null=True)
 
 		 nombre=models.CharField(max_length=150)
-		 descripcion= models.TextField(blank=True,null=True)		 
+		 descripcion= models.TextField(blank=True,null=True)
+		 recomendacion= models.TextField(blank=True,null=True)		 
 		 imagen1 = ImageField(upload_to='tmp',blank=True)
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
@@ -101,8 +103,8 @@ class Estudios(models.Model):
 
 		 n_muestras= models.IntegerField(blank=True,null=True)
 		 universo= models.IntegerField(blank=True,null=True)
-		 error= models.CharField(max_length=8)
-		 confianza= models.CharField(max_length=8)
+		 error= models.CharField(max_length=8,blank=True,null=True)
+		 confianza= models.CharField(max_length=8,blank=True,null=True)
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 		 def save(self, *args,**kwargs):

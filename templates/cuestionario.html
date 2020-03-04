@@ -7,11 +7,10 @@
 <div class="row">  
        <div class="alert alert-info">        
 <center>
-        <a href="/"> <h4>  <font color="blue">{{estudio_actua.nombre}}l</font> </h4> </a>
-        <a href="/pagina_de_analisis/100/INFORMACION">  <img  src ='{% static "informacion.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+        <a href="/"> <h4>  <font color="blue">{{estudio_actua.nombre}}l</font> </h4> </a>     
 
          <a href="/pagina_de_analisis/100/TABLITA">  <img  src ='{% static "TABLITA.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-<center><form action="/agregar_encuesta/{{id_estudio}}" method="post">
+<center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">
        
 </center>
 <br>
@@ -26,9 +25,7 @@
      {% for j in i  %} 
         {% if forloop.first %}
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
-
-
-
+               
                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
                  <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
@@ -36,9 +33,7 @@
                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
                    <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-                            
-                    <a href="/pagina_de_analisis/{{j.pregunta.id}}/TABLITA">  <img  src ='{% static "tablita.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-               
+                                  
 
 
 
@@ -68,8 +63,11 @@
 
 <br>
 <br>
- 
-                    <input type="submit" value="FINALIZAR ENCUESTA">
+        {% if tipo_usuario=='EL_LECTOR'%}
+                    <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
+         {% else %}
+
+          {% endif %}
                                                                                                         
              </form> </center> 
 

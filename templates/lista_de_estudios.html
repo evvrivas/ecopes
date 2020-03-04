@@ -8,49 +8,67 @@
        <div class="alert alert-info">        
 <center>
         
-        <p><h3><font color="blue">Estudios de opinion publica</font></h3>h3></p>  
+        <p><h3><font color="blue">Estudios de opinion publica</font></h3></p>  
           
 </center>
 <br>
-        
+ <hr>       
         <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>  
                        
         {% for j in vector_de_estudios_publicos %} 
        		
         		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a>
 
-                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
+                <a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a>
+
+                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
                
-                <p>Ultima actualizacion  xx:xx pm</p>
+                <h6><p>Ultima actualizacion  xx:xx pm</p></h6>
 
                 
         {% endfor %}
 
+<br>
+ <hr> 
         <center><h4><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h4></center>
         
+        <center><h5><p>Estudios habilitados para usted </p></h5></center>
+        
         {% for j in vector_de_estudios_de_pago_habilitados %} 
+
          		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}</font> </h5> </a> 
-                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-                <p>Ultima actualizacion  xx:xx pm</p>      		
+                <a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a>
+                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                <h6><p>Ultima actualizacion  xx:xx pm</p></h6>
+                      		
         {% endfor %} 
         
-        
+        <center><h5><p>Estos estudios No estan habilitados para usted </p></h5></center>
+        <center><h5><p>Suscribase aqui. </p></h5></center>
+
         {% for j in vector_de_estudios_de_pago_deshabilitados %} 
-                <a href="informacion"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>
 
-                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-                <p>Ultima actualizacion  xx:xx pm</p>           
+                <a href="informacion"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>
+                <a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a>
+                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                <h6><p>Ultima actualizacion  xx:xx pm</p></h6>
+                           
         {% endfor %} 
 
+
+<br>
+ <hr> 
         <center><h4><p>Estudios de opinion publica PRIVADOS</p></h24></center>
         <center><h6><p>(SOLO USTED PUEDE VER ESTOS ESTUDIOS) </p></h6></center>
         
         {% for j in vector_de_estudios_privado %} 
 
                 <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>  
+                <a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a>
 
-                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h5>  <font color="green">Actualizar</font> </h5> </a>
-                <p>Ultima actualizacion  xx:xx pm</p>             
+                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                <h6><p>Ultima actualizacion  xx:xx pm</p></h6>
+                           
 
 
         {% endfor %} 

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %} 
+ 
+
+  
+
+<center><h3><p><font color="red">Codigo {{estudio.codigo}} </font > {{estudio.nombre}}</p></h3></center>
+ 
+</center>
+<br>
+
+<p>{{estudio.recomendacion}}</p>	
+        
+<br>
+        <p>CATEGOORIA: {{estudio.categoria.nombre}}</p>
+		 
+		 <p>{{estudio.descripcion}}</p>
+		  
+		 
+		 <p>Fecha inicio {{estudio.fecha_inicio}}</p>
+		 <p>Fecha final {{estudio.fecha_final}}</p>
+		 
+		<p> Tipo de estudio {{estudio.tipo_de_estudio}}</p>
+<br>
+
+		 <p>N. Muestras Tomadas{{estudio.n_muestras}}</p>
+		<p>Universo {{estudio.universo}}</p>
+		 <p>Puntos de Error {{estudio.error}}</p>
+		 <p>Confianza {{estudio.confianza}}</p>
+		 
+</center>
+
+                       
+
+{% endblock %}

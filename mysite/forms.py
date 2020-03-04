@@ -24,7 +24,8 @@ class CategoriaForm(ModelForm):
 class EstudiosForm(ModelForm):
 	class Meta:
 		model= Estudios
-		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),'descripcion_publica': Textarea(attrs={'cols': 30, 'rows': 2}),}
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),'recomendacion': Textarea(attrs={'cols': 30, 'rows': 2}),}
+		
 		exclude=["codigo","n_muestras","universo","patrocinador_1","patrocinador_2","fecha_final_plan","nota_de_evaluacion"]
 		
 

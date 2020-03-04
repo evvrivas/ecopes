@@ -46,6 +46,9 @@ urlpatterns = [
     url(r'^agregar_encuesta/(\d+)/$',agregar_encuesta),
 
     url(r'^actualizar_previo_a_graficar/(\d+)/$',actualizar_previo_a_graficar),
+    url(r'^informacion_del_estudio/(\d+)/$',informacion_del_estudio),
+
+    
     
     url(r'^pagina_de_analisis/(\d+)/([^/]+)/$',pagina_de_analisis),
     url(r'^hacer_grafico_de_barras/(\d+)/$',hacer_grafico_de_barras),
@@ -57,7 +60,9 @@ urlpatterns = [
     url(r'^informacion/$',informacion),
     
 
-    url(r'^crear_estudio/$',crear_estudio),    
+    url(r'^crear_estudio/$',crear_estudio),
+    url(r'^crear_estudioCH5NOV/$',crear_estudioCH5NOV),   
+      
 
 ]
 

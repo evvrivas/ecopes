@@ -173,21 +173,36 @@ def poner_lista_de_estudios(request,bandera):
           
         if bandera=="TODOS":
                  
-                estudios=Estudios.objects.filter(tipo_estudio="PUBLICO")
+                estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO")
                 vector_de_estudios_publicos=estudios
 
-                estudios=Estudios.objects.filter(tipo_estudio="DEPAGO")
-                for i in lista_de_codigos:
-                      for j in estudios:             
+
+
+                estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO")
+
+                if lista_de_codigos.count()==0:
+                    vector_de_estudios_de_pago_deshabilitados=estudios
+                else:
+                    for i in lista_de_codigos:
+                        for j in estudios:             
                      
                               if j.codigo==i.codigo:
                                   vector_de_estudios_de_pago_habilitados.append(j)
                               else:
                                   vector_de_estudios_de_pago_deshabilitados.append(j)
+                    
+             
+               
+                estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO")
 
-                estudios=Estudios.objects.filter(tipo_estudio="PRIVADO")
-                for i in lista_de_codigos:
-                      for j in estudios:          
+
+                if lista_de_codigos.count()==0:
+                  vector_de_estudios_privados_deshabilitados=estudios
+                
+                else:
+
+                    for i in lista_de_codigos:
+                          for j in estudios:          
                      
                               if j.codigo==i.codigo:
                                   vector_de_estudios_privados_habilitados.append(j)
@@ -196,14 +211,19 @@ def poner_lista_de_estudios(request,bandera):
 
 
         elif bandera=="PUBLICO":
-                estudios=Estudios.objects.filter(tipo_estudio=bandera)
+                estudios=Estudios.objects.filter(tipo_de_estudio=bandera)
                 vector_de_estudios_publicos=estudios
+
 
         
         elif bandera=="DE_PAGO":
-                estudios=Estudios.objects.filter(tipo_estudio=bandera)
-                for i in lista_de_codigos:
-                      for j in estudios:             
+                estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO")
+
+                if lista_de_codigos.count()==0:
+                    vector_de_estudios_de_pago_deshabilitados=estudios
+                else:
+                    for i in lista_de_codigos:
+                        for j in estudios:             
                      
                               if j.codigo==i.codigo:
                                   vector_de_estudios_de_pago_habilitados.append(j)
@@ -211,14 +231,20 @@ def poner_lista_de_estudios(request,bandera):
                                   vector_de_estudios_de_pago_deshabilitados.append(j)
 
         elif bandera=="PRIVADO":
-                estudios=Estudios.objects.filter(tipo_estudio=bandera)
-                for i in lista_de_codigos:
-                      for j in estudios:          
+                estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO")
+
+                if lista_de_codigos.count()==0:
+                  vector_de_estudios_privados_deshabilitados=estudios
+                
+                else:
+
+                    for i in lista_de_codigos:
+                          for j in estudios:          
                      
                               if j.codigo==i.codigo:
                                   vector_de_estudios_privados_habilitados.append(j)
                               else:
-                                  pass
+                                  pass         
         else:
                pass
                               
@@ -233,6 +259,8 @@ def poner_lista_de_estudios(request,bandera):
 def poner_cuestionario(request,id_estudio):
 
       vector_de_opciones=[]
+      usuario=UserProfile.objects.get(watsapp=request.user.username)
+      tipo_usuario=usuario.tipo_usuario
       
       estudio_actual=Estudios.objects.get(id=id_estudio)
       las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
@@ -270,7 +298,8 @@ def crear_estudio(request):
             codigo_del_estudio=str(i)
             date=datetime.datetime.now()
 
-            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="LIBRE",n_muestras=100,universo=1000)
+            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio=tipo_estudio,n_muestras=100,universo=1000,error=0, confianza=0)
+    
             p1.save() 
 
             for j in range(10):
@@ -504,9 +533,24 @@ def agregar_encuesta(request,id_estudio):
                                       respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,pago_encuesta="PENDIENTE") 
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             p1.save()
+
+            p1=Cuestionario_principal(estudio=estudio_actual,respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
+                                      respuesta_6=respuesta_6,respuesta_7=respuesta_7,respuesta_8=respuesta_8,respuesta_9=respuesta_9,respuesta_10=respuesta_10,
+                                      respuesta_11=respuesta_11,respuesta_12=respuesta_12,respuesta_13=respuesta_13,respuesta_14=respuesta_14,respuesta_15=respuesta_15,
+                                      respuesta_16=respuesta_16,respuesta_17=respuesta_17,respuesta_18=respuesta_18,respuesta_19=respuesta_19,respuesta_20=respuesta_20,
+                                      respuesta_21=respuesta_21,respuesta_22=respuesta_22,respuesta_23=respuesta_23,respuesta_24=respuesta_24,respuesta_25=respuesta_25,
+                                      respuesta_26=respuesta_26,respuesta_27=respuesta_27,respuesta_28=respuesta_28,respuesta_29=respuesta_29,respuesta_30=respuesta_30,
+                                      respuesta_31=respuesta_31,respuesta_32=respuesta_32,respuesta_33=respuesta_33,respuesta_34=respuesta_34,respuesta_35=respuesta_35,
+                                      respuesta_36=respuesta_36,respuesta_37=respuesta_37,respuesta_38=respuesta_38,respuesta_39=respuesta_39,respuesta_40=respuesta_40,
+                                      respuesta_41=respuesta_41,respuesta_42=respuesta_42,respuesta_43=respuesta_43,respuesta_44=respuesta_44,respuesta_45=respuesta_45,
+                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,pago_encuesta="PENDIENTE") 
+                #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+            p1.save()
+
+
            
 
-            tabla_datos=Cuestionario_temporal.objects.all()
+            #tabla_datos=Cuestionario_temporal.objects.all()
             connection.close()
             return render(request,'confirmar_encuesta.html',locals())             
 
@@ -521,7 +565,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       estudio_actual=Estudios.objects.get(id=id_estudio)
       las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)    
 
-      datos_temporales=Cuestionario_temporal.objects.filter(estudio_id=id_estudio)
+      datos_temporales=Cuestionario_temporal.objects.filter(estudio__id=id_estudio)
       
       texto=[field.name for field in Cuestionario_temporal._meta.get_fields()]
                  
@@ -545,7 +589,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
                         i=i+1
                         guardar_en_acumulados(vector_de_acumulados,j)
 
-      Cuestionario_temporal.objects.filter(estudio_id=id_estudio).delete()
+      Cuestionario_temporal.objects.filter(estudio__id=id_estudio).delete()
       
       return render(request,'confirmar_encuesta.html',locals())
 
@@ -592,20 +636,28 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 
 def pagina_de_analisis(request, id_pregunta,bandera):
+
     pregunta=Preguntas.objects.get(id=id_pregunta)
-    opci=Opciones.objects.filter(pregunta_id=id_pregunta) 
+    lista_de_opciones=Opciones.objects.filter(pregunta__nombre=pregunta.pregunta) 
+    
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
     bandera=bandera
-
+   
+    #tabla_resultados=Cuestionario_principal.objects.filter(estudio__nombre=pregunta.estudio.nombre)
     return render(request,'pagina_de_analisis.html',locals())
+
+def informacion_del_estudio(request,id_estudio):
+    estudio=Estudios.objects.get(id=id_estudio)    
+    return render(request,'informacion_del_estudio.html',locals())
+
+
 
 def hacer_grafico_de_barras(request,id_pregunta):
         vector_de_opciones=[]
         vector_de_repeticiones=[]
-        opci=Opciones.objects.filter(pregunta_id=id_pregunta)       
+        opci=Opciones.objects.filter(pregunta__id=id_pregunta)       
       
-
         x=1
         for i in opci:
             xx=str(x)
@@ -665,7 +717,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
 def hacer_grafico_de_pastel(request,id_pregunta):
         vector_de_opciones=[]
         vector_de_repeticiones=[]
-        opci=Opciones.objects.filter(pregunta_id=id_pregunta)       
+        opci=Opciones.objects.filter(pregunta__id=id_pregunta)       
       
 
         x=1
@@ -688,12 +740,12 @@ def hacer_grafico_de_pastel(request,id_pregunta):
         f=plt.figure()
 
 
-        desfase = (0.1, 0, 0, 0, 0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        #desfase = (0.1, 0, 0, 0, 0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
-        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray"] 
+        color=["red","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","black"] 
       
         
-        plt.pie(Y1, labels=vector_de_opciones, autopct="%0.1f %%", colors=color, explode=desfase)
+        plt.pie(Y1, labels=vector_de_opciones, autopct="%0.1f %%", colors=color)
         plt.axis("equal")
         plt.show()      
               
@@ -721,10 +773,10 @@ def hacer_grafico_de_pastel(request,id_pregunta):
 
 def hacer_grafico_de_secuencia(request,id_pregunta):
        
-       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
+       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta__id=id_pregunta)
        texto=[field.name for field in Opciones_acumuladas._meta.get_fields()]
 
-       nombre_opcion=Opciones.objects.filter(pregunta_id=id_pregunta)
+       nombre_opcion=Opciones.objects.filter(pregunta__id=id_pregunta)
        
        vector_de_secuencias=[]
 
@@ -794,10 +846,10 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
 
 def hacer_grafico_de_tendencia(request,id_pregunta):
        
-       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta_id=id_pregunta)
+       opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta__id=id_pregunta)
        texto=[field.name for field in Opciones_acumuladas._meta.get_fields()]
 
-       nombre_opcion=Opciones.objects.filter(pregunta_id=id_pregunta)
+       nombre_opcion=Opciones.objects.filter(pregunta__id=id_pregunta)
        
        vector_de_secuencias=[]
 
@@ -849,3 +901,143 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
+def crear_estudioCH5NOV(request):        
+              
+        import random
+        import datetime  
+        
+
+        tipo_estudio="PUBLICO"
+
+        nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "+ str(i)
+        codigo_del_estudio=0001
+        date=datetime.datetime.now()
+
+        descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
+
+        p1=Estudios(nombre=nombre_estudio,descripcion=descripcion_del_estudio, fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="PUBLICO",n_muestras=400,universo=400,error=0,confianza=0)
+        p1.save() 
+
+            
+
+
+
+        pregunta_est="Cual es su relacionn con CH5NOV "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Soy Trabajador"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Soy Beneficiari@ Compañer@ de vida "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+                    
+        la_opcion="Soy Beneficiari@ hij@"
+        p33=Opciones(pregunta=p21,opcion=la_opcion)
+        p33.save()
+
+
+
+
+        pregunta_est="Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Niño (5-14 años)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Joven (15 a 21 años)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Joven adulto (22- 35 años)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Adulto (35  a 60  años)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Adulto Mayor (60... años)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Le gustaria participar en estosotros deportes "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Ping-Pong"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ajedres"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Billar"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+     
+
+        pregunta_est="Asistiria usted a apoyar a los participantes "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si, Siempre voy"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Si, cuando tengo tiempo y energias"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        la_opcion="No, prefiero descanzar"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Hare el esfuerzo si hay insentivo (Vender comida), prefiero descanzar"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No me gusta ir"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+
+
+        connection.close()
+        return render(request,'principal.html',locals())
