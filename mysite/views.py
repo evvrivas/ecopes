@@ -910,7 +910,7 @@ def crear_estudioCH5NOV(request):
         tipo_estudio="PUBLICO"
 
         nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "+ str(i)
-        codigo_del_estudio=0001
+        codigo_del_estudio="1000"
         date=datetime.datetime.now()
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
