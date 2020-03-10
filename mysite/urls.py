@@ -44,17 +44,18 @@ urlpatterns = [
     url(r'^poner_lista_de_estudios/([^/]+)/$',poner_lista_de_estudios),
     url(r'^poner_cuestionario/(\d+)/$',poner_cuestionario),
     url(r'^agregar_encuesta/(\d+)/$',agregar_encuesta),
+    url(r'^habilitar_estudio/(\d+)/$',habilitar_estudio),
 
     url(r'^actualizar_previo_a_graficar/(\d+)/$',actualizar_previo_a_graficar),
-    url(r'^informacion_del_estudio/(\d+)/$',informacion_del_estudio),
-
-    
+    url(r'^informacion_del_estudio/(\d+)/$',informacion_del_estudio),    
     
     url(r'^pagina_de_analisis/(\d+)/([^/]+)/$',pagina_de_analisis),
     url(r'^hacer_grafico_de_barras/(\d+)/$',hacer_grafico_de_barras),
     url(r'^hacer_grafico_de_secuencia/(\d+)/$',hacer_grafico_de_secuencia),
     url(r'^hacer_grafico_de_tendencia/(\d+)/$',hacer_grafico_de_tendencia),
     url(r'^hacer_grafico_de_pastel/(\d+)/$',hacer_grafico_de_pastel),
+
+    url(r'^ver_mis_numeros/([^/]+)/$',ver_mis_numeros),
 
 
     url(r'^informacion/$',informacion),

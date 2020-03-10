@@ -9,7 +9,7 @@ from django import forms
 class UserProfileForm(ModelForm):
 	class Meta:
 		model= UserProfile
-		exclude=['tipo_usuario']
+		exclude=['tipo_usuario','comodin']
 
 class CodigoForm(ModelForm):
 	class Meta:

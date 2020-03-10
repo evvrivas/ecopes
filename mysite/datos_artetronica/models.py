@@ -53,11 +53,13 @@ class UserProfile(models.Model):
 		 class Admin:
 		 	list_display = ('watsapp')
 
-
+# DESACTIVADO       ACTIVADO
 
 class Codigo(models.Model):
 	usuario=models.ForeignKey('UserProfile')
 	codigo=models.CharField(max_length=8,null=True,blank=True)
+	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
+
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
@@ -70,9 +72,20 @@ class Codigo(models.Model):
 	class Admin:
 		list_display = ('codigo')
 	    
+CATEGORIA_ESTUDIO=(
+			('POLITICO', 'POLITICO'),			
+			('ECONOMICA', 'ECONOMICA'),
+			('PHICOSOCIAL', 'PHICOSOCIAL'),
+			('COMERCIAL', 'COMERCIAL'),
+			('ACADEMICO', 'ACADEMICO'),
+			('CIENTIFICA', 'CIENTIFICA'),
+			('DEPORTIVA', 'DEPORTIVA'),
+			)
+
+
 
 class Categoria(models.Model):
-         nombre=models.CharField(max_length=30,blank=True,null=True)
+         nombre=models.CharField(max_length=30,blank=True,null=True,default="POLITICO",choices=CATEGORIA_ESTUDIO)
          comodin=models.CharField(max_length=12,blank=True,null=True)
                          
          def __str__(self):
@@ -106,6 +119,8 @@ class Estudios(models.Model):
 		 error= models.CharField(max_length=8,blank=True,null=True)
 		 confianza= models.CharField(max_length=8,blank=True,null=True)
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
+
+		 costo_por_muestra=models.FloatField(default=0,blank=True,null=True)
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1

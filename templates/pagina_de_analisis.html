@@ -16,7 +16,7 @@
 <center><h3>  <font color="blue">{{nombre_de_pregunta}}</font></p></h3></center>
 <br>
 {% for i in lista_de_opciones %}
-<p>{{i}}</p>
+<p>{{ forloop.counter }}: {{i}}</p>
 {% endfor %}
 
 <br>

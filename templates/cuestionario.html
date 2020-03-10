@@ -7,13 +7,13 @@
 <div class="row">  
        <div class="alert alert-info">        
 <center>
-        <a href="/"> <h4>  <font color="blue">{{estudio_actua.nombre}}l</font> </h4> </a>     
-
-         <a href="/pagina_de_analisis/100/TABLITA">  <img  src ='{% static "TABLITA.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+        <a href="/"> <h4>  <font color="blue">{{estudio_actual.nombre}}</font> </h4> </a>     
+<br>
+         
 <center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">
        
 </center>
-<br>
+
 
 
                        {% csrf_token %}                                                  
@@ -22,7 +22,10 @@
 
  {% for i in vector_de_opciones %} 
 
+
      {% for j in i  %} 
+
+
         {% if forloop.first %}
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
                
@@ -63,13 +66,21 @@
 
 <br>
 <br>
-        {% if tipo_usuario=='EL_LECTOR'%}
+         {% ifnotequal tipo_usuario 'EL_LECTOR' %}
                     <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
-         {% else %}
+         {% endifnotequal %}
 
-          {% endif %}
+        </form> </center> 
+<br>
+<br>
+
+</center> <h3> <p>COMPARTIR ESTE ESTUDIO.</p></h3> 
+
+ <a href='whatsapp://send?text= http://encuestasv.com/poner_cuestionario/{{id_estudio}}/' data-action='share/whatsapp/share'> <img src='{% static "whatssapp-sharing.png" %}' style='height:20px !important;' title='Compartir por whatsapp' /></a>                  
+
+<div class="fb-share-button" data-href="https://encuestasv.com/poner_cuestionario/{{id_estudio}}/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdetodonegocio.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
                                                                                                         
-             </form> </center> 
+  </center>       
 
 </div>
 </div>
@@ -78,11 +89,11 @@
 
  {% endblock %}
 
+<td WIDTH="60"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
 
 
-
-
-
+                 
 
 
 

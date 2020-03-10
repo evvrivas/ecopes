@@ -50,10 +50,10 @@
                 <center>   
                      <a href="/">  <img  src ='{% static "logo45.png" %}' alt='img' >  </a> 
                      
-                     {%  if user.is_authenticated %} 
+                   <!--  {%  if user.is_authenticated %} -->
 
                         <div class="btn-group">
-                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
+                           <button type="button" class="btn btn-danger dropdown-toggle"    
                                         data-toggle="dropdown">
                                   Ver Estudios<span class="caret"></span>
                             </button>
@@ -81,12 +81,12 @@
                         
                 
 
-                     {%  else  %}   
+                    <!--  {%  else  %}   -->
                         <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
                         <a href="/crear_usuario" class="btn btn-info" role="button">Registro</a>
                         <a href="/informacion" class="btn btn-warning" role="button">?</a>                         
                                            
-                     {% endif %}   
+                    <!--  {% endif %}   -->
 
 
 
@@ -100,7 +100,13 @@
                                            
                                           <ul class="dropdown-menu" role="menu">                                                                                                               
 
-                                            <li><a href="/editar_usuario/">Editar Usuario</a></li>                                                 
+                                            <li><a href="/editar_usuario/">Editar Usuario</a></li>
+
+                                          {% ifequal tipo_usuario 'EL_ENCUESTADOR' %}
+                                                  <li><a href="/ver_mis_numeros/">Ver mis numeros $</a></li>
+                                          {% endifequal %}
+                                           
+
                                             <li><a href="/informacion">?</a></li> 
                                             <li><a href="/accounts/logout/">Salir</a></li>
                                             </ul>
@@ -149,6 +155,18 @@
   <div class="panel panel-primary">
       <div class="panel-heading">
        <h2 class="panel-title"><center>ECOPES.........El Salvador WhatsApp (+503) 7821 8224 </center></h2>    
+
+      <br>    
+
+        <li><a href="/poner_lista_de_estudios/TODOS" class="btn btn-info" role="button">VER TODOS LOS ESTUDIOS</a></li>
+      <br>  
+
+        <li><a href="/poner_lista_de_estudios/PUBLICO" class="btn btn-info" role="button">VER ESTUDIOS PUBLICOS(gratuitos</a></li>
+     <br>     
+        <li><a href="/poner_lista_de_estudios/DE_PAGO" class="btn btn-info" role="button">VER ESTUDIOS POR SUSCRIPCION</a></li>
+     <br>  
+        <li><a href="/poner_lista_de_estudios/PRIVADO" class="btn btn-info" role="button">VER ESTUDIO PRIVADOS</a></li>
+       
        
         <a href='whatsapp://send?text= http://encuestasv.com' data-action='share/whatsapp/share'> <img src='{% static "whatssapp-sharing.png" %}' style='height:20px !important;' title='Compartir por whatsapp' /></a>                  
 

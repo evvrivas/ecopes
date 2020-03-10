@@ -262,8 +262,10 @@ def poner_cuestionario(request,id_estudio):
       usuario=UserProfile.objects.get(watsapp=request.user.username)
       tipo_usuario=usuario.tipo_usuario
       
+      
       estudio_actual=Estudios.objects.get(id=id_estudio)
-      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)      
+      las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)
+
       
       for i in las_preguntas:
            
@@ -638,7 +640,7 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 def pagina_de_analisis(request, id_pregunta,bandera):
 
     pregunta=Preguntas.objects.get(id=id_pregunta)
-    lista_de_opciones=Opciones.objects.filter(pregunta__nombre=pregunta.pregunta) 
+    lista_de_opciones=Opciones.objects.filter(pregunta__pregunta=pregunta.pregunta) 
     
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
@@ -692,10 +694,10 @@ def hacer_grafico_de_barras(request,id_pregunta):
  
       
         plt.xlabel('\nOpciones disponibles a esta pregunta')
-        plt.ylabel('Cantidad de respuestas/opcion ')
+        plt.ylabel('Porcentaje (respuestas) /opcion ')
         titulo=""
         plt.title(titulo)
-        plt.xticks(())
+        #plt.xticks(())
 
         subplots_adjust(left=0.21)
       
@@ -901,6 +903,58 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
 
+
+class Codigo(models.Model):
+  usuario=models.ForeignKey('UserProfile')
+  codigo=models.CharField(max_length=8,null=True,blank=True)
+  estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
+
+  cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
+  cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
+  cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
+  costos_por_muestra = models.FloatField(default=0,blank=True,null=True)
+  comodin=models.CharField(max_length=12,blank=True,null=True)
+
+
+
+def habilitar_estudio(request)        
+       
+        usuario_actual=request.user.username
+        Codigo(usuario=usuario_actual, codigo estado_del_estudio):
+        
+        estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
+
+
+
+        return render(request,'habilitar_estudio.html',locals())
+
+
+def ver_mis_numeros(recuest):
+      usuario_actual=request.user.username
+      tipo=UserProfile.objects.get(watsapp=usuario_actual)
+      tipo_usuario=tipo.tipo_usuario
+
+      code=Codigo.objects.filter(usuario=tipo)
+
+      
+      for i in code:
+
+            i.codigo
+            estu=Estudios.objects.get(codigo=i.codigo)
+            nombre_del_estudio=estu.nombre
+            precio=estu.costos_por_muestra
+
+            i.cantidad_muestras_asignadas 
+            i.cantidad_muestras_realizadas  
+            i.cantidad_muestras_liquidadas
+            i.costos_por_muestra    
+      
+
+      return render(request,'ver_mis_numeros.html',locals())
+
+
+
+
 def crear_estudioCH5NOV(request):        
               
         import random
@@ -909,7 +963,7 @@ def crear_estudioCH5NOV(request):
 
         tipo_estudio="PUBLICO"
 
-        nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "+ str(i)
+        nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "
         codigo_del_estudio="1000"
         date=datetime.datetime.now()
 
@@ -938,6 +992,10 @@ def crear_estudioCH5NOV(request):
         p33=Opciones(pregunta=p21,opcion=la_opcion)
         p33.save()
 
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
 
 
 
@@ -952,6 +1010,9 @@ def crear_estudioCH5NOV(request):
         la_opcion="Femenino "
         p32=Opciones(pregunta=p21,opcion=la_opcion)
         p32.save()
+
+
+
 
 
         pregunta_est="Rango de edad "
@@ -980,7 +1041,39 @@ def crear_estudioCH5NOV(request):
 
 
 
-        pregunta_est="Le gustaria participar en estosotros deportes "
+
+
+
+        pregunta_est="Le gustaria participar en estos deportes "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Softball"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Football"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="BasquetBall"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="BoleyBall"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()    
+
+
+
+
+
+
+        pregunta_est="En cual de estos otros deportes le gusaria partcipar "
         p21=Preguntas(estudio=p1, pregunta=pregunta_est)
         p21.save()
                     
@@ -1000,26 +1093,97 @@ def crear_estudioCH5NOV(request):
         p32=Opciones(pregunta=p21,opcion=la_opcion)
         p32.save()
 
-     
 
-        pregunta_est="Asistiria usted a apoyar a los participantes "
+
+
+
+
+
+
+        pregunta_est="Si usted fuera autoridad, Que otro deporte propondria a esta central? "
         p21=Preguntas(estudio=p1, pregunta=pregunta_est)
         p21.save()
                     
-        la_opcion="Si, Siempre voy"          
+       
+        la_opcion="Atletismo"          
         p31=Opciones(pregunta=p21,opcion=la_opcion)
         p31.save()
 
-        la_opcion="Si, cuando tengo tiempo y energias"          
-        p31=Opciones(pregunta=p21,opcion=la_opcion)
-        p31.save()
-
-
-        la_opcion="No, prefiero descanzar"
+        la_opcion="Natacion"
         p32=Opciones(pregunta=p21,opcion=la_opcion)
         p32.save()
 
-        la_opcion="Hare el esfuerzo si hay insentivo (Vender comida), prefiero descanzar"
+        
+        la_opcion="Carrera de Bicicletas"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+
+
+
+        pregunta_est="Que lugar propone usted que se habilite para practicar deporte "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Cancha de Football"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Casa de Juegos"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Piscina"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Cancha de Boleyball"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Casa Club (Casa de charlas y conferencias)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Calles internas de la CENTRAL)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Que lo motiva a usted para que llegue a ver practicar a otros deportistas? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Siempre voy, me gusta apoyar"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Voy de ves en cuando, cuando tengo tiempo y energias"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        la_opcion="Nada me insentiva, prefiero descanzar"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="llego cuando hay incentivos, Venta de comida"
         p32=Opciones(pregunta=p21,opcion=la_opcion)
         p32.save()
 
@@ -1037,7 +1201,22 @@ def crear_estudioCH5NOV(request):
 
 
 
+        pregunta_est="Supongamos que el torneo no es de la empresa, Participaria usted si es libre y abierto? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si, Si apoyaria"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
 
+        la_opcion="No, No apoyaria"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+       
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
 
         connection.close()
         return render(request,'principal.html',locals())
