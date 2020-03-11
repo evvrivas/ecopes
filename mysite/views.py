@@ -917,7 +917,7 @@ class Codigo(models.Model):
 
 
 
-def habilitar_estudio(request)        
+def habilitar_estudio(request):      
        
         usuario_actual=request.user.username
         Codigo(usuario=usuario_actual, codigo estado_del_estudio):
