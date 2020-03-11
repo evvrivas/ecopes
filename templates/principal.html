@@ -15,13 +15,44 @@
 <br>
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
                          
+
+
+<center>   
+
          {%  if user.is_authenticated %}
+
+          <li><a href="/poner_lista_de_estudios/TODOS" class="btn btn-info" role="button">VER TODOS LOS ESTUDIOS</a></li>
+      <br>  
+
+         <br>     
+        <li><a href="/poner_lista_de_estudios/DE_PAGO" class="btn btn-info" role="button">VER ESTUDIOS POR SUSCRIPCION</a></li>
+     <br>  
+        <li><a href="/poner_lista_de_estudios/PRIVADO" class="btn btn-info" role="button">VER ESTUDIO PRIVADOS</a></li>
+
+
                                 
          {%  else  %} 
              <br>                                
              <li><a href="/accounts/login">Entrar aqui..! </a></li>
               <br>
             <li><a href="/crear_usuario">Quieres ver los estudios..?   Registrarte Aqui...GRATIS !</a></li>
+
+
+              <li><a href="/poner_lista_de_estudios/PUBLICO" class="btn btn-info" role="button">VER ESTUDIOS PUBLICOS(gratuitos</a></li>
+     
+
+
+
+
+       </center>   
+
+       
+
+      
+
+
+
+
          {% endif %}  
 
 <!--   quita este parar color de fondo -->

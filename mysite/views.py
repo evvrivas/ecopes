@@ -904,17 +904,6 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 
 
 
-class Codigo(models.Model):
-  usuario=models.ForeignKey('UserProfile')
-  codigo=models.CharField(max_length=8,null=True,blank=True)
-  estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
-
-  cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
-  cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
-  cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
-  costos_por_muestra = models.FloatField(default=0,blank=True,null=True)
-  comodin=models.CharField(max_length=12,blank=True,null=True)
-
 
 
 def habilitar_estudio(request):      
