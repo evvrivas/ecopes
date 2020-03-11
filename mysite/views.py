@@ -920,12 +920,8 @@ class Codigo(models.Model):
 def habilitar_estudio(request):      
        
         usuario_actual=request.user.username
-        Codigo(usuario=usuario_actual, codigo estado_del_estudio):
+               
         
-        estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
-
-
-
         return render(request,'habilitar_estudio.html',locals())
 
 
