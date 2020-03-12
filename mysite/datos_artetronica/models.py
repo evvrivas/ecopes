@@ -54,7 +54,7 @@ class UserProfile(models.Model):
 		 
 		 municipio=models.CharField(max_length=60,blank=True,null=True)
 		 departatmento=models.CharField(max_length=60,blank=True,null=True)
-		 barrios_colonias_canton_caserio==models.CharField(max_length=160,blank=True,null=True)
+		 barrio_colonia_canton_caserio==models.CharField(max_length=160,blank=True,null=True)
 		 
 		 n_cuenta_ahorro=models.CharField(max_length=60,blank=True,null=True,default="BANCO_AGRICOLA_COMERCIAL",choices=BANCO)
 		 banco_a_depositar=models.CharField(max_length=60,blank=True,null=True)
