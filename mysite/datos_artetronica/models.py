@@ -42,12 +42,24 @@ TIPO_USUARIO=(
 			('ENCUESTADOR', 'ENCUESTADOR'),	
 			('ADMINISTRADOR', 'ADMINISTRADOR'),
 			)
-
+BANCO=(
+			('BANCO_AGRICOLA_COMERCIAL', 'BANCO_AGRICOLA_COMERCIAL'),			
+			
+			)
 class UserProfile(models.Model):
 		 watsapp=models.CharField(max_length=15)
 		 clave=models.CharField(max_length=4)
-		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",null=True)
+		 tipo_usuario=models.CharField(max_length=30,blank=True,default="EL_LECTOR",choices=TIPO_USUARIO,null=True)
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
+		 
+		 municipio=models.CharField(max_length=60,blank=True,null=True)
+		 departatmento=models.CharField(max_length=60,blank=True,null=True)
+		 barrios_colonias_canton_caserio==models.CharField(max_length=160,blank=True,null=True)
+		 
+		 n_cuenta_ahorro=models.CharField(max_length=60,blank=True,null=True,default="BANCO_AGRICOLA_COMERCIAL",choices=BANCO)
+		 banco_a_depositar=models.CharField(max_length=60,blank=True,null=True)
+		 nombre_de_la_persona=models.CharField(max_length=60,blank=True,null=True)
+
 		 def __str__(self):
 				return  self.watsapp
 		 class Admin:
@@ -101,6 +113,16 @@ TIPO_ESTUDIO=(
 			('PRIVADO', 'PRIVADO'),							
 			)
 
+CONFIANZA_NIVEL=(
+			('1.15', '75%'),			
+			('1.28', '80%'),
+			('1.44', '85%'),	
+			('1.65', '90%'),			
+			('1.96', '95%'),
+			('2.0', '95.5%'),
+			('2.58', '99%'),							
+			)
+
 class Estudios(models.Model):
 
 		 categoria=models.ForeignKey('Categoria',blank=True,null=True)
@@ -111,13 +133,17 @@ class Estudios(models.Model):
 		 imagen1 = ImageField(upload_to='tmp',blank=True)
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
+		 fecha_ultima_actualizacion= models.DateField(default=datetime.now)
+
 		 codigo= models.CharField(max_length=8)
 		 tipo_de_estudio= models.CharField(max_length=150,default="PUBLICO",choices=TIPO_ESTUDIO)
 
 		 n_muestras= models.IntegerField(blank=True,null=True)
+
+		
 		 universo= models.IntegerField(blank=True,null=True)
 		 error= models.CharField(max_length=8,blank=True,null=True)
-		 confianza= models.CharField(max_length=8,blank=True,null=True)
+		 confianza= models.CharField(max_length=8,blank=True,null=True,choices=CONFIANZA_NIVEL,default="1.65")
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 		 costo_por_muestra=models.FloatField(default=0,blank=True,null=True)

@@ -5,29 +5,40 @@
 
   
 
-<center><h3><p><font color="red">Codigo {{estudio.codigo}} </font > {{estudio.nombre}}</p></h3></center>
- 
-</center>
-<br>
+<center><h3><p><font color="red"> {{estudio.nombre}} </font ></p></h3></center>
 
-<p>{{estudio.recomendacion}}</p>	
-        
+<br>
+<p>Codigo: {{estudio.codigo}}</p>
+
+ {% ifequal tipo_usuario 'EL_LECTOR' %}
+    <br>
+    <p> INFORMACION PARA EL ENCUESTADOR</p>
+
+                    <p>{{estudio.recomendacion}}</p>
+                    <br>	
+                    <p><font color="red">Precio de cada encuesta: ${{costo_por_muestra}}</font ></p>
+ 
+ {% endifequal %}
+
+
+       
 <br>
         <p>CATEGOORIA: {{estudio.categoria.nombre}}</p>
 		 
-		 <p>{{estudio.descripcion}}</p>
+		 <br>
+		 <p>Descripcion del estudio :{{estudio.descripcion}}</p>
 		  
-		 
+		 <br>
 		 <p>Fecha inicio {{estudio.fecha_inicio}}</p>
 		 <p>Fecha final {{estudio.fecha_final}}</p>
 		 
-		<p> Tipo de estudio {{estudio.tipo_de_estudio}}</p>
+		<p> Tipo de estudio: {{estudio.tipo_de_estudio}}</p>
 <br>
 
-		 <p>N. Muestras Tomadas{{estudio.n_muestras}}</p>
-		<p>Universo {{estudio.universo}}</p>
-		 <p>Puntos de Error {{estudio.error}}</p>
-		 <p>Confianza {{estudio.confianza}}</p>
+		 <p>Numero de muestras Tomadas: {{estudio.n_muestras}}</p>
+		 <p>Universo: {{estudio.universo}}</p>
+		 <p>Puntos de Error: {{estudio.error}}</p>
+		 <p>Nivel de confianza: {{estudio.confianza}}</p>
 		 
 </center>
 

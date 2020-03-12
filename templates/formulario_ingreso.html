@@ -14,7 +14,24 @@
                       <form action="." method="post" enctype="multipart/form-data" > 
                             {% csrf_token %}                              
 
-                            <p> {{ form.as_p }} </p>                                                              
+                           
+                            <p> WhatsApp {{ form. watsapp }} </p> 
+                            <p> Contraseña(4 digitos) {{ form. clave }}  </p>
+<br>
+ {% ifequal tipo_usuario 'ENCUESTADOR' %}
+                    <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
+         
+
+                            <p>Municipio {{ form.municipio }} </p> 
+                            <p>departatmento {{ form.departatmento }}  </p>
+                            <p>barrio_colonia_canton_caserio {{ form.barrio_colonia_canton_caserio }}  </p>
+                            <br>
+                            <p>n_cuenta_ahorro {{ form.n_cuenta_ahorro }} </p> 
+                            <p>banco_a_depositar {{ form.banco_a_depositar }}  </p>
+                            <p>nombre_de_la_persona {{ form.nombre_de_la_persona }}  </p>
+
+            {% endifequal %}                            
+
                            <br>             
                            <input type="submit" value="GUARDAR"  />                       
                       </form>

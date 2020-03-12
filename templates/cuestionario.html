@@ -8,11 +8,12 @@
        <div class="alert alert-info">        
 <center>
         <a href="/"> <h4>  <font color="blue">{{estudio_actual.nombre}}</font> </h4> </a>     
+</center>
 <br>
          
 <center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">
        
-</center>
+
 
 
 
@@ -27,19 +28,25 @@
 
 
         {% if forloop.first %}
-                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>  
-               
+                  
+
+
+       {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
+                    <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
+                  
+               <center>
                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
                  <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                  <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-                                  
+                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>                                
+                </center>
+        {% endifnotequal %}
 
-
-
+                <br>
+                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
 
                                               
@@ -74,7 +81,7 @@
 <br>
 <br>
 
-</center> <h3> <p>COMPARTIR ESTE ESTUDIO.</p></h3> 
+<center> <h3> <p>COMPARTIR ESTE ESTUDIO.</p></h3> 
 
  <a href='whatsapp://send?text= http://encuestasv.com/poner_cuestionario/{{id_estudio}}/' data-action='share/whatsapp/share'> <img src='{% static "whatssapp-sharing.png" %}' style='height:20px !important;' title='Compartir por whatsapp' /></a>                  
 

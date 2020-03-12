@@ -17,18 +17,34 @@
                        
         {% for j in vector_de_estudios_publicos %} 
        		
-        		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a>
+        		
 
                 <center>
                 <table BORDER="1" CELLSPACING="1">
+                
+
+                <tr  align="center">
+                                    
+                  <td WIDTH="180"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }}  :  {{j.descripcion}}</font> </h5> </a></td>  
+                                                          
+                                   
+                </tr >  
+
+
+
                             
                 <tr  align="center">
                                     
-                  <td WIDTH="40"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+                  <td WIDTH="60"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
                 
-                  <td WIDTH="40"><a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a></td>                 
+                   <td WIDTH="60">
+                    {% ifequal tipo_usuario 'ADMINISTRADOR' %}
+                    <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                     {% endequal %}
+
+                </td>                     
                 
-                  <td WIDTH="40"><h6><p> xx:xx pm</p></h6></td>                             
+                  <td WIDTH="60"><h6><p> xx:xx pm</p></h6></td>                             
                                    
                 </tr >                                                   
 
@@ -46,18 +62,37 @@
         
         {% for j in vector_de_estudios_de_pago_habilitados %} 
 
-         		<a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}</font> </h5> </a> 
+         		 
 
                  <center>
                 <table BORDER="1" CELLSPACING="1">
+
+                     <tr  align="center">
+                                    
+                  <td WIDTH="180"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}  :  {{j.descripcion}}</font> </h5> </a></td>  
+                                                          
+                                   
+                </tr >  
+
+
+
+
+
                             
                 <tr  align="center">
                                     
-                  <td WIDTH="40"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+                  <td WIDTH="60"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+
+         
                 
-                  <td WIDTH="40"><a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a></td>                 
+                  <td WIDTH="60">
+                    {% ifequal tipo_usuario 'ADMINISTRADOR' %}
+                    <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                     {% endequal %}
+
+                </td>                 
                 
-                  <td WIDTH="40"><h6><p> xx:xx pm</p></h6></td>                             
+                  <td WIDTH="60"><h6><p> xx:xx pm</p></h6></td>                             
                                    
                 </tr >                                                   
 
@@ -72,26 +107,47 @@
 
         {% for j in vector_de_estudios_de_pago_deshabilitados %} 
 
-                <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}}</font> </h4> </a>  
-
-                 <center> 
-
-                <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
-                 </center>
                 
+
+                             
                     
                  <center>
                 <table BORDER="1" CELLSPACING="1">
+
+
+                     <tr  align="center">
+                                    
+                  <td WIDTH="180">
+                    <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}} :  {{j.descripcion}}</font> </h4> </a>  
+
+                     <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
+
+
+                  </td>  
+                                                          
+                                   
+                </tr >  
+
+
+
+
+
+
+
                             
                 <tr  align="center">
 
                                     
-                  <td WIDTH="40"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+                  <td WIDTH="60"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
                 
-                  <td WIDTH="40"><a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a></td>    
+                  <td WIDTH="60">
+                    {% ifequal tipo_usuario 'ADMINISTRADOR' %}
+                    <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                     {% endequal %}
 
+                </td>     
                  
-                  <td WIDTH="40"><h6><p> xx:xx pm</p></h6></td>                             
+                  <td WIDTH="60"><h6><p> xx:xx pm</p></h6></td>                             
                                    
                 </tr >                                                   
 
@@ -112,24 +168,45 @@
         
         {% for j in vector_de_estudios_privado %} 
 
-                <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} -->  {{j.descripcion}}</font> </h5> </a>  
-                <a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a>
+                <center>
+                <table BORDER="1" CELLSPACING="1">
 
-                <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
-                <h6><p>Ultima actualizacion  xx:xx pm</p></h6>
+
+                     <tr  align="center">
+                                    
+                  <td WIDTH="180">
+                    <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} :  {{j.descripcion}}</font> </h5> </a> 
+                  
+
+                  </td>  
+                                                          
+                                   
+                </tr >  
+
+                            
+                <tr  align="center">
+
+                                    
+                  <td WIDTH="60"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+                
+                  <td WIDTH="60">
+                    {% ifequal tipo_usuario 'ADMINISTRADOR' %}
+                    <a href="/actualizar_previo_a_graficar/{{j.id}}"> <h6>  <font color="green">Actualizar</font> </h6> </a>
+                     {% endequal %}
+
+                </td>     
+                 
+                  <td WIDTH="60"><h6><p> Ultima actualizació: {{fecha_ultima_actualizacion}} pm</p></h6></td>  
+
+                                   
+                </tr >                                                   
+
+                </table>
+                </center>   
                            
 
 
-        {% endfor %} 
-
-
-
-
-       
-
-
-
-         
+        {% endfor %}         
 
 
 </div>

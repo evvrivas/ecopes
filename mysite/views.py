@@ -120,7 +120,9 @@ def crear_usuario(request):
 
 
 @login_required
-def editar_usuario(request):   
+def editar_usuario(request):
+             usuario=UserProfile.objects.get(watsapp=request.user.username)
+             tipo_usuario=usuario.tipo_usuario   
               
              f = UserProfile.objects.get(watsapp=request.user.username)           
              
@@ -159,6 +161,9 @@ def editar_usuario(request):
 
 
 def poner_lista_de_estudios(request,bandera):
+
+        usuario=UserProfile.objects.get(watsapp=request.user.username)
+        tipo_usuario=usuario.tipo_usuario
 
         usuario_actual=request.user.username
         lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
@@ -561,8 +566,8 @@ def agregar_encuesta(request,id_estudio):
 
 
 
-def actualizar_previo_a_graficar(request,id_estudio):
-
+def actualizar_previo_a_graficar(request,id_estudio):     
+         
       id_estudio=id_estudio
       estudio_actual=Estudios.objects.get(id=id_estudio)
       las_preguntas=Preguntas.objects.filter(estudio=estudio_actual)    
@@ -592,6 +597,20 @@ def actualizar_previo_a_graficar(request,id_estudio):
                         guardar_en_acumulados(vector_de_acumulados,j)
 
       Cuestionario_temporal.objects.filter(estudio__id=id_estudio).delete()
+
+      n=estudio_actual.universo
+      N=estudio_actual.n_muestras         
+      k=eval(estudio_actual.confianza)
+      p=0.5
+      q=0.5    
+
+      e=k*sqrt(p*q*(N/n -1)/(N-1) )
+      ee=round(e, 1)
+
+      estudio_actual.error=str(ee)
+      estudio_actual.fecha_ultima_actualizacion= datetime.datetime.now()
+
+      estudio.actual.save()
       
       return render(request,'confirmar_encuesta.html',locals())
 
@@ -813,9 +832,15 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        #barh(pos,datos,align = 'center')
        f=plt.figure()
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
+       titulo_color=[", 1-red",", 2-black",", 3-blue",", 4-green","5, -orange",", 6-gray",", 7-yelow",", 8-red",", 9-black",", 10-blue",", 11-green",", 12-orange",", 13-gray",", 14-yelow",", 15-red",", 16-black",", 17-blue",", 18-green",", 19-orange",", 20-gray",", 21-yelow"] 
+       
        b=0
+
+       titulo=""
        for i in vector_de_secuencias:
                 plt.plot(X,i, color[b],"o-")
+                t_color=titulo_color[b]
+                titulo=titulo+t_color
                 b=b+1
                
 
@@ -826,7 +851,7 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        plt.xlabel(leyenda)
        plt.ylim(0, 100)    
        plt.ylabel('PREFERENCIAS')
-       titulo="Variacion del las preferencias"
+       #titulo="preferencias "
        plt.xticks(())
        #plt.yticks()
       
@@ -870,11 +895,15 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        #barh(pos,datos,align = 'center')
        f=plt.figure()
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
+       titulo_color=[", 1-red",", 2-black",", 3-blue",", 4-green","5, -orange",", 6-gray",", 7-yelow",", 8-red",", 9-black",", 10-blue",", 11-green",", 12-orange",", 13-gray",", 14-yelow",", 15-red",", 16-black",", 17-blue",", 18-green",", 19-orange",", 20-gray",", 21-yelow"] 
+
        b=0
+       titulo=""
        for i in vector_de_secuencias:
                 plt.plot(X,i, color[b],"o-")
+                t_color=titulo_color[b]
+                titulo=titulo+t_color
                 b=b+1
-               
 
        plt.grid()     
         
@@ -883,7 +912,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        plt.xlabel(leyenda)
            
        plt.ylabel('PREFERENCIAS')
-       titulo="Variacion del las preferencias"
+       #titulo="Variacion del las preferencias"
        plt.xticks(())
        #plt.yticks(())
       
@@ -920,14 +949,13 @@ def ver_mis_numeros(recuest):
       tipo_usuario=tipo.tipo_usuario
 
       code=Codigo.objects.filter(usuario=tipo)
-
       
       for i in code:
 
             i.codigo
             estu=Estudios.objects.get(codigo=i.codigo)
             nombre_del_estudio=estu.nombre
-            precio=estu.costos_por_muestra
+            precio=estu.costos_por_muestra           
 
             i.cantidad_muestras_asignadas 
             i.cantidad_muestras_realizadas  
@@ -951,13 +979,13 @@ def crear_estudioCH5NOV(request):
         nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "
         codigo_del_estudio="1000"
         date=datetime.datetime.now()
+        precio=0.15
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
-
-        p1=Estudios(nombre=nombre_estudio,descripcion=descripcion_del_estudio, fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="PUBLICO",n_muestras=400,universo=400,error=0,confianza=0)
+        recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terseros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
+        p1=Estudios(costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
         p1.save() 
 
-            
 
 
 
