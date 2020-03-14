@@ -149,8 +149,8 @@ class Estudios(models.Model):
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 		 costo_por_muestra=models.FloatField(default=0,blank=True,null=True)
-         precio_por_suscripcion=models.FloatField(default=5,blank=True,null=True)
-         precio_del_estudio=models.FloatField(default=0,blank=True,null=True)  
+		 precio_por_suscripcion=models.FloatField(default=5,blank=True,null=True)
+		 precio_del_estudio=models.FloatField(default=0,blank=True,null=True)  
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1
