@@ -69,18 +69,20 @@ class UserProfile(models.Model):
 
 class Codigo(models.Model):
 	usuario=models.ForeignKey('UserProfile')
-	codigo=models.CharField(max_length=8,null=True,blank=True)
+	#codigo=models.CharField(max_length=8,null=True,blank=True)
+	estudio=models.ForeignKey('Estudios')
+	
 	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
 
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
-	costos_por_muestra = models.FloatField(default=0,blank=True,null=True)
+
 	comodin=models.CharField(max_length=12,blank=True,null=True)
 
 
 	def __str__(self):
-		return  self.codigo
+		return  self.usuario.whatsap
 	class Admin:
 		list_display = ('codigo')
 	    
@@ -135,7 +137,7 @@ class Estudios(models.Model):
 		 fecha_final= models.DateField(default=datetime.now)
 		 fecha_ultima_actualizacion= models.DateField(default=datetime.now)
 
-		 codigo= models.CharField(max_length=8)
+		 #codigo= models.CharField(max_length=8)
 		 tipo_de_estudio= models.CharField(max_length=150,default="PUBLICO",choices=TIPO_ESTUDIO)
 
 		 n_muestras= models.IntegerField(blank=True,null=True)
@@ -147,6 +149,8 @@ class Estudios(models.Model):
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 
 		 costo_por_muestra=models.FloatField(default=0,blank=True,null=True)
+         precio_por_suscripcion=models.FloatField(default=5,blank=True,null=True)
+         precio_del_estudio=models.FloatField(default=0,blank=True,null=True)  
 
 		 def save(self, *args,**kwargs):
 		 	self.image=self.imagen1

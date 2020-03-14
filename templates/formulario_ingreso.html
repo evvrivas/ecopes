@@ -15,13 +15,11 @@
                             {% csrf_token %}                              
 
                            
-                            <p> WhatsApp {{ form. watsapp }} </p> 
-                            <p> Contraseña(4 digitos) {{ form. clave }}  </p>
+                            <p> WhatsApp {{ form.watsapp }} </p> 
+                            <p> Contraseña(4 digitos) {{ form.clave }}  </p>
 <br>
  {% ifequal tipo_usuario 'ENCUESTADOR' %}
-                    <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
-         
-
+                    
                             <p>Municipio {{ form.municipio }} </p> 
                             <p>departatmento {{ form.departatmento }}  </p>
                             <p>barrio_colonia_canton_caserio {{ form.barrio_colonia_canton_caserio }}  </p>

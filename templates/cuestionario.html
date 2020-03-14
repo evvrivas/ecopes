@@ -31,21 +31,7 @@
                   
 
 
-       {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
-                    <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
-                  
-               <center>
-                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-
-                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-
-                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
-
-                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>                                
-                </center>
-        {% endifnotequal %}
-
-                <br>
+                 <br>
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
 
@@ -64,6 +50,19 @@
 
                                   
       </select> 
+
+        {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
+                                    
+               <center>
+                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>                                
+                </center>
+        {% endifnotequal %}
       
       <hr>
       <br>
@@ -71,7 +70,7 @@
  {% endfor %} 
 
 
-<br>
+
 <br>
          {% ifnotequal tipo_usuario 'EL_LECTOR' %}
                     <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">

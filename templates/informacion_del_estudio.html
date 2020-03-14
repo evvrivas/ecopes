@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 {% load staticfiles %} 
- 
-
-  
+   
 
 <center><h3><p><font color="red"> {{estudio.nombre}} </font ></p></h3></center>
 
 <br>
-<p>Codigo: {{estudio.codigo}}</p>
 
- {% ifequal tipo_usuario 'EL_LECTOR' %}
+ {% ifequal tipo_usuario 'ENCUESTADOR' %}
     <br>
     <p> INFORMACION PARA EL ENCUESTADOR</p>
 

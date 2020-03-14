@@ -5,22 +5,75 @@
 
   
 
-<center><h3><p><font color="red">Min Numeros $ </font ></p></h3></center>
+<center><h3><p><font color="red">Informacion de Estudios acreditados </font ></p></h3></center>
  
-</center>
-		<p> Nombre de usuario {{usuario_actual}}</p>
-		<br>
 
-		<p> Estudio:</p>
-		<p> Costo de cada encuesta:</p>
-		<p> Total de encuestas asignadas:</p>
-		<p> Total de encuestas realizadas:</p>
-		<p> Total de encuestas canceladas:</p>
-		<p> Total de adeudadas asignadas:</p>
-		<p> Valor Total adeudado $:</p>
-		<p> Estudio:</p>
-		 
-</center>
+ <p> Nombre de usuario {{usuario_actual}}, : {{tipo_usuario}}</p>
+
+ <br>	
+ 
+ {% for i in listado_de_mis_estudios %}
+
+	   <p> {{i.estudio.nombre}} </p>
+	   <p> {{i.estudio.categoria.nombre}} </p>
+	   <p> {{i.estudio.tipo_de_estudio}}  </p> 
+
+	   <br> 
+	   <p> {{i.estado_del_estudio}} </p>
+	   <br>
+
+
+			{% ifequal tipo_usuario 'EL_LECTOR' %}
+
+
+                {% ifequal i.estudio.tipo_de_estudio 'DE_PAGO' %}
+				 		<p> Precio de suscripcion: $ {{i.estudio.precio_por_suscripcion}} </p>
+	    		{% endifequal %}
+
+                {% ifequal i.estudio.tipo_de_estudio 'PRIVADO' %}
+	    		 		<p> Precio del Estudio: $ {{i.estudio.precio_del_estudio}} </p>
+	    		{% endifequal %}            
+
+	        {% endifequal %}
+
+
+
+	        {% ifequal tipo_usuario 'ADMINISTRADOR' %}
+
+
+                {% ifequal i.estudio.tipo_de_estudio 'DE_PAGO' %}
+				 		<p> Precio de suscripcion: $ {{i.estudio.precio_por_suscripcion}} </p>
+	    		{% endifequal %}
+
+                {% ifequal i.estudio.tipo_de_estudio 'PRIVADO' %}
+	    		 		<p> Precio del Estudio: $ {{i.estudio.precio_del_estudio}} </p>
+	    		{% endifequal %}  
+
+	    		<br>
+	            <p>Total de encuestas asignadas: {{i.cantidad_muestras_asignadas}} </p>
+	    		<p>Total de encuestas realizadas: {{i.cantidad_muestras_realizadas}} </p>
+	    		<p>Total de encuestas canceladas: {{i.cantidad_muestras_liquidadas}} </p>
+	    		<p>Costo de cada encuesta: {{i.estudio.costo_por_muestra}} </p>	            
+            {% endifequal %}
+
+
+ 	        {% ifequal tipo_usuario 'ENCUESTADOR' %}
+	             <br>
+	            <p>Total de encuestas asignadas: {{i.cantidad_muestras_asignadas}} </p>
+	    		<p>Total de encuestas realizadas: {{i.cantidad_muestras_realizadas}} </p>
+	    		<p>Total de encuestas canceladas: {{i.cantidad_muestras_liquidadas}} </p>
+	    		<p>Costo de cada encuesta: {{i.estudio.costo_por_muestra}} </p>	            
+
+
+	        {% endifequal %}
+
+<hr>
+<br>
+
+
+{%endfor%}
+
+
 
                        
 

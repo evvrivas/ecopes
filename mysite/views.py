@@ -191,7 +191,7 @@ def poner_lista_de_estudios(request,bandera):
                     for i in lista_de_codigos:
                         for j in estudios:             
                      
-                              if j.codigo==i.codigo:
+                              if j.id==i.estudio.id:
                                   vector_de_estudios_de_pago_habilitados.append(j)
                               else:
                                   vector_de_estudios_de_pago_deshabilitados.append(j)
@@ -209,7 +209,7 @@ def poner_lista_de_estudios(request,bandera):
                     for i in lista_de_codigos:
                           for j in estudios:          
                      
-                              if j.codigo==i.codigo:
+                              if j.id==i.estudio.id:
                                   vector_de_estudios_privados_habilitados.append(j)
                               else:
                                   pass                  
@@ -230,7 +230,7 @@ def poner_lista_de_estudios(request,bandera):
                     for i in lista_de_codigos:
                         for j in estudios:             
                      
-                              if j.codigo==i.codigo:
+                              if j.id==i.estudio.id:
                                   vector_de_estudios_de_pago_habilitados.append(j)
                               else:
                                   vector_de_estudios_de_pago_deshabilitados.append(j)
@@ -246,7 +246,7 @@ def poner_lista_de_estudios(request,bandera):
                     for i in lista_de_codigos:
                           for j in estudios:          
                      
-                              if j.codigo==i.codigo:
+                              if j.id==i.estudio.id:
                                   vector_de_estudios_privados_habilitados.append(j)
                               else:
                                   pass         
@@ -302,10 +302,10 @@ def crear_estudio(request):
                 tipo_estudio="BUENO"
 
             nombre_estudio="ELECCION alcalde "+ str(i)
-            codigo_del_estudio=str(i)
+            
             date=datetime.datetime.now()
 
-            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio=tipo_estudio,n_muestras=100,universo=1000,error=0, confianza=0)
+            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,tipo_de_estudio=tipo_estudio,n_muestras=100,universo=1000,error=0, confianza=0)
     
             p1.save() 
 
@@ -610,7 +610,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       estudio_actual.error=str(ee)
       estudio_actual.fecha_ultima_actualizacion= datetime.datetime.now()
 
-      estudio.actual.save()
+      estudio_actual.save()
       
       return render(request,'confirmar_encuesta.html',locals())
 
@@ -945,23 +945,11 @@ def habilitar_estudio(request):
 
 def ver_mis_numeros(recuest):
       usuario_actual=request.user.username
-      tipo=UserProfile.objects.get(watsapp=usuario_actual)
-      tipo_usuario=tipo.tipo_usuario
+      perfil_del_usuario=UserProfile.objects.get(watsapp=usuario_actual)
+      tipo_usuario=perfil_del_usuario.tipo_usuario
 
-      code=Codigo.objects.filter(usuario=tipo)
-      
-      for i in code:
-
-            i.codigo
-            estu=Estudios.objects.get(codigo=i.codigo)
-            nombre_del_estudio=estu.nombre
-            precio=estu.costos_por_muestra           
-
-            i.cantidad_muestras_asignadas 
-            i.cantidad_muestras_realizadas  
-            i.cantidad_muestras_liquidadas
-            i.costos_por_muestra    
-      
+      listado_de_mis_estudios=Codigo.objects.filter(usuario=perfil_del_usuario)
+    
 
       return render(request,'ver_mis_numeros.html',locals())
 
@@ -977,13 +965,12 @@ def crear_estudioCH5NOV(request):
         tipo_estudio="PUBLICO"
 
         nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "
-        codigo_del_estudio="1000"
         date=datetime.datetime.now()
         precio=0.15
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
         recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terseros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
-        p1=Estudios(costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,codigo=codigo_del_estudio,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
+        p1=Estudios(costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
         p1.save() 
 
 
