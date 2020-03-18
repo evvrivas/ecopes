@@ -67,16 +67,25 @@ class UserProfile(models.Model):
 
 # DESACTIVADO       ACTIVADO
 
+
+TIPO_ACTIVACION=(
+			('DESACTIVADO', 'DESACTIVADO'),			
+			('ACTIVO', 'ACTIVO'),	
+			
+			)
 class Codigo(models.Model):
 	usuario=models.ForeignKey('UserProfile')
 	#codigo=models.CharField(max_length=8,null=True,blank=True)
 	estudio=models.ForeignKey('Estudios')
-	
-	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO")
+
+	solicitud_de_activacion=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",,choices=TIPO_ACTIVACION)	
+	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",,choices=TIPO_ACTIVACION)
 
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
+
+	fecha_inicio= models.DateField(default=datetime.now)
 
 	comodin=models.CharField(max_length=12,blank=True,null=True)
 
@@ -131,7 +140,8 @@ class Estudios(models.Model):
 
 		 nombre=models.CharField(max_length=150)
 		 descripcion= models.TextField(blank=True,null=True)
-		 recomendacion= models.TextField(blank=True,null=True)		 
+		 recomendacion= models.TextField(blank=True,null=True)
+
 		 imagen1 = ImageField(upload_to='tmp',blank=True)
 		 fecha_inicio= models.DateField(default=datetime.now)
 		 fecha_final= models.DateField(default=datetime.now)
@@ -250,6 +260,7 @@ class Opciones(models.Model):
 		 cantidad= models.IntegerField(blank=True,default=0)
 		 color=models.CharField(max_length=30,choices=COLORES)
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
+		 
 		 def __str__(self):
 		 	return  self.opcion
 		 class Admin:
@@ -257,6 +268,7 @@ class Opciones(models.Model):
 
 class Opciones_acumuladas(models.Model):
 		 pregunta=models.ForeignKey('Preguntas',blank=True,null=True)
+		 fecha_de_actualizacion= models.DateField(default=datetime.now)
 		 opcion_1=models.IntegerField(blank=True,default=0)
 		 opcion_2=models.IntegerField(blank=True,default=0)
 		 opcion_3=models.IntegerField(blank=True,default=0)
@@ -277,7 +289,7 @@ class Opciones_acumuladas(models.Model):
 		 opcion_18=models.IntegerField(blank=True,default=0)
 		 opcion_19=models.IntegerField(blank=True,default=0)
 		 opcion_20=models.IntegerField(blank=True,default=0)
-		 comodin=models.CharField(max_length=12,blank=True,null=True)
+		  
 
 
 		 def __str__(self):
@@ -352,7 +364,8 @@ class Cuestionario_temporal(models.Model):
 		 respuesta_50=models.CharField(max_length=100)
 
 		 encuestador=models.CharField(max_length=15)
-		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
+		 fecha_de_ingreso = models.DateField(default=datetime.now)
+		 
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 
 		 def __str__(self):
@@ -414,7 +427,8 @@ class Cuestionario_principal(models.Model):
 		 respuesta_50=models.CharField(max_length=100)
 
 		 encuestador=models.CharField(max_length=15)
-		 pago_encuesta=models.CharField(max_length=15,default="PENDIENTE")
+		 fecha_de_ingreso = models.DateField(default=datetime.now)
+		 
 		 comodin=models.CharField(max_length=12,blank=True,null=True)
 		 
 		 def __str__(self):

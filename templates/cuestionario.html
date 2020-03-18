@@ -10,9 +10,9 @@
         <a href="/"> <h4>  <font color="blue">{{estudio_actual.nombre}}</font> </h4> </a>     
 </center>
 <br>
+
          
-<center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">
-       
+<center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">     
 
 
 
@@ -60,7 +60,27 @@
 
                  <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>                                
+                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+
+     
+
+     <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Cruzar pregunta con: <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu">                     
+         
+
+
+             {% for k in i  %} 
+                 <li><a href="graficar_cruse_de_datos/{{id_estudio}}/{{j.pregunta.id}}/{{k.pregunta.id}}/">{{k.pregunta.pregunta}}</a></li>                            
+             {% endfor %}
+          </ul>
+     </div>
+
+
+
+
+
                 </center>
         {% endifnotequal %}
       

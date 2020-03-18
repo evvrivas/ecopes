@@ -526,7 +526,9 @@ def agregar_encuesta(request,id_estudio):
 
 
             usuario_actual=request.user.username
-
+            
+            fecha= datetime.datetime.now()
+         
 
             p1=Cuestionario_temporal(estudio=estudio_actual,respuesta_1=respuesta_1,respuesta_2=respuesta_2,respuesta_3=respuesta_3,respuesta_4=respuesta_4,respuesta_5=respuesta_5,
                                       respuesta_6=respuesta_6,respuesta_7=respuesta_7,respuesta_8=respuesta_8,respuesta_9=respuesta_9,respuesta_10=respuesta_10,
@@ -537,7 +539,7 @@ def agregar_encuesta(request,id_estudio):
                                       respuesta_31=respuesta_31,respuesta_32=respuesta_32,respuesta_33=respuesta_33,respuesta_34=respuesta_34,respuesta_35=respuesta_35,
                                       respuesta_36=respuesta_36,respuesta_37=respuesta_37,respuesta_38=respuesta_38,respuesta_39=respuesta_39,respuesta_40=respuesta_40,
                                       respuesta_41=respuesta_41,respuesta_42=respuesta_42,respuesta_43=respuesta_43,respuesta_44=respuesta_44,respuesta_45=respuesta_45,
-                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,pago_encuesta="PENDIENTE") 
+                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,fecha_de_ingreso=fecha) 
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             p1.save()
 
@@ -550,7 +552,7 @@ def agregar_encuesta(request,id_estudio):
                                       respuesta_31=respuesta_31,respuesta_32=respuesta_32,respuesta_33=respuesta_33,respuesta_34=respuesta_34,respuesta_35=respuesta_35,
                                       respuesta_36=respuesta_36,respuesta_37=respuesta_37,respuesta_38=respuesta_38,respuesta_39=respuesta_39,respuesta_40=respuesta_40,
                                       respuesta_41=respuesta_41,respuesta_42=respuesta_42,respuesta_43=respuesta_43,respuesta_44=respuesta_44,respuesta_45=respuesta_45,
-                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,pago_encuesta="PENDIENTE") 
+                                      respuesta_46=respuesta_46,respuesta_47=respuesta_47,respuesta_48=respuesta_48,respuesta_49=respuesta_49,respuesta_50=respuesta_50,encuestador=usuario_actual,fecha_de_ingreso=fecha) 
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             p1.save()
 
@@ -623,30 +625,30 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
              #for key, value in list_freq.items():
                  #print(key, " has count ", value)
                  #vector_de_acumulados.append(value)
-
+             fecha=datetime.datetime.now()
              va=vector_de_acumulados
              t=len(vector_de_acumulados)
              a=0
              if t==1:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0])
              elif t==2:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1])
              elif t==3:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2])
              elif t==4:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3])
              elif t==5:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4])
              elif t==6:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5])
              elif t==7:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6])
              elif t==8:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7])
              elif t==9:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8])
              elif t==10:
-                 p=Opciones_acumuladas(pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8],opcion_10=va[9])
+                 p=Opciones_acumuladas(fecha_de_actualizacion=fecha,pregunta=pregunta_actual,opcion_1=va[0],opcion_2=va[1],opcion_3=va[2],opcion_4=va[3],opcion_5=va[4],opcion_6=va[5],opcion_7=va[6],opcion_8=va[7],opcion_9=va[8],opcion_10=va[9])
 
              else:
                  a=1
@@ -801,8 +803,9 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        
        vector_de_secuencias=[]
 
+            
        x=len(nombre_opcion)+2
-       for i in range(2,x):
+       for i in range(3,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
             vector2=vector1
             vector3=[]
@@ -828,6 +831,12 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
             vector_de_secuencias.append(vector2)
         
        X= np.arange(len(vector2))
+       fecha=opcion_secuencial.values_list("fecha_de_actualizacion", flat=True)     
+       anios=[]       
+       for i in  fecha:
+            an=i.strftime('%d%m%Y') 
+            anios.append(an)
+       #X= np.arange(len(fecha))
        
        #barh(pos,datos,align = 'center')
        f=plt.figure()
@@ -838,7 +847,7 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
 
        titulo=""
        for i in vector_de_secuencias:
-                plt.plot(X,i, color[b],"o-")
+                plt.plot(anios,i, color[b],"o-")
                 t_color=titulo_color[b]
                 titulo=titulo+t_color
                 b=b+1
@@ -847,12 +856,14 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        plt.grid()     
         
 
-       leyenda="Variacion de la respuesta"
-       plt.xlabel(leyenda)
        plt.ylim(0, 100)    
        plt.ylabel('PREFERENCIAS')
+
+       plt.xticks(rotation='vertical',size="small")
+       plt.xlabel('Fecha de actualización ')
+
        #titulo="preferencias "
-       plt.xticks(())
+       #plt.xticks(())
        #plt.yticks()
       
        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
@@ -881,7 +892,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        vector_de_secuencias=[]
 
        x=len(nombre_opcion)+2
-       for i in range(2,x):
+       for i in range(3,x):
             vector1=opcion_secuencial.values_list(texto[i], flat=True)
             
             total=sum(vector1)            
@@ -891,7 +902,19 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
             vector_de_secuencias.append(vector2)
         
        X= np.arange(len(vector2))
-       print(vector_de_secuencias)
+
+       fecha=opcion_secuencial.values_list("fecha_de_actualizacion", flat=True)     
+       anios=[]       
+       for i in  fecha:
+            an=i.strftime('%d%m%Y') 
+            anios.append(an)
+       #X= np.arange(len(fecha))
+
+
+
+
+
+       #print(vector_de_secuencias)
        #barh(pos,datos,align = 'center')
        f=plt.figure()
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
@@ -900,21 +923,18 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        b=0
        titulo=""
        for i in vector_de_secuencias:
-                plt.plot(X,i, color[b],"o-")
+                plt.plot(anios,i, color[b],"o-")
                 t_color=titulo_color[b]
                 titulo=titulo+t_color
                 b=b+1
 
-       plt.grid()     
-        
-
-       leyenda="Variacion de la respuesta"
-       plt.xlabel(leyenda)
+       plt.grid()    
+    
            
        plt.ylabel('PREFERENCIAS')
        #titulo="Variacion del las preferencias"
-       plt.xticks(())
-       #plt.yticks(())
+       plt.xticks(rotation='vertical',size="small")
+       plt.xlabel('Fecha de actualización ')
       
        #titulo="Tendencia del las preferencias\n"+" fml "+str(fml)+ "%    "+  "gan "+str(gan)+ "%    "+"vamo "+str(vamo)+ "%    "+"alian "+str(aaa)+ "%" +  "NS+NR "+str(ns_nr)+ "%"
        plt.title(titulo)  
@@ -935,15 +955,26 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 
 
 
-def habilitar_estudio(request):      
+def habilitar_estudio(request,id_del_estudio):      
        
         usuario_actual=request.user.username
-               
+        estudio_actual=Estudios.objects.get(id=id_del_estudio)
+
+        existe=Codigo.objects.filter(usuario=usuario_actual,estudio=estudio_actual).count()
         
-        return render(request,'habilitar_estudio.html',locals())
+        if existe>=0:
+
+            return render(request,'solicitud_de_suscripcion.html',locals())
+
+        else:
+
+            nuevo=Codigo(usuario=usuario_actual,estudio=estudio_actual,solicitud_de_activacion="ACTIVAR",estado_del_estudio="DESACTIVADO",cantidad_muestras_asignadas=0,cantidad_muestras_realizadas=0,cantidad_muestras_liquidadas=0,fecha_inicio=,comodin=0)
+            nuevo.save()
+
+            return render(request,'solicitud_de_suscripcion.html',locals())  
 
 
-def ver_mis_numeros(recuest):
+def ver_mis_numeros(request):
       usuario_actual=request.user.username
       perfil_del_usuario=UserProfile.objects.get(watsapp=usuario_actual)
       tipo_usuario=perfil_del_usuario.tipo_usuario
@@ -956,6 +987,111 @@ def ver_mis_numeros(recuest):
 
 
 
+def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta_hijo):
+        pregunta_padre=Preguntas.objects.get(id=id_pregunta_padre)
+        pregunta_hijo=Preguntas.objects.get(id=id_pregunta_hijo)
+
+        opci_padre=Opciones.objects.filter(pregunta__id=id_pregunta_padre)
+        opci_hijo=Opciones.objects.filter(pregunta__id=id_pregunta_hijo)
+
+        las_preguntas=Preguntas.objects.filter(estudio__id=id_del_estudio)       
+        cuestionario_analisis=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio)
+        texto=[field.name for field in Cuestionario_principal._meta.get_fields()]
+    
+   
+        x=2
+        vector_padre=[]  
+        for i in las_preguntas:
+
+            if i.pregunta==pregunta_padre.pregunta:
+
+              for k in opci_padre:
+                  la_opcion=k.opcion 
+                  arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(texto[x]=k.opcion)
+                  cantidad=arreglo_filtrado_con_la_opcion.count()
+                  vector_1=[la_opcion,cantidad,arreglo_filtrado_con_la_opcion]
+                  vector_padre.apend(vector_1)
+                  
+              break      
+
+            x=x+1
+
+
+        x=2
+        vector_conteo_hijo=[]
+        vector_conteo_global=[]
+        
+        for i in las_preguntas:
+
+            if i.pregunta==pregunta_hijo.pregunta:             
+
+              for v in vector_padre:
+                  
+                  for k in opci_hijo:
+                     la_opcion=k.opcion
+                     conteo_opcion_hijo=v[2].objects.filter(texto[x]=k.opcion).count()
+                     vector_1=[v[0], v[1], la_opcion, conteo_opcion_hijo]
+                     vector_conteo_hijo.append(vector_1)
+
+                  vector_conteo_global.append(vector_conteo_global)
+              break        
+                   
+
+            x=x+1   
+        ########################################################################################
+        #########################################################################################
+        #########################################################################################
+        #vector_conteo_global=[  [["hombre",100,"fmln",20], ["hombre",100,"arena",70], ["hombre",10,"pcn",30]],
+        #                        [["Mujer", 50, "fmln",10], ["Mujer",10,"arena",15],   ["Mujer",20,"pcn",25 ]]   ]
+
+        celda=len(vector_conteo_global) 
+
+        fila=1 
+        for i in vector_conteo_global:
+            x=[]
+            y=[]
+            for j in i:
+
+                   x.append(j[2])
+                   y.append(j[3])
+            titulo=j[0]
+
+
+            total=sum(y)
+            a=np.array(y)
+            b=a*100/total
+      
+            X= np.arange(len(x))
+            X=X+1
+            
+            Y1 = np.asarray(b)        
+                   
+            f=plt.figure()
+
+            plt.subplot(celda,fila,1)                            
+            bar_width = 0.45
+            plt.bar(X, Y1, bar_width, color='b')
+            fila=fila+1
+
+            plt.xlabel('\nOpciones disponibles a esta pregunta')
+            plt.title(titulo)
+      
+          
+       
+        buffer = io.BytesIO()
+        canvas = pylab.get_current_fig_manager().canvas
+        canvas.draw()        
+        graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
+        graphIMG.save(buffer, "PNG")
+        pylab.close()  
+        f.clear()
+
+        return HttpResponse (buffer.getvalue(), content_type="Image/png")
+
+
+
+
+
 def crear_estudioCH5NOV(request):        
               
         import random
@@ -964,17 +1100,20 @@ def crear_estudioCH5NOV(request):
 
         tipo_estudio="PUBLICO"
 
-        nombre_estudio="Estudio de Disciplinas deportivas de interes en CH5NOV "
+        nombre_estudio=" 1er. Estudio de Disciplinas deportivas de interes en CH5NOV (Marzo 2020)"
         date=datetime.datetime.now()
         precio=0.15
+        precio_suscrip=5.00
+        precio_est=300
+
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
-        recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terseros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
-        p1=Estudios(costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
+        recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terceros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
         p1.save() 
 
 
-
+     
 
         pregunta_est="Cual es su relacionn con CH5NOV "
         p21=Preguntas(estudio=p1, pregunta=pregunta_est)
