@@ -986,107 +986,108 @@ def ver_mis_numeros(request):
 
       return render(request,'ver_mis_numeros.html',locals())
 
-def filtro_casero(x,opcion):
+def filtro_casero(id_del_estudio,x,opcion):
+
       if x==2:
-          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_1=opcion)
+          arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_1=opcion)
       elif x==3:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_2=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_2=opcion)
       elif x==4:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_3=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_3=opcion)
       elif x==5:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_4=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_4=opcion)
       elif x==6:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_5=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_5=opcion)
       elif x==7:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_6=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_6=opcion)
       elif x==8:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_7=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_7=opcion)
       elif x==9:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_8=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_8=opcion)
       elif x==10:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_9=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_9=opcion)
       elif x==11:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_10=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_10=opcion)
       elif x==12:
-          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_11=opcion)
+          arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_11=opcion)
       elif x==13:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_12=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_12=opcion)
       elif x==14:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_13=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_13=opcion)
       elif x==15:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_14=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_14=opcion)
       elif x==16:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_15=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_15=opcion)
       elif x==17:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_16=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_16=opcion)
       elif x==18:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_17=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_17=opcion)
       elif x==19:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_18=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_18=opcion)
       elif x==20:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_19=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_19=opcion)
       elif x==21:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_20=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_20=opcion)
       if x==22:
-          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_21=opcion)
+          arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_21=opcion)
       elif x==23:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_22=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_22=opcion)
       elif x==24:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_23=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_23=opcion)
       elif x==25:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_24=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_24=opcion)
       elif x==26:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_25=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_25=opcion)
       elif x==27:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_26=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_26=opcion)
       elif x==28:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_27=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_27=opcion)
       elif x==29:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_28=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_28=opcion)
       elif x==30:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_29=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_29=opcion)
       elif x==31:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_30=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_30=opcion)
       elif x==32:
-          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_31=opcion)
+          arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_31=opcion)
       elif x==33:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_32=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_32=opcion)
       elif x==34:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_33=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_33=opcion)
       elif x==35:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_34=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_34=opcion)
       elif x==36:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_35=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_35=opcion)
       elif x==37:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_36=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_36=opcion)
       elif x==38:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_37=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_37=opcion)
       elif x==39:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_38=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_38=opcion)
       elif x==40:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_39=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_39=opcion)
       elif x==41:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_40=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_40=opcion)
       elif x==42:
-          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_41=opcion)
+          arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_41=opcion)
       elif x==43:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_42=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_42=opcion)
       elif x==44:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_43=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_43=opcion)
       elif x==45:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_44=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_44=opcion)
       elif x==46:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_45=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_45=opcion)
       elif x==47:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_46=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_46=opcion)
       elif x==48:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_47=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_47=opcion)
       elif x==49:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_48=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_48=opcion)
       elif x==50:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_49=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_49=opcion)
       elif x==11:
-        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_50=opcion)
+        arreglo_filtrado_con_la_opcion=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio).filter(respuesta_50=opcion)
       else: 
         pass
       return arreglo_filtrado_con_la_opcion 
@@ -1205,7 +1206,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         opci_hijo=Opciones.objects.filter(pregunta__id=id_pregunta_hijo)
 
         las_preguntas=Preguntas.objects.filter(estudio__id=id_del_estudio)       
-        cuestionario_analisis=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio)
+        #cuestionario_analisis=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio)
         texto=[field.name for field in Cuestionario_principal._meta.get_fields()]
     
    
@@ -1218,9 +1219,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
               for k in opci_padre:
                   la_opcion=k.opcion
 
-                  arreglo_filtrado_con_la_opcion=filtro_casero(x,la_opcion)
-
-
+                  arreglo_filtrado_con_la_opcion=filtro_casero(id_del_estudio,x,la_opcion)
 
                   cantidad=arreglo_filtrado_con_la_opcion.count()
                   vector_1=[la_opcion,cantidad,arreglo_filtrado_con_la_opcion]
