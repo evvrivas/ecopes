@@ -6,11 +6,7 @@
   
 <div class="row">  
        <div class="alert alert-info">        
-<center>
-        
-        <p><h3><font color="blue">Estudios de opinion publica</font></h3></p>  
-          
-</center>
+
 <br>
  <hr>       
         <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>  
@@ -58,8 +54,7 @@
  <hr> 
         <center><h4><p>Estudios de opinion publica *POR SUSCRIPCION ($) </p></h4></center>
         
-        <center><h5><p>Estudios habilitados para usted </p></h5></center>
-        
+              
         {% for j in vector_de_estudios_de_pago_habilitados %} 
 
          		 
@@ -69,7 +64,7 @@
 
                      <tr  align="center">
                                     
-                  <td WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}  :  {{j.descripcion}}</font> </h5> </a></td>  
+                  <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{j.nombre}}</font> </h5> </a></td>  
                                                           
                                    
                 </tr >  
@@ -102,9 +97,6 @@
                       		
         {% endfor %} 
         
-        <center><h5><p>Estos estudios No estan habilitados para usted </p></h5></center>
-        <center><h5><p>Suscribase aqui. </p></h5></center>
-
         {% for j in vector_de_estudios_de_pago_deshabilitados %} 
 
                 
@@ -117,8 +109,8 @@
 
                      <tr  align="center">
                                     
-                  <td WIDTH="270">
-                    <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}} :  {{j.descripcion}}</font> </h4> </a>  
+                  <td colspan="3" WIDTH="270">
+                    <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}}</font> </h4> </a>  
 
                      <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
 
@@ -174,8 +166,8 @@
 
                      <tr  align="center">
                                     
-                  <td WIDTH="270">
-                    <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} :  {{j.descripcion}}</font> </h5> </a> 
+                  <td colspan="3" WIDTH="270">
+                    <a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="red">{{j.nombre}} :</font> </h5> </a> 
                   
 
                   </td>  

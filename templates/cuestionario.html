@@ -13,11 +13,7 @@
 
          
 <center><form action="/agregar_encuesta/{{id_estudio}}/" method="post">     
-
-
-
-
-                       {% csrf_token %}                                                  
+        {% csrf_token %}                                                  
                                                     
                 <div class="col-md-12">   
 
@@ -28,16 +24,9 @@
 
 
         {% if forloop.first %}
-                  
-
-
-                 <br>
+                <br>
                 <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
                 <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
-
-                                              
-
-                 
               
         {% else %}                
         {% endif %}
@@ -45,7 +34,7 @@
      {% endfor %}      
                                                      
              {% for j in i  %} 
-                <option value="{{j.opcion}}">{{j.opcion}}</option>                              
+                <option value="{{j.opcion}}">{{j.opcion}}</option>                             
              {% endfor %}
 
                                   
@@ -62,23 +51,19 @@
 
                    <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
+   
+  <div class="btn-group">
+     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Cruzar pregunta con: <span class="caret"></span></button>
      
+       <ul class="dropdown-menu" role="menu">                     
 
-     <div class="btn-group">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          Cruzar pregunta con: <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu">                     
-         
+          {% for k in las_preguntas  %} 
+             <li><a href="graficar_cruse_de_datos/{{id_estudio}}/{{j.pregunta.id}}/{{k.id}}">{{k.pregunta}}</a></li>                            
+          {% endfor %}
 
-
-             {% for k in i  %} 
-                 <li><a href="graficar_cruse_de_datos/{{id_estudio}}/{{j.pregunta.id}}/{{k.pregunta.id}}/">{{k.pregunta.pregunta}}</a></li>                            
-             {% endfor %}
-          </ul>
-     </div>
-
-
-
+       </ul>
+  </div>
 
 
                 </center>
@@ -94,10 +79,10 @@
 <br>
          {% ifnotequal tipo_usuario 'EL_LECTOR' %}
                     <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
+                    <br>
          {% endifnotequal %}
 
         </form> </center> 
-<br>
 <br>
 
 <center> <h3> <p>COMPARTIR ESTE ESTUDIO.</p></h3> 
