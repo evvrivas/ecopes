@@ -986,7 +986,215 @@ def ver_mis_numeros(request):
 
       return render(request,'ver_mis_numeros.html',locals())
 
+def filtro_casero(x,opcion):
+      if x==2:
+          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_1=opcion)
+      elif x==3:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_2=opcion)
+      elif x==4:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_3=opcion)
+      elif x==5:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_4=opcion)
+      elif x==6:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_5=opcion)
+      elif x==7:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_6=opcion)
+      elif x==8:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_7=opcion)
+      elif x==9:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_8=opcion)
+      elif x==10:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_9=opcion)
+      elif x==11:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_10=opcion)
+      elif x==12:
+          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_11=opcion)
+      elif x==13:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_12=opcion)
+      elif x==14:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_13=opcion)
+      elif x==15:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_14=opcion)
+      elif x==16:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_15=opcion)
+      elif x==17:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_16=opcion)
+      elif x==18:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_17=opcion)
+      elif x==19:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_18=opcion)
+      elif x==20:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_19=opcion)
+      elif x==21:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_20=opcion)
+      if x==22:
+          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_21=opcion)
+      elif x==23:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_22=opcion)
+      elif x==24:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_23=opcion)
+      elif x==25:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_24=opcion)
+      elif x==26:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_25=opcion)
+      elif x==27:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_26=opcion)
+      elif x==28:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_27=opcion)
+      elif x==29:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_28=opcion)
+      elif x==30:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_29=opcion)
+      elif x==31:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_30=opcion)
+      elif x==32:
+          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_31=opcion)
+      elif x==33:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_32=opcion)
+      elif x==34:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_33=opcion)
+      elif x==35:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_34=opcion)
+      elif x==36:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_35=opcion)
+      elif x==37:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_36=opcion)
+      elif x==38:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_37=opcion)
+      elif x==39:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_38=opcion)
+      elif x==40:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_39=opcion)
+      elif x==41:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_40=opcion)
+      elif x==42:
+          arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_41=opcion)
+      elif x==43:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_42=opcion)
+      elif x==44:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_43=opcion)
+      elif x==45:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_44=opcion)
+      elif x==46:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_45=opcion)
+      elif x==47:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_46=opcion)
+      elif x==48:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_47=opcion)
+      elif x==49:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_48=opcion)
+      elif x==50:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_49=opcion)
+      elif x==11:
+        arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(respuesta_50=opcion)
+      else: 
+        pass
+      return arreglo_filtrado_con_la_opcion 
 
+def filtro_casero_2(vector,x,opcion):
+      if x==2:
+          arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_1=opcion).count()
+      elif x==3:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_2=opcion).count()
+      elif x==4:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_3=opcion).count()
+      elif x==5:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_4=opcion).count()
+      elif x==6:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_5=opcion).count()
+      elif x==7:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_6=opcion).count()
+      elif x==8:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_7=opcion).count()
+      elif x==9:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_8=opcion).count()
+      elif x==10:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_9=opcion).count()
+      elif x==11:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_10=opcion).count()
+      elif x==12:
+          arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_11=opcion).count()
+      elif x==13:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_12=opcion).count()
+      elif x==14:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_13=opcion).count()
+      elif x==15:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_14=opcion).count()
+      elif x==16:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_15=opcion).count()
+      elif x==17:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_16=opcion).count()
+      elif x==18:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_17=opcion).count()
+      elif x==19:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_18=opcion).count()
+      elif x==20:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_19=opcion).count()
+      elif x==21:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_20=opcion).count()
+      if x==22:
+          arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_21=opcion).count()
+      elif x==23:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_22=opcion).count()
+      elif x==24:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_23=opcion).count()
+      elif x==25:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_24=opcion).count()
+      elif x==26:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_25=opcion).count()
+      elif x==27:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_26=opcion).count()
+      elif x==28:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_27=opcion).count()
+      elif x==29:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_28=opcion).count()
+      elif x==30:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_29=opcion).count()
+      elif x==31:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_30=opcion).count()
+      elif x==32:
+          arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_31=opcion).count()
+      elif x==33:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_32=opcion).count()
+      elif x==34:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_33=opcion).count()
+      elif x==35:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_34=opcion).count()
+      elif x==36:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_35=opcion).count()
+      elif x==37:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_36=opcion).count()
+      elif x==38:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_37=opcion).count()
+      elif x==39:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_38=opcion).count()
+      elif x==40:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_39=opcion).count()
+      elif x==41:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_40=opcion).count()
+      elif x==42:
+          arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_41=opcion).count()
+      elif x==43:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_42=opcion).count()
+      elif x==44:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_43=opcion).count()
+      elif x==45:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_44=opcion).count()
+      elif x==46:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_45=opcion).count()
+      elif x==47:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_46=opcion).count()
+      elif x==48:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_47=opcion).count()
+      elif x==49:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_48=opcion).count()
+      elif x==50:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_49=opcion).count()
+      elif x==11:
+        arreglo_filtrado_con_la_opcion=vector.objects.filter(respuesta_50=opcion).count()
+      else: 
+        pass
+      return arreglo_filtrado_con_la_opcion 
 
 
 def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta_hijo):
@@ -1008,8 +1216,12 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             if i.pregunta==pregunta_padre.pregunta:
 
               for k in opci_padre:
-                  la_opcion=k.opcion 
-                  arreglo_filtrado_con_la_opcion=cuestionario_analisis.objects.filter(texto[x]=k.opcion)
+                  la_opcion=k.opcion
+
+                  arreglo_filtrado_con_la_opcion=filtro_casero(x,la_opcion)
+
+
+
                   cantidad=arreglo_filtrado_con_la_opcion.count()
                   vector_1=[la_opcion,cantidad,arreglo_filtrado_con_la_opcion]
                   vector_padre.apend(vector_1)
@@ -1031,7 +1243,8 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
                   
                   for k in opci_hijo:
                      la_opcion=k.opcion
-                     conteo_opcion_hijo=v[2].objects.filter(texto[x]=k.opcion).count()
+                     conteo_opcion_hijo=filtro_casero_2(v[2],x,la_opcion)                   
+                     
                      vector_1=[v[0], v[1], la_opcion, conteo_opcion_hijo]
                      vector_conteo_hijo.append(vector_1)
 
