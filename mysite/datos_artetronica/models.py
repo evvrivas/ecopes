@@ -79,7 +79,7 @@ class Codigo(models.Model):
 	estudio=models.ForeignKey('Estudios')
 
 	solicitud_de_activacion=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)	
-	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",,choices=TIPO_ACTIVACION)
+	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)
 
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
