@@ -959,6 +959,8 @@ def habilitar_estudio(request,id_del_estudio):
        
         usuario_actual=request.user.username
         estudio_actual=Estudios.objects.get(id=id_del_estudio)
+        precio_de_la_muestra=estudio_actual.costo_por_muestra
+
 
         existe=Codigo.objects.filter(usuario=usuario_actual,estudio=estudio_actual).count()
         
@@ -967,8 +969,8 @@ def habilitar_estudio(request,id_del_estudio):
             return render(request,'solicitud_de_suscripcion.html',locals())
 
         else:
-
-            nuevo=Codigo(usuario=usuario_actual,estudio=estudio_actual,solicitud_de_activacion="ACTIVAR",estado_del_estudio="DESACTIVADO",cantidad_muestras_asignadas=0,cantidad_muestras_realizadas=0,cantidad_muestras_liquidadas=0,fecha_inicio=,comodin=0)
+            date=datetime.datetime.now()  
+            nuevo=Codigo(usuario=usuario_actual,estudio=estudio_actual,solicitud_de_activacion="ACTIVAR",estado_del_estudio="DESACTIVADO",cantidad_muestras_asignadas=0,cantidad_muestras_realizadas=0,costo_por_muestra=precio_de_la_muestra,fecha_inicio=date,comodin=0)
             nuevo.save()
 
             return render(request,'solicitud_de_suscripcion.html',locals())  

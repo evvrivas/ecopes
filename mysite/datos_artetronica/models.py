@@ -83,7 +83,8 @@ class Codigo(models.Model):
 
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
-	cantidad_muestras_liquidadas= models.IntegerField(blank=True,null=True,default=0)
+	
+	costo_por_muestra=models.FloatField(default=0,blank=True,null=True)
 
 	fecha_inicio= models.DateField(default=datetime.now)
 
