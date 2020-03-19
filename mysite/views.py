@@ -1208,7 +1208,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         las_preguntas=Preguntas.objects.filter(estudio__id=id_del_estudio)       
         #cuestionario_analisis=Cuestionario_principal.objects.filter(estudio__id=id_del_estudio)
         texto=[field.name for field in Cuestionario_principal._meta.get_fields()]
-    
+   
    
         x=2
         vector_padre=[]  
@@ -1258,39 +1258,48 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         #vector_conteo_global=[  [["hombre",100,"fmln",20], ["hombre",100,"arena",70], ["hombre",10,"pcn",30]],
         #                        [["Mujer", 50, "fmln",10], ["Mujer",10,"arena",15],   ["Mujer",20,"pcn",25 ]]   ]
 
-        celda=len(vector_conteo_global) 
+        celda=len(vector_conteo_global)
+        
+        vector_de_graficas=[]
+        
+        for i in vector_conteo_global:            
+             
+             y=[]
+             titulos=[]
+             
+             for j in i:
 
-        fila=1 
-        for i in vector_conteo_global:
-            x=[]
-            y=[]
-            for j in i:
+                 v=j[3]*100/j[1]
+                 y.append(v)
 
-                   x.append(j[2])
-                   y.append(j[3])
-            titulo=j[0]
+             titulos.append(j[0])
 
+             vector_de_graficas.append(y)
+        
 
-            total=sum(y)
-            a=np.array(y)
-            b=a*100/total
-      
-            X= np.arange(len(x))
-            X=X+1
+        f=plt.figure()
+        
+        celdas=len(vector_de_graficos)
+        fila=1
+        tit=0
+        for i in vector_de_graficos:
+
+            Y = np.asarray(i)
+            X= np.arange(len(i))
             
-            Y1 = np.asarray(b)        
-                   
-            f=plt.figure()
-
-            plt.subplot(celda,fila,1)                            
-            bar_width = 0.45
-            plt.bar(X, Y1, bar_width, color='b')
+            plt.subplot(celdas,1,fila)
             fila=fila+1
+            bar_width = 0.45
+            plt.bar(X, Y, bar_width, color='b')
+            
+            a=titulos[tit]
+            plt.title(a)
+            tit=tit+1
 
-            plt.xlabel('\nOpciones disponibles a esta pregunta')
-            plt.title(titulo)
-      
-          
+
+        #plt.xlabel('Opciones disponibles a esta pregunta')
+        plt.ylabel('Preguntas cruzadas ')
+         
        
         buffer = io.BytesIO()
         canvas = pylab.get_current_fig_manager().canvas
@@ -1301,8 +1310,6 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         f.clear()
 
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
-
-
 
 
 
