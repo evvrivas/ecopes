@@ -64,7 +64,7 @@ urlpatterns = [
     url(r'^informacion/$',informacion),
     
 
-    url(r'^crear_estudio/$',crear_estudio),
+    
     url(r'^crear_estudioCH5NOV/$',crear_estudioCH5NOV),   
       
 
