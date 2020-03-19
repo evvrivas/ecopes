@@ -25,22 +25,9 @@
 
         {% if forloop.first %}
                 <br>
-                <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
-                <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
-              
-        {% else %}                
-        {% endif %}
+                
 
-     {% endfor %}      
-                                                     
-             {% for j in i  %} 
-                <option value="{{j.opcion}}">{{j.opcion}}</option>                             
-             {% endfor %}
-
-                                  
-      </select> 
-
-        {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
+                {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
                                     
                <center>
                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
@@ -71,6 +58,38 @@
 
                 </center>
         {% endifnotequal %}
+
+
+
+              <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
+
+
+              {% block content_imagenes %}
+
+              {% endblock %}
+
+
+
+
+
+
+
+
+                <select name="{{j.pregunta.pregunta}}" value="{{j.pregunta.pregunta}}" style="font-size:12pt;width:300px;background-color:white;color:blue;">
+              
+        {% else %}                
+        {% endif %}
+
+     {% endfor %}      
+                                                     
+             {% for j in i  %} 
+                <option value="{{j.opcion}}">{{j.opcion}}</option>                             
+             {% endfor %}
+
+                                  
+      </select> 
+
+        
       
       <hr>
       <br>

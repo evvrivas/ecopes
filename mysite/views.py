@@ -282,63 +282,6 @@ def poner_cuestionario(request,id_estudio):
 
 
 
-def crear_estudio(request):        
-              
-        import random
-        import datetime  
-        for i in range(10):
-
-            a=random.randint(0,2)
-            if a==0:
-                tipo_estudio="PUBLICO"
-
-            elif a==1:
-                tipo_estudio="DE_PAGO"
-
-            elif a==1:
-                tipo_estudio="PRIVADO"
-
-            else:
-                tipo_estudio="BUENO"
-
-            nombre_estudio="ELECCION alcalde "+ str(i)
-            
-            date=datetime.datetime.now()
-
-            p1=Estudios(nombre=nombre_estudio,descripcion="Este se realiza en ahuachapan municipio", fecha_inicio=date,fecha_final=date,tipo_de_estudio=tipo_estudio,n_muestras=100,universo=1000,error=0, confianza=0)
-    
-            p1.save() 
-
-            for j in range(10):
-
-                    pregunta_est="que es eso "+str(i) +str(j)
-                    p21=Preguntas(estudio=p1, pregunta=pregunta_est)
-                    p21.save()
-                    
-                    la_opcion="Opcion A "+str(i) +str(j)           
-                    p31=Opciones(pregunta=p21,opcion=la_opcion)
-                    p31.save()
-
-                    la_opcion="Opcion B "+str(i) +str(j)
-                    p32=Opciones(pregunta=p21,opcion=la_opcion)
-                    p32.save()
-                    
-                    la_opcion="Opcion C "+str(i) +str(j)
-                    p33=Opciones(pregunta=p21,opcion=la_opcion)
-                    p33.save()
-                    
-                    la_opcion="Opcion D "+str(i) +str(j)
-                    p34=Opciones(pregunta=p21,opcion=la_opcion)
-                    p34.save()
-                    
-                    la_opcion="Opcion E "+str(i) +str(j)
-                    p35=Opciones(pregunta=p21,opcion=la_opcion)
-                    p35.save()
-
-        connection.close()
-        return render(request,'principal.html',locals()) 
-
-
 
      
      
@@ -1288,21 +1231,23 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         celdas=len(vector_de_graficas)
         fila=1
         tit=0
-        for i in vector_de_graficas:
+        #for i in vector_de_graficas:
 
-            Y = np.asarray(i)
-            X= np.arange(len(i))
+            #Y = np.asarray(i)
+            #X= np.arange(len(i))
             
-            plt.subplot(celdas,1,fila)
-            fila=fila+1
-            bar_width = 0.45
-            plt.bar(X, Y, bar_width, color='b')
-            
-            a=titulos[tit]
-            plt.title(a)
-            tit=tit+1
-
-
+            #plt.subplot(celdas,1,fila)
+            #fila=fila+1
+            #bar_width = 0.45
+            #plt.bar(X, Y, bar_width, color='b')
+           # 
+            #a=titulos[tit]
+            #plt.title(a)
+            #tit=tit+1
+        X=[1,2,3,4,5,6,7,8,9]
+        Y=[10,99,12,34,54,26,78,32,98]
+        bar_width = 0.45
+        plt.bar(X, Y, bar_width, color='b')
         plt.xlabel('Opciones disponibles a esta pregunta')
         plt.ylabel('Preguntas cruzadas ')
          
@@ -1336,7 +1281,7 @@ def crear_estudioCH5NOV(request):
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
         recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terceros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
-        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza=97)
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza='1.96')
         p1.save() 
 
 
@@ -1586,3 +1531,10 @@ def crear_estudioCH5NOV(request):
 
         connection.close()
         return render(request,'principal.html',locals())
+
+
+
+
+
+
+

@@ -194,6 +194,26 @@ class Preguntas(models.Model):
 	     imagen4 = ImageField(upload_to='tmp',blank=True)
 	     imagen5 = ImageField(upload_to='tmp',blank=True)
 	     imagen6 = ImageField(upload_to='tmp',blank=True)
+	     imagen7 = ImageField(upload_to='tmp',blank=True)
+	     imagen8 = ImageField(upload_to='tmp',blank=True)
+	     imagen9 = ImageField(upload_to='tmp',blank=True)
+	     imagen10 = ImageField(upload_to='tmp',blank=True)
+	     imagen11 = ImageField(upload_to='tmp',blank=True)
+	     imagen12 = ImageField(upload_to='tmp',blank=True)
+	     imagen13 = ImageField(upload_to='tmp',blank=True)
+	     imagen14 = ImageField(upload_to='tmp',blank=True)
+	     imagen15 = ImageField(upload_to='tmp',blank=True)
+	     imagen16 = ImageField(upload_to='tmp',blank=True)
+	     imagen17 = ImageField(upload_to='tmp',blank=True)
+	     imagen18 = ImageField(upload_to='tmp',blank=True)
+	     imagen19 = ImageField(upload_to='tmp',blank=True)
+	     imagen20 = ImageField(upload_to='tmp',blank=True)
+	     imagen21 = ImageField(upload_to='tmp',blank=True)
+	     imagen22 = ImageField(upload_to='tmp',blank=True)
+	     imagen23 = ImageField(upload_to='tmp',blank=True)
+	     imagen24= ImageField(upload_to='tmp',blank=True)
+	     imagen25 = ImageField(upload_to='tmp',blank=True)
+	     
 
 	     def save(self, *args,**kwargs):
 	     	if self.imagen1:
@@ -208,7 +228,55 @@ class Preguntas(models.Model):
 	     		self.image=self.imagen5
 	     	elif self.imagen6:
 	     		self.image=self.imagen6
-	     	else:
+	     	elif self.imagen7:
+	     		self.image=self.imagen7
+	     	elif self.imagen8:
+	     		self.image=self.imagen8
+	     	elif self.imagen9:
+	     		self.image=self.imagen9
+	     	elif self.imagen10:
+	     		self.image=self.imagen10
+	     	elif self.imagen11:
+	     		self.image=self.imagen11
+	     	elif self.imagen12:
+	     		self.image=self.imagen12
+	     	elif self.imagen13:
+	     		self.image=self.imagen13
+	     	elif self.imagen14:
+	     		self.image=self.imagen14
+	     	elif self.imagen15:
+	     		self.image=self.imagen15
+	     	elif self.imagen16:
+	     		self.image=self.imagen16
+	     	elif self.imagen17:
+	     		self.image=self.imagen17
+	     	elif self.imagen18:
+	     		self.image=self.imagen18
+	     	elif self.imagen19:
+	     		self.image=self.imagen19
+	     	elif self.imagen20:
+	     		self.image=self.imagen20
+	     	elif self.imagen21:
+	     		self.image=self.imagen21
+	     	elif self.imagen22:
+	     		self.image=self.imagen22
+	     	elif self.imagen23:
+	     		self.image=self.imagen23
+	     	elif self.imagen24:
+	     		self.image=self.imagen24
+	     	elif self.imagen25:
+	     		self.image=self.imagen25
+	     	elif self.imagen26:
+	     		self.image=self.imagen26
+	     	elif self.imagen27:
+	     		self.image=self.imagen27
+	     	elif self.imagen28:
+	     		self.image=self.imagen28
+	     	elif self.imagen29:
+	     		self.image=self.imagen29
+	     	elif self.imagen30:
+	     		self.image=self.imagen30
+	     	else:  
 	     		self.image=False
 	     	
 	     	if self.image:
@@ -289,7 +357,16 @@ class Opciones_acumuladas(models.Model):
 		 opcion_17=models.IntegerField(blank=True,default=0)
 		 opcion_18=models.IntegerField(blank=True,default=0)
 		 opcion_19=models.IntegerField(blank=True,default=0)
-		 opcion_20=models.IntegerField(blank=True,default=0)
+		 opcion_21=models.IntegerField(blank=True,default=0)
+		 opcion_22=models.IntegerField(blank=True,default=0)
+		 opcion_23=models.IntegerField(blank=True,default=0)
+		 opcion_24=models.IntegerField(blank=True,default=0)
+		 opcion_25=models.IntegerField(blank=True,default=0)
+		 opcion_26=models.IntegerField(blank=True,default=0)
+		 opcion_27=models.IntegerField(blank=True,default=0)
+		 opcion_28=models.IntegerField(blank=True,default=0)
+		 opcion_29=models.IntegerField(blank=True,default=0)
+		 opcion_30=models.IntegerField(blank=True,default=0)
 		  
 
 
