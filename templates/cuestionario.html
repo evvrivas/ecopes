@@ -43,13 +43,13 @@
         {% ifnotequal tipo_usuario 'ENCUESTADOR' %}
                                     
                <center>
-                <a href="/pagina_de_analisis/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                <a href="/pagina_de_analisis/{{j.pregunta.id}}/{{j.pregunta.id}}/BARRAS">  <img  src ='{% static "barras.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/{{j.pregunta.id}}/PASTEL">  <img  src ='{% static "pastel.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                 <a href="/pagina_de_analisis/{{j.pregunta.id}}/{{j.pregunta.id}}/SECUENCIA">  <img  src ='{% static "secuencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
-                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
+                   <a href="/pagina_de_analisis/{{j.pregunta.id}}/{{j.pregunta.id}}/TENDENCIA">  <img  src ='{% static "tendencia.png" %}' alt='img' style="float: right; margin: 5px 5px 5px 5px;" >  </a>
 
    
   <div class="btn-group">
@@ -59,7 +59,10 @@
        <ul class="dropdown-menu" role="menu">                     
 
           {% for k in las_preguntas  %} 
-             <li><a href="graficar_cruse_de_datos/{{id_estudio}}/{{j.pregunta.id}}/{{k.id}}">{{k.pregunta}}</a></li>                            
+             
+             <li><a href="/pagina_de_analisis/{{j.pregunta.id}}/{{k.id}}/CRUZE">
+
+             {{k.pregunta}}</a></li>                            
           {% endfor %}
 
        </ul>

@@ -658,14 +658,20 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
 
 
 
-def pagina_de_analisis(request, id_pregunta,bandera):
+def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
 
     pregunta=Preguntas.objects.get(id=id_pregunta)
+    id_estudio=pregunta.estudio.id
+
     lista_de_opciones=Opciones.objects.filter(pregunta__pregunta=pregunta.pregunta) 
     
     nombre_de_pregunta=pregunta.pregunta   
     id_pregunta=id_pregunta
     bandera=bandera
+    id_pregunta_de_cruze=id_pregunta_de_cruze
+
+
+    /{{j.pregunta.id}}/{{k.id}}
    
     #tabla_resultados=Cuestionario_principal.objects.filter(estudio__nombre=pregunta.estudio.nombre)
     return render(request,'pagina_de_analisis.html',locals())
@@ -1269,8 +1275,8 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
              
              for j in i:
 
-                 v=j[3]*100/j[1]
-                 y.append(v)
+                 #v=j[3]*100/j[1]
+                 y.append(j[3])
 
              titulos.append(j[0])
 
@@ -1279,10 +1285,10 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
 
         f=plt.figure()
         
-        celdas=len(vector_de_graficos)
+        celdas=len(vector_de_graficas)
         fila=1
         tit=0
-        for i in vector_de_graficos:
+        for i in vector_de_graficas:
 
             Y = np.asarray(i)
             X= np.arange(len(i))
@@ -1297,7 +1303,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             tit=tit+1
 
 
-        #plt.xlabel('Opciones disponibles a esta pregunta')
+        plt.xlabel('Opciones disponibles a esta pregunta')
         plt.ylabel('Preguntas cruzadas ')
          
        
@@ -1310,7 +1316,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         f.clear()
 
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
-
+         
 
 
 def crear_estudioCH5NOV(request):        

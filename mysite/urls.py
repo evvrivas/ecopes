@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^actualizar_previo_a_graficar/(\d+)/$',actualizar_previo_a_graficar),
     url(r'^informacion_del_estudio/(\d+)/$',informacion_del_estudio),    
     
-    url(r'^pagina_de_analisis/(\d+)/([^/]+)/$',pagina_de_analisis),
+    url(r'^pagina_de_analisis/(\d+)/(\d+)/([^/]+)/$',pagina_de_analisis),
     url(r'^hacer_grafico_de_barras/(\d+)/$',hacer_grafico_de_barras),
     url(r'^hacer_grafico_de_secuencia/(\d+)/$',hacer_grafico_de_secuencia),
     url(r'^hacer_grafico_de_tendencia/(\d+)/$',hacer_grafico_de_tendencia),
