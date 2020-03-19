@@ -213,6 +213,11 @@ class Preguntas(models.Model):
 	     imagen23 = ImageField(upload_to='tmp',blank=True)
 	     imagen24= ImageField(upload_to='tmp',blank=True)
 	     imagen25 = ImageField(upload_to='tmp',blank=True)
+	     imagen26 = ImageField(upload_to='tmp',blank=True)
+	     imagen27 = ImageField(upload_to='tmp',blank=True)
+	     imagen28 = ImageField(upload_to='tmp',blank=True)
+	     imagen29 = ImageField(upload_to='tmp',blank=True)
+	     imagen30 = ImageField(upload_to='tmp',blank=True)
 	     
 
 	     def save(self, *args,**kwargs):
