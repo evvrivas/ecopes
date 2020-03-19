@@ -671,7 +671,7 @@ def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
     id_pregunta_de_cruze=id_pregunta_de_cruze
 
 
-    /{{j.pregunta.id}}/{{k.id}}
+    
    
     #tabla_resultados=Cuestionario_principal.objects.filter(estudio__nombre=pregunta.estudio.nombre)
     return render(request,'pagina_de_analisis.html',locals())
