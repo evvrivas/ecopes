@@ -1236,7 +1236,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             #Y = np.asarray(i)
             #X= np.arange(len(i))
             
-            #plt.subplot(celdas,1,fila)
+            #plt.add_subplot(celdas,1,fila)
             #fila=fila+1
             #bar_width = 0.45
             #plt.bar(X, Y, bar_width, color='b')
@@ -1248,6 +1248,9 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         Y=[10,99,12,34,54,26,78,32,98]
         bar_width = 0.45
         plt.bar(X, Y, bar_width, color='b')
+
+        print (vector_de_graficas)
+
         plt.xlabel('Opciones disponibles a esta pregunta')
         plt.ylabel('Preguntas cruzadas ')
          
