@@ -577,7 +577,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       q=0.5    
 
       e=k*sqrt(p*q*(N/n -1)/(N-1) )
-      print e
+      print("error",e)
       ee=str(round(e, 1))
       estudio_actual.error=ee
       N=N+1     
