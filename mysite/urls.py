@@ -55,15 +55,12 @@ urlpatterns = [
     url(r'^hacer_grafico_de_tendencia/(\d+)/$',hacer_grafico_de_tendencia),
     url(r'^hacer_grafico_de_pastel/(\d+)/$',hacer_grafico_de_pastel),
 
-    url(r'^ver_mis_numeros/$',ver_mis_numeros),
-
     url(r'^graficar_cruse_de_datos/(\d+)/(\d+)/(\d+)/$',graficar_cruse_de_datos),
     
-
-
     url(r'^informacion/$',informacion),
+    url(r'^busqueda/$', busqueda),
+    url(r'^ver_mis_numeros/$',ver_mis_numeros),
     
-
     
     url(r'^crear_estudioCH5NOV/$',crear_estudioCH5NOV),   
       

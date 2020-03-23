@@ -126,7 +126,12 @@
 
        
 
-           <div class="col-md-12">              
+           <div class="col-md-12">  
+           <center><form action="/busqueda/" method="post">
+             {% csrf_token %}
+               <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="30"/>
+               <input type="submit" value="Buscar">
+           </form> </center>           
                 
                   {%  if user.is_authenticated %}          
                       <center>    <li> Hola.!.{{ user.username }} </li>   </center>                             

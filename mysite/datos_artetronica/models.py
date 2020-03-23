@@ -92,7 +92,7 @@ class Codigo(models.Model):
 
 
 	def __str__(self):
-		return  self.usuario.whatsap
+		return  self.usuario.watsapp
 	class Admin:
 		list_display = ('codigo')
 	    
@@ -104,6 +104,8 @@ CATEGORIA_ESTUDIO=(
 			('ACADEMICO', 'ACADEMICO'),
 			('CIENTIFICA', 'CIENTIFICA'),
 			('DEPORTIVA', 'DEPORTIVA'),
+			('SOCIAL', 'SOCIAL'),
+			('TECNOLOGICO', 'TECNOLOGICO'),
 			)
 
 
@@ -126,13 +128,13 @@ TIPO_ESTUDIO=(
 			)
 
 CONFIANZA_NIVEL=(
-			('1.15', '75%'),			
-			('1.28', '80%'),
-			('1.44', '85%'),	
-			('1.65', '90%'),			
-			('1.96', '95%'),
-			('2.0', '95.5%'),
-			('2.58', '99%'),							
+			('75%', '75%'),			
+			('80%', '80%'),
+			('85%', '85%'),	
+			('90%', '90%'),			
+			('95%', '95%'),
+			('95.5%', '95.5%'),
+			('99%', '99%'),							
 			)
 
 class Estudios(models.Model):

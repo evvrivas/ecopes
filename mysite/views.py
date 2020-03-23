@@ -343,7 +343,7 @@ def agregar_encuesta(request,id_estudio):
             respuesta_39=""
             respuesta_40=""
 
-            respuesta_41=""
+            respuesta_41="" 
             respuesta_42=""
             respuesta_43=""
             respuesta_44=""
@@ -469,7 +469,14 @@ def agregar_encuesta(request,id_estudio):
 
 
             usuario_actual=request.user.username
-            
+
+            codigo=Codigo.objects.get(usuario__watsapp=usuario_actual)
+            a=codigo.cantidad_muestras_realizadas
+            a=a+1
+            codigo.cantidad_muestras_realizadas=a
+            codigo.save()  
+
+
             fecha= datetime.datetime.now()
          
 
@@ -500,7 +507,7 @@ def agregar_encuesta(request,id_estudio):
             p1.save()
 
 
-           
+            
 
             #tabla_datos=Cuestionario_temporal.objects.all()
             connection.close()
@@ -543,20 +550,41 @@ def actualizar_previo_a_graficar(request,id_estudio):
 
       Cuestionario_temporal.objects.filter(estudio__id=id_estudio).delete()
 
+      
+      if estudio_actual.confianza=="75%":
+        c=1.15
+      elif estudio_actual.confianza=="80%":
+        c=1.28
+      elif estudio_actual.confianza=="85%":
+        c=1.44
+      elif estudio_actual.confianza=="90%":
+        c=1.65
+      elif estudio_actual.confianza=="95%":
+        c=1.96
+      elif estudio_actual.confianza=="95.5%":
+        c=2.0
+      elif estudio_actual.confianza=="99%":
+        c=2.58
+      else:
+        c=1.15
+
+
+
       n=estudio_actual.universo
       N=estudio_actual.n_muestras         
-      k=eval(estudio_actual.confianza)
+      k=c
       p=0.5
       q=0.5    
 
       e=k*sqrt(p*q*(N/n -1)/(N-1) )
-      ee=round(e, 1)
-
-      estudio_actual.error=str(ee)
+      print e
+      ee=str(round(e, 1))
+      estudio_actual.error=ee
+      N=N+1     
+      estudio_actual.n_muestras=N
       estudio_actual.fecha_ultima_actualizacion= datetime.datetime.now()
 
-      estudio_actual.save()
-      
+      estudio_actual.save()      
       return render(request,'confirmar_encuesta.html',locals())
 
 
@@ -612,6 +640,9 @@ def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
     id_pregunta=id_pregunta
     bandera=bandera
     id_pregunta_de_cruze=id_pregunta_de_cruze
+    pregunta_de_cruze=Preguntas.objects.get(id=id_pregunta_de_cruze)
+    lista_de_opciones_de_cruze=Opciones.objects.filter(pregunta__pregunta=pregunta_de_cruze.pregunta) 
+   
 
 
     
@@ -661,6 +692,10 @@ def hacer_grafico_de_barras(request,id_pregunta):
         #for x, y in zip(X, Y1):
         #    plt.text(x, y+1 ,str(y)+ "\n"+vector_de_opciones[z], ha='center', va= 'bottom')
         #    z=z+1
+        z=0 
+        for x, y in zip(X, Y1):
+            plt.text(x, y ,str(y), ha='center', va= 'bottom')
+            z=z+1
  
       
         plt.xlabel('\nOpciones disponibles a esta pregunta')
@@ -913,7 +948,7 @@ def habilitar_estudio(request,id_del_estudio):
 
         existe=Codigo.objects.filter(usuario=usuario_actual,estudio=estudio_actual).count()
         
-        if existe>=0:
+        if existe>0:
 
             return render(request,'solicitud_de_suscripcion.html',locals())
 
@@ -1180,23 +1215,22 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
 
 
         x=2
-        vector_conteo_hijo=[]
+       
         vector_conteo_global=[]
         
         for i in las_preguntas:
 
             if i.pregunta==pregunta_hijo.pregunta:             
 
-              for v in vector_padre:
-                  
+              for v in vector_padre:  
+                  vector_conteo_hijo=[]
                   for k in opci_hijo:
                      la_opcion=k.opcion
-                     conteo_opcion_hijo=filtro_casero_2(v[2],x,la_opcion)                   
-                     
-                     vector_1=[v[0], v[1], la_opcion, conteo_opcion_hijo]
+                     conteo_opcion_hijo=filtro_casero_2(v[2],x,la_opcion)
+                     vector_1=[v[0], v[1], la_opcion, conteo_opcion_hijo]                     
                      vector_conteo_hijo.append(vector_1)
-
-                  vector_conteo_global.append(vector_conteo_global)
+                     
+                  vector_conteo_global.append(vector_conteo_hijo)
               break        
                    
 
@@ -1211,17 +1245,23 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         
         vector_de_graficas=[]
         
+        titulos=[]
+        x_dato=[]
+
+        for i in  vector_conteo_global[0]:
+          x_dato.append(i[2])
+                
         for i in vector_conteo_global:            
              
              y=[]
-             titulos=[]
+             
              
              for j in i:
 
                  #v=j[3]*100/j[1]
                  y.append(j[3])
-
              titulos.append(j[0])
+                      
 
              vector_de_graficas.append(y)
         
@@ -1231,29 +1271,31 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         celdas=len(vector_de_graficas)
         fila=1
         tit=0
-        #for i in vector_de_graficas:
 
-            #Y = np.asarray(i)
-            #X= np.arange(len(i))
+      
+        for i in vector_de_graficas:
+            total=sum(i)
+            a=np.array(i)
+            b=a*100/total
+
+            Y1 = np.asarray(b)
+            X= np.arange(len(i))
+            X=X+1
+                        
+            plt.subplot(celdas,1,fila)
+            fila=fila+1
+            bar_width = 0.45
+            plt.bar(X, Y1, bar_width, color='b')
+
+            z=0 
+            for x, y in zip(X, Y1):
+                plt.text(x, y ,str(y), ha='center', va= 'bottom')
+                z=z+1
             
-            #plt.add_subplot(celdas,1,fila)
-            #fila=fila+1
-            #bar_width = 0.45
-            #plt.bar(X, Y, bar_width, color='b')
-           # 
-            #a=titulos[tit]
-            #plt.title(a)
-            #tit=tit+1
-        X=[1,2,3,4,5,6,7,8,9]
-        Y=[10,99,12,34,54,26,78,32,98]
-        bar_width = 0.45
-        plt.bar(X, Y, bar_width, color='b')
-
-        print (vector_de_graficas)
-
-        plt.xlabel('Opciones disponibles a esta pregunta')
-        plt.ylabel('Preguntas cruzadas ')
-         
+            a=titulos[tit]
+            plt.title(a)            
+            tit=tit+1
+                
        
         buffer = io.BytesIO()
         canvas = pylab.get_current_fig_manager().canvas
@@ -1284,7 +1326,7 @@ def crear_estudioCH5NOV(request):
 
         descripcion_del_estudio= "Este se realiza entre trabajadores y beneficiarios de la Central Hidroelectrica 5 de Noviembre"
         recomendacion_estudio= "Se recomienda visitar a las personas en sus casas de habitacion y preguntar individualmente a cada persona, sin que terceros intervengann en las respuestas del encuestado. Siempre preguntar si ya alguien les realizo el cuestionario. No hacer 2 veces el cuestionario a la misma persona"
-        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error=1,confianza='1.96')
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="PUBLICO",n_muestras=300,universo=400,error="1",confianza='1.96')
         p1.save() 
 
 
@@ -1538,6 +1580,62 @@ def crear_estudioCH5NOV(request):
 
 
 
+def busqueda(request):     
+     bandera="TODOS"  
+     if request.POST:
+        palabra = request.POST.get('nombre')
+             
+        usuario=UserProfile.objects.get(watsapp=request.user.username)
+        tipo_usuario=usuario.tipo_usuario
+
+        usuario_actual=request.user.username
+        lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
+        
+        vector_de_estudios_publicos=[]
+        
+        vector_de_estudios_de_pago_habilitados=[]
+        vector_de_estudios_de_pago_deshabilitados=[]
+        
+        vector_de_estudios_privados_habilitados=[]
+        
+          
+        if bandera=="TODOS":
+                 
+                estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+                vector_de_estudios_publicos=estudios
 
 
+                estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
 
+                if lista_de_codigos.count()==0:
+                    vector_de_estudios_de_pago_deshabilitados=estudios
+                else:
+                    for i in lista_de_codigos:
+                        for j in estudios:             
+                     
+                              if j.id==i.estudio.id:
+                                  vector_de_estudios_de_pago_habilitados.append(j)
+                              else:
+                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+                    
+             
+               
+                estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+
+
+                if lista_de_codigos.count()==0:
+                  vector_de_estudios_privados_deshabilitados=estudios
+                
+                else:
+
+                    for i in lista_de_codigos:
+                          for j in estudios:          
+                     
+                              if j.id==i.estudio.id:
+                                  vector_de_estudios_privados_habilitados.append(j)
+                              else:
+                                  pass                  
+                   
+
+        return render(request,'lista_de_estudios.html',locals())
+     return render(request,'lista_de_estudios.html',locals())

@@ -1,4 +1,4 @@
-{% extends "cuestionario.html" %}
+{% extends "base.html" %}
 {% load staticfiles %} 
 {% load thumbnail %}
 
@@ -6,7 +6,7 @@
   
 <div class="row">  
        <div class="alert alert-info">        
-<center>
+<center> 
         <a href="/"> <h4>  <font color="blue">{{estudio_actual.nombre}}</font> </h4> </a>     
 </center>
 <br>
@@ -63,10 +63,246 @@
 
               <p> <font color="blue">{{j.pregunta.pregunta}} </font> </p>
 
+             
 
-              {% block content_imagenes %}
 
-              {% endblock %}
+              
+
+
+
+
+
+{%  if j.pregunta.imagen1 %}               
+                        
+                              {% thumbnail j.pregunta.imagen1 "75x75" crop="center" as  im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+
+{%  if j.pregunta.imagen2 %}               
+                        
+                              {% thumbnail j.pregunta.imagen2 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen3 %}               
+                        
+                              {% thumbnail j.pregunta.imagen3 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen4 %}               
+                        
+                              {% thumbnail j.pregunta.imagen4 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen5 %}               
+                        
+                              {% thumbnail j.pregunta.imagen5 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen6 %}               
+                        
+                              {% thumbnail j.pregunta.imagen6 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen7 %}               
+                        
+                              {% thumbnail j.pregunta.imagen7 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen8 %}               
+                        
+                              {% thumbnail j.pregunta.imagen8 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen9 %}               
+                        
+                              {% thumbnail j.pregunta.imagen9 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen10 %}               
+                        
+                              {% thumbnail j.pregunta.imagen10 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen11 %}               
+                        
+                              {% thumbnail j.pregunta.imagen11 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen12 %}               
+                        
+                              {% thumbnail j.pregunta.imagen12 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen13 %}               
+                        
+                              {% thumbnail j.pregunta.imagen13 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen14 %}               
+                        
+                              {% thumbnail j.pregunta.imagen14 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen15 %}               
+                        
+                              {% thumbnail j.pregunta.imagen15 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen16 %}               
+                        
+                              {% thumbnail j.pregunta.imagen16 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen17 %}               
+                        
+                              {% thumbnail j.pregunta.imagen17 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen18 %}               
+                        
+                              {% thumbnail j.pregunta.imagen18 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen19 %}               
+                        
+                              {% thumbnail j.pregunta.imagen19 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen20 %}               
+                        
+                              {% thumbnail j.pregunta.imagen20 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen21 %}               
+                        
+                              {% thumbnail j.pregunta.imagen21 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen22 %}               
+                        
+                              {% thumbnail j.pregunta.imagen22 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen23 %}               
+                        
+                              {% thumbnail j.pregunta.imagen23 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen24 %}               
+                        
+                              {% thumbnail j.pregunta.imagen24 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen25 %}               
+                        
+                              {% thumbnail j.pregunta.imagen25 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen26 %}               
+                        
+                              {% thumbnail j.pregunta.imagen26 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen27 %}               
+                        
+                              {% thumbnail j.pregunta.imagen27 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen28 %}               
+                        
+                              {% thumbnail j.pregunta.imagen28 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen29 %}               
+                        
+                              {% thumbnail j.pregunta.imagen29 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+{%  if j.pregunta.imagen30 %}               
+                        
+                              {% thumbnail j.pregunta.imagen30 "75x75" crop="center" as im %}   
+                               <img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                             {% endthumbnail %}
+                                 
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

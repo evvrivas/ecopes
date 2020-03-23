@@ -2,7 +2,11 @@
 {% load staticfiles %} 
 {% load thumbnail %}
 
+
+
+
 {% block content_imagenes %}
+
 {%  if j.pregunta.imagen1 %}               
                         
                               {% thumbnail j.pregunta.imagen1 "50x50" crop="center" as  im %}   

@@ -54,6 +54,19 @@
 
 
 {% if bandera == 'CRUZE' %}
+
+
+
+<center><h4>  <font color="blue">{{pregunta_de_cruze.pregunta}}</font></p></h4></center>
+<br>
+{% for i in lista_de_opciones_de_cruze %}
+<p>{{ forloop.counter }}: {{i}}</p>
+{% endfor %}
+
+
+   
+
+
 <center><div class="container"> <img src="/graficar_cruse_de_datos/{{id_estudio}}/{{id_pregunta}}/{{id_pregunta_de_cruze}}">
            </div></center>
 {% else %}
