@@ -3604,7 +3604,7 @@ def crear_estudio_APPS(request):
         connection.close()
         return render(request,'principal.html',locals())
 
-def crear_estudio_NUEVO()
+def crear_estudio_NUEVO(request)
    pass
    return render(request,'principal.html',locals())
 
