@@ -68,8 +68,8 @@ urlpatterns = [
     url(r'^crear_estudio_PADA/$',crear_estudio_PADA),
     url(r'^crear_estudio_CV/$',crear_estudio_CV),
     url(r'^crear_estudio_FPMA/$',crear_estudio_FPMA),
-    url(r'^crear_estudio_APPS/$',crear_estudio_apps),
-    url(r'^crear_estudio_NUEVO/$',crear_estudio_apps),
+    url(r'^crear_estudio_APPS/$',crear_estudio_APPS),
+    url(r'^crear_estudio_NUEVO/$',crear_estudio_NUEVO),
      
 
 ]
