@@ -3606,6 +3606,7 @@ def crear_estudio_APPS(request):
 
 def crear_estudio_NUEVO(request):
    pass
+   pass
    return render(request,'principal.html',locals())
 
 
