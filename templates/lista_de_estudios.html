@@ -20,9 +20,34 @@
                 
 
                 <tr  align="center">
-                                    
+                  
+
+              {% ifequal tipo_usuario 'EL_LECTOR' %}                   
                   <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a></td>  
-                                                          
+              {% endifequal %} 
+
+              {% ifequal tipo_usuario 'ADMINISTRADOR' %}                   
+                  <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a></td>  
+              {% endifequal %} 
+
+
+
+
+                  
+
+                  {% ifequal tipo_usuario 'ENCUESTADOR' %}
+                  
+                  <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}}</font> </h4> </a>  
+
+                     <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
+           
+                  {% endifequal %}
+
+
+
+
+
+
                                    
                 </tr >  
 
@@ -99,9 +124,7 @@
         
         {% for j in vector_de_estudios_de_pago_deshabilitados %} 
 
-                
-
-                             
+                                             
                     
                  <center>
                 <table BORDER="1" CELLSPACING="1">

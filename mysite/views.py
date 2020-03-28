@@ -671,6 +671,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
         total=sum(vector_de_repeticiones)
         a=np.array(vector_de_repeticiones)
         b=a*100/total
+        b=round(b,2)
   
         X= np.arange(len(vector_de_opciones))
         X=X+1
@@ -679,6 +680,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
      
                
         f=plt.figure()
+        f.set_size_inches(3,6)
        
         #plt.gca().set_yscale('log')
 
@@ -702,7 +704,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
         plt.ylabel('Porcentaje (respuestas) /opcion ')
         titulo=""
         plt.title(titulo)
-        #plt.xticks(())
+        plt.xticks(X)
 
         subplots_adjust(left=0.21)
       
@@ -745,6 +747,7 @@ def hacer_grafico_de_pastel(request,id_pregunta):
      
                
         f=plt.figure()
+        f.set_size_inches(3,6)
 
 
         #desfase = (0.1, 0, 0, 0, 0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
@@ -824,9 +827,11 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
        
        #barh(pos,datos,align = 'center')
        f=plt.figure()
+       f.set_size_inches(3,6)
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
-       titulo_color=[", 1-red",", 2-black",", 3-blue",", 4-green","5, -orange",", 6-gray",", 7-yelow",", 8-red",", 9-black",", 10-blue",", 11-green",", 12-orange",", 13-gray",", 14-yelow",", 15-red",", 16-black",", 17-blue",", 18-green",", 19-orange",", 20-gray",", 21-yelow"] 
-       
+       #titulo_color=[", 1-red",", 2-black",", 3-blue",", 4-green","5, -orange",", 6-gray",", 7-yelow",", 8-red",", 9-black",", 10-blue",", 11-green",", 12-orange",", 13-gray",", 14-yelow",", 15-red",", 16-black",", 17-blue",", 18-green",", 19-orange",", 20-gray",", 21-yelow"] 
+       titulo_color=[", 1-rojo",", 2-negro",", 3-azul",", 4-verde","5-anaranjdo",", 6-gris",", 7-amarillo",", 8-rojo",", 9-negro",", 10-azul",", 11-verde",", 12-anaranjado",", 13-gris",", 14-amarillo",", 15-rojo",", 16-negro",", 17-azul",", 18-verde",", 19-anaranjado",", 20-gris",", 21-amarillo"] 
+
        b=0
 
        titulo=""
@@ -901,8 +906,9 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
        #print(vector_de_secuencias)
        #barh(pos,datos,align = 'center')
        f=plt.figure()
+       f.set_size_inches(3,6)
        color=["red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow","red","black","blue","green","orange","gray","yelow"] 
-       titulo_color=[", 1-red",", 2-black",", 3-blue",", 4-green","5, -orange",", 6-gray",", 7-yelow",", 8-red",", 9-black",", 10-blue",", 11-green",", 12-orange",", 13-gray",", 14-yelow",", 15-red",", 16-black",", 17-blue",", 18-green",", 19-orange",", 20-gray",", 21-yelow"] 
+       titulo_color=[", 1-rojo",", 2-negro",", 3-azul",", 4-verde","5-anaranjdo",", 6-gris",", 7-amarillo",", 8-rojo",", 9-negro",", 10-azul",", 11-verde",", 12-anaranjado",", 13-gris",", 14-amarillo",", 15-rojo",", 16-negro",", 17-azul",", 18-verde",", 19-anaranjado",", 20-gris",", 21-amarillo"] 
 
        b=0
        titulo=""
@@ -1267,6 +1273,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         
 
         f=plt.figure()
+        f.set_size_inches(3,12)
         
         celdas=len(vector_de_graficas)
         fila=1
@@ -1277,6 +1284,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             total=sum(i)
             a=np.array(i)
             b=a*100/total
+            b=round(b, 2)
 
             Y1 = np.asarray(b)
             X= np.arange(len(i))
@@ -1286,19 +1294,21 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             fila=fila+1
             bar_width = 0.45
             plt.bar(X, Y1, bar_width, color='b')
-
+            plt.yticks()
+            plt.xticks()
             z=0 
             for x, y in zip(X, Y1):
-                plt.text(x, y ,str(y), ha='center', va= 'bottom')
+                plt.text(x, y ,str(y), ha='center', va= 'center')
                 z=z+1
             
             a=titulos[tit]
             plt.title(a)            
             tit=tit+1
                 
-       
+        #plt.xticks(X)
         buffer = io.BytesIO()
         canvas = pylab.get_current_fig_manager().canvas
+        canvas.setPageSize((5*inch, 8*inch))
         canvas.draw()        
         graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
         graphIMG.save(buffer, "PNG")
@@ -1309,13 +1319,78 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
          
 
 
-def crear_estudioCH5NOV(request):        
+def busqueda(request):     
+     bandera="TODOS"  
+     if request.POST:
+        palabra = request.POST.get('nombre')
+             
+        usuario=UserProfile.objects.get(watsapp=request.user.username)
+        tipo_usuario=usuario.tipo_usuario
+
+        usuario_actual=request.user.username
+        lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
+        
+        vector_de_estudios_publicos=[]
+        
+        vector_de_estudios_de_pago_habilitados=[]
+        vector_de_estudios_de_pago_deshabilitados=[]
+        
+        vector_de_estudios_privados_habilitados=[]
+        
+          
+        if bandera=="TODOS":
+                 
+                estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
+                vector_de_estudios_publicos=estudios
+
+
+                estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
+
+                if lista_de_codigos.count()==0:
+                    vector_de_estudios_de_pago_deshabilitados=estudios
+                else:
+                    for i in lista_de_codigos:
+                        for j in estudios:             
+                     
+                              if j.id==i.estudio.id:
+                                  vector_de_estudios_de_pago_habilitados.append(j)
+                              else:
+                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+                    
+             
+               
+                estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
+
+
+                if lista_de_codigos.count()==0:
+                  vector_de_estudios_privados_deshabilitados=estudios
+                
+                else:
+
+                    for i in lista_de_codigos:
+                          for j in estudios:          
+                     
+                              if j.id==i.estudio.id:
+                                  vector_de_estudios_privados_habilitados.append(j)
+                              else:
+                                  pass                  
+                   
+
+        return render(request,'lista_de_estudios.html',locals())
+     return render(request,'lista_de_estudios.html',locals())
+
+
+def manual_de_usuario(request):
+    
+    return render(request,'manual_de_usuario.html',locals())
+
+def crear_estudio_CH5NOV(request):        
               
         import random
         import datetime  
         
 
-        tipo_estudio="PUBLICO"
+        tipo_estudio="PRIVADO"
 
         nombre_estudio=" 1er. Estudio de Disciplinas deportivas de interes en CH5NOV (Marzo 2020)"
         date=datetime.datetime.now()
@@ -1576,66 +1651,1979 @@ def crear_estudioCH5NOV(request):
 
         connection.close()
         return render(request,'principal.html',locals())
-
-
-
-
-def busqueda(request):     
-     bandera="TODOS"  
-     if request.POST:
-        palabra = request.POST.get('nombre')
-             
-        usuario=UserProfile.objects.get(watsapp=request.user.username)
-        tipo_usuario=usuario.tipo_usuario
-
-        usuario_actual=request.user.username
-        lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
+    
+def crear_estudio_FPMA(request):        
+              
+        import random
+        import datetime  
         
-        vector_de_estudios_publicos=[]
-        
-        vector_de_estudios_de_pago_habilitados=[]
-        vector_de_estudios_de_pago_deshabilitados=[]
-        
-        vector_de_estudios_privados_habilitados=[]
-        
-          
-        if bandera=="TODOS":
-                 
-                estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-                vector_de_estudios_publicos=estudios
+# CATEGORIA_ESTUDIO=(
+#             ('POLITICO', 'POLITICO'),           
+#             ('ECONOMICA', 'ECONOMICA'),
+#             ('PHICOSOCIAL', 'PHICOSOCIAL'),
+#             ('COMERCIAL', 'COMERCIAL'),
+#             ('ACADEMICO', 'ACADEMICO'),
+#             ('CIENTIFICA', 'CIENTIFICA'),
+#             ('DEPORTIVA', 'DEPORTIVA'),
+#             ('SOCIAL', 'SOCIAL'),
+#             ('TECNOLOGICO', 'TECNOLOGICO'),
+#             )
+
+# TIPO_ESTUDIO=(
+#             ('PUBLICO', 'PUBLICO'),         
+#             ('DE_PAGO', 'DE_PAGO'),
+#             ('PRIVADO', 'PRIVADO'),                         
+#             )
+
+# CONFIANZA_NIVEL=(
+#             ('75%', '75%'),         
+#             ('80%', '80%'),
+#             ('85%', '85%'), 
+#             ('90%', '90%'),         
+#             ('95%', '95%'),
+#             ('95.5%', '95.5%'),
+#             ('99%', '99%'),                         
+#             )
+        tipo_estudio="DE_PAGO"
+
+        nombre_estudio="EStudio: Nivel de Aceptacion de Figuras Publicas del Municipio de Ahuachapán (Marzo 2020)"
+        date=datetime.datetime.now()
+        precio=0.15
+        precio_suscrip=10.00
+        precio_est=300
 
 
-                estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+        descripcion_del_estudio= "Este estudio tiene como objetivo medir el nivel de Aceptacion que tienen los actuales diputados residentes en el municipio de Ahuachapan, Asi como la evaluacion de la gestion municipal Actual del Municipio de Ahuachapán"
+        recomendacion_estudio= "Se recomienda realizar el estudio a personas mayores de edad, que residan en el municipio de ahuachapán"
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="DE_PAGO",n_muestras=300,universo=60000,error="1",confianza='95%')
+        p1.save() 
 
-                if lista_de_codigos.count()==0:
-                    vector_de_estudios_de_pago_deshabilitados=estudios
-                else:
-                    for i in lista_de_codigos:
-                        for j in estudios:             
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_de_pago_habilitados.append(j)
-                              else:
-                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+        pregunta_est="Cual es su municipio de Origen"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
                     
-             
+        la_opcion="AHUACHAPAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+
+
+        pregunta_est="Cual es su Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="18 a 25 años (joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="26 a 35 años (Adulto)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="36 a 60 años (Adulto mayor)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="60  a 100 años (Tercera edad)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Relaciona Laboral"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Soy o estoy desempleado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+                    
+        la_opcion="Soy empleado Publico"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Soy empleado privado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Soy empresario independiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="N/S N/R"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Nivel Academico "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Nunca he estudiado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+                    
+        la_opcion="Estudios Basicos"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Estudio hasta bachillerato o esta en bachillerato"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Tienen estudios tecnicos"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="Tienen un titulo Universitario o estudio en la Universidad"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Deacuerdo a su persepcion, Cual de estos diputados esta realizando MAL su trabajo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Arturo Magaña (ARENA)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ricardo Godoy (ARENA)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Isela de Portillo  (FMLN) "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Serafin Orantes (PCN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()    
+
+
+
+
+
+        pregunta_est="Deacuerdo a su persepcion, Cual de estos diputados esta realizando BIEN su trabajo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Arturo Magaña (ARENA)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ricardo Godoy (ARENA)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Isela de Portillo  (FMLN) "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Serafin Orantes (PCN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()    
+
+
+
+        pregunta_est="Hay un diputado que usted selecciono que realiza bien su trabajo, porque cree eso "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Porque veo su desempeño en el campo legislativo, y veo que promueve leyes en favor de la sociedad"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Porque constantemente veo publicaciones en redes sociales, de su ayuda a la sociedad"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Porque me cae bien, aunque no veo noticias de el, yo creo que hace bien su trabajo"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Es una buena persona y yo vote por el."
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr No seleccione a ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+
+
+        pregunta_est="Con respecto a los Diputados. Cual de estas personas cree usted que debe reelegirse en el cargo?? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Arturo Magaña (ARENA)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ricardo Godoy (ARENA)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="Isela de Portillo (FMLN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Serafin Orantes (PCN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+
+
+
+        pregunta_est="¿Como evalúa usted el desempeño del actual alcalde ABILIO FLORES de Ahuachapán? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Cree usted que el actual alcalde debe participar nuevamente como candidato a alcalde del municipio de Ahuachapán."
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+       
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+        pregunta_est="Si usted cree que el alcalde debe buscar la reelección, como le gustaría que lo hiciera. "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Que se reelija con su actual partido PCN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Que busque realizar una coalición o Alianza con otro partido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No me interesa, yo votare por otro candidato"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+       
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Supongamos que se reelige"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Como sea Yo voy a votar por el"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Yo votaría por el aunque se reelija con el PCN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Yo votaría Por el Si se reelige en Una coalición con otro Partido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="Yo no votaría por el si se reelige con el PCN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+        la_opcion="Independientemente lo que haga, yo no voy a votar por EL"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+       
+        la_opcion="Ns/Nr Ninguno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Actualmente El Alcalde de Ahuachapan Pertenece al PCN ,Con que partido le recomendaría usted que haga una alianza o coalición"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="FMLN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="ARENA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="GANA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="NUEVAS IDEAS"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+        la_opcion="CD"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+       
+        la_opcion="PDC"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="OTRO"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No sabe/ No responde"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Es prematura la pregunta, pero queremos saber la fuerza de los partidos, Para Diputado que partido cree que debe tener mas diputados"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="FMLN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="ARENA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="GANA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="PCN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="NUEVAS IDEAS"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+        la_opcion="CD"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+       
+        la_opcion="PDC"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="OTRO"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No sabe/ No responde"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Suponga que es su candidato y que en su partido, Por cuall partido votaria usted para la Alcaldia de ahuachapán"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="FMLN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="ARENA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="GANA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="PCN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="NUEVAS IDEAS"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+        la_opcion="CD"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+       
+        la_opcion="PDC"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="OTRO"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No sabe/ No responde"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        connection.close()
+        return render(request,'principal.html',locals())
+
+
+
+def crear_estudio_CV(request):        
+     
+    
+              
+        import random
+        import datetime  
+        
+# CATEGORIA_ESTUDIO=(
+#             ('POLITICO', 'POLITICO'),           
+#             ('ECONOMICA', 'ECONOMICA'),
+#             ('PHICOSOCIAL', 'PHICOSOCIAL'),
+#             ('COMERCIAL', 'COMERCIAL'),
+#             ('ACADEMICO', 'ACADEMICO'),
+#             ('CIENTIFICA', 'CIENTIFICA'),
+#             ('DEPORTIVA', 'DEPORTIVA'),
+#             ('SOCIAL', 'SOCIAL'),
+#             ('TECNOLOGICO', 'TECNOLOGICO'),
+#             )
+
+# TIPO_ESTUDIO=(
+#             ('PUBLICO', 'PUBLICO'),         
+#             ('DE_PAGO', 'DE_PAGO'),
+#             ('PRIVADO', 'PRIVADO'),                         
+#             )
+
+# CONFIANZA_NIVEL=(
+#             ('75%', '75%'),         
+#             ('80%', '80%'),
+#             ('85%', '85%'), 
+#             ('90%', '90%'),         
+#             ('95%', '95%'),
+#             ('95.5%', '95.5%'),
+#             ('99%', '99%'),                         
+#             )
+        tipo_estudio="GRATIS"
+
+        nombre_estudio="Estudio Sobre Corona Virus COVID 19 En el Salvador"
+        date=datetime.datetime.now()
+        precio=0.15
+        precio_suscrip=10.00
+        precio_est=200
+
+
+        descripcion_del_estudio= "Estudio sobre el conocimiento de la poblacion sobre el corona Virus, Su impacto Social y Economico"
+        recomendacion_estudio= "Realizar el estudio, entre su comunidad, "
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="DE_PAGO",n_muestras=200,universo=5000,error="1",confianza='95%')
+        p1.save() 
+
+
+            
+
+        pregunta_est="Cual es su Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="15 a 21 años (Joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="22 a 28 años (Adulto joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="29 a 40 años (Adulto)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="41 a 60 años (Adulto mayor)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="60  a 100 años (Tercera edad)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Nivel Academico "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Nunca he estudiado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+                    
+        la_opcion="Estudios Basicos"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Estudio hasta bachillerato o esta en bachillerato"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Tienen estudios tecnicos"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="Tienen un titulo Universitario o estudio en la Universidad"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+       
+
+
+        pregunta_est="Que tan informado se siente sobre como evitar la enfermedad producida por el Virus COVID-19 "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Muy Informado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Algo Informado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Poco Informado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Nada Informado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Como califica la informacion brindada por el gobierno "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Muy Suficiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Suficiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Insuficiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy insuficiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Que sensacion le produce el Corona Virus"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="preocupacion"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Insertidumbre"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Es irrelevante"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Cual Cree que es la causa del corona Virus"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Tienen que ver con la accion del Ser Humano sobre el medio Ambiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Tienen que ver con ell conflicto economico entre las grandes potencis"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Tienen que ver con la Naturaleza, la biologia y esas cosas, es algo natural"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Es una accion divina, es una prueba, pronto pasara."
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="esta tomando usted, precauciones contra el Corona Virus"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Si, todas"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Si Algunas"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Teniendo en cuenta la situacion de El Salvador, Como afectara a la pandemia"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Empeorara la situacion economica"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Puede abrir nuevas oportunidades"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No afectara"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Cuanto temor le genera la llegada de el corona virus a El Salvador"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Mucho"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bastante"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Poco"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Nada"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Ha salido ultimamente de su casa?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Si, ha hacer unas cosas "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Si, obligadamente, muy pocas veces"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No, no he salido, execpto a emergencia"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No, no he salido"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        return render(request,'principal.html',locals())
+
+
+def crear_estudio_PDAD(request):    
+              
+        import random
+        import datetime  
+        
+# CATEGORIA_ESTUDIO=(
+#             ('POLITICO', 'POLITICO'),           
+#             ('ECONOMICA', 'ECONOMICA'),
+#             ('PHICOSOCIAL', 'PHICOSOCIAL'),
+#             ('COMERCIAL', 'COMERCIAL'),
+#             ('ACADEMICO', 'ACADEMICO'),
+#             ('CIENTIFICA', 'CIENTIFICA'),
+#             ('DEPORTIVA', 'DEPORTIVA'),
+#             ('SOCIAL', 'SOCIAL'),
+#             ('TECNOLOGICO', 'TECNOLOGICO'),
+#             )
+
+# TIPO_ESTUDIO=(
+#             ('PUBLICO', 'PUBLICO'),         
+#             ('DE_PAGO', 'DE_PAGO'),
+#             ('PRIVADO', 'PRIVADO'),                         
+#             )
+
+# CONFIANZA_NIVEL=(
+#             ('75%', '75%'),         
+#             ('80%', '80%'),
+#             ('85%', '85%'), 
+#             ('90%', '90%'),         
+#             ('95%', '95%'),
+#             ('95.5%', '95.5%'),
+#             ('99%', '99%'),                         
+#             )
+        tipo_estudio="DE_PAGO"
+
+        nombre_estudio="Se lleva un registro Mensual del indice de popularidad de Alcaldes y Diputados del departamento de Ahuachapanecas)"
+        date=datetime.datetime.now()
+        precio=0.15
+        precio_suscrip=10.00
+        precio_est=800
+
+
+        descripcion_del_estudio= "Con este estudio se puede monitorear el nivel de aceptacion que tienen los DIPUTADOS de Ahuachapan, de donde vienen y hacia donde van, en cuanto al nivel de popularidad "
+        recomendacion_estudio= "Se recomienda hacer el estudio a personas mayores de edad, tratar de cumplir la cantidad de encuestas solicitadas y distribuirlas en el tiempo, es decir no las haga todas de un solo, la actualizacion se realizara cada 15 dias apartir de la fecha de inicio"
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="DE_PAGO",n_muestras=200,universo=5000,error="1",confianza='95%')
+        p1.save() 
+
+
+     
+
+        pregunta_est="Seleccione el Municipio"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="AHUACHAPAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+        la_opcion="ATIQUIZAYA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN FRANCISCO MENENDEZ"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN PEDRO PUXTLA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="ATACO"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="APANECA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="TURIN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="EL REFUGIO"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="TACUBA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="GUAYMANGO"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="JUJUTLA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN LORENZO"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+      
+
+        pregunta_est="Cual es su Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="15 a 21 años (Joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="22 a 28 años (Adulto joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="29 a 40 años (Adulto)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="41 a 60 años (Adulto mayor)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="60  a 100 años (Tercera edad)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+        pregunta_est="Relación Laboral"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Soy o estoy desempleado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+                    
+        la_opcion="Soy empleado Publico"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Soy empleado privado"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Soy empresario independiente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="N/S N/R"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Nivel Academico "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Nunca he estudiado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+                    
+        la_opcion="Estudios Basicos"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Estudio hasta bachillerato o esta en bachillerato"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Tienen estudios tecnicos"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+
+        la_opcion="Tienen un titulo Universitario o estudio en la Universidad"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+
+
+
+        pregunta_est="Como evalua usted el desempeño de el Diputado Arturo Magaña "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Como evalua usted el desempeño de el Diputado Serafin Orantes "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+        pregunta_est="Como evalua usted el desempeño de la Diputada Guisela de Portillo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Como evalua usted el desempeño de el Diputado Ricardo Godoy "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Quien de estos diputados realiza mejor su trabajo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        
+        
+        la_opcion="Arturo Magaña (ARENA)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ricardo Godoy (ARENA)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="Isela de Portillo (FMLN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Serafin Orantes (PCN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Quien de estos diputados realiza Peor su trabajo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+        
+        
+        la_opcion="Arturo Magaña (ARENA)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Ricardo Godoy (ARENA)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="Isela de Portillo (FMLN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Serafin Orantes (PCN)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        return render(request,'principal.html',locals())
+
+
+
+
+def crear_estudio_PADA(request):        
+     
+    
+              
+        import random
+        import datetime  
+        
+# CATEGORIA_ESTUDIO=(
+#             ('POLITICO', 'POLITICO'),           
+#             ('ECONOMICA', 'ECONOMICA'),
+#             ('PHICOSOCIAL', 'PHICOSOCIAL'),
+#             ('COMERCIAL', 'COMERCIAL'),
+#             ('ACADEMICO', 'ACADEMICO'),
+#             ('CIENTIFICA', 'CIENTIFICA'),
+#             ('DEPORTIVA', 'DEPORTIVA'),
+#             ('SOCIAL', 'SOCIAL'),
+#             ('TECNOLOGICO', 'TECNOLOGICO'),
+#             )
+
+# TIPO_ESTUDIO=(
+#             ('PUBLICO', 'PUBLICO'),         
+#             ('DE_PAGO', 'DE_PAGO'),
+#             ('PRIVADO', 'PRIVADO'),                         
+#             )
+
+# CONFIANZA_NIVEL=(
+#             ('75%', '75%'),         
+#             ('80%', '80%'),
+#             ('85%', '85%'), 
+#             ('90%', '90%'),         
+#             ('95%', '95%'),
+#             ('95.5%', '95.5%'),
+#             ('99%', '99%'),                         
+#             )
+        tipo_estudio="DE_PAGO"
+
+        nombre_estudio="Se lleva un registro Mensual del indice de popularidad de Alcaldes y Diputados del departamento de Ahuachapanecas)"
+        date=datetime.datetime.now()
+        precio=0.15
+        precio_suscrip=10.00
+        precio_est=800
+
+
+        descripcion_del_estudio= "Con este estudio se puede monitorear el nivel de aceptacion que tienen las figuras publicas estudiadas, de donde vienen y hacia donde van, en cuanto al nivel de popularidad "
+        recomendacion_estudio= "Se recomienda hacer el estudio a personas mayores de edad, tratar de cumplir la cantidad de encuestas solicitadas y distribuirlas en el tiempo, es decir no las haga todas de un solo, la actualizacion se realizara cada 15 dias apartir de la fecha de inicio"
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="DE_PAGO",n_muestras=200,universo=5000,error="1",confianza='95%')
+        p1.save() 
+
+
+     
+
+        pregunta_est="Seleccione el Municipio/ Alcalde"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="AHUACHAPAN / Abilio Flores"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+        la_opcion="ATIQUIZAYA / Ana Luisa Rodríguez de González "          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN FRANCISCO MENENDEZ / Adin Zetino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN PEDRO PUXTLA / Carlos Armando Cabrera "          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="ATACO / Óscar Oliverio Gómez"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="APANECA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="TURIN / Hilda María de Quezada"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="EL REFUGIO / Wilfredo Barrientos"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="TACUBA /  Luis Carlos Milla"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="GUAYMANGO / José Ángel Figueroa"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="JUJUTLA / Víctor Manuel Martínez "          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN LORENZO / Álvaro Castillo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+      
+
+
+
+
+        pregunta_est="Cual es su Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="18 a 25 años (joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="26 a 35 años (Adulto)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="36 a 60 años (Adulto mayor)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="60  a 100 años (Tercera edad)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+
+
+
+      
+
+        pregunta_est="Como evalua usted el desempeño del Actual Alcalde de su municipio "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Regular"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Muy Bueno"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Excelente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        return render(request,'principal.html',locals())
+
+
+
+def crear_estudio_APPS(request):        
+     
+    
+              
+        import random
+        import datetime  
+        
+# CATEGORIA_ESTUDIO=(
+#             ('POLITICO', 'POLITICO'),           
+#             ('ECONOMICA', 'ECONOMICA'),
+#             ('PHICOSOCIAL', 'PHICOSOCIAL'),
+#             ('COMERCIAL', 'COMERCIAL'),
+#             ('ACADEMICO', 'ACADEMICO'),
+#             ('CIENTIFICA', 'CIENTIFICA'),
+#             ('DEPORTIVA', 'DEPORTIVA'),
+#             ('SOCIAL', 'SOCIAL'),
+#             ('TECNOLOGICO', 'TECNOLOGICO'),
+#             )
+
+# TIPO_ESTUDIO=(
+#             ('PUBLICO', 'PUBLICO'),         
+#             ('DE_PAGO', 'DE_PAGO'),
+#             ('PRIVADO', 'PRIVADO'),                         
+#             )
+
+# CONFIANZA_NIVEL=(
+#             ('75%', '75%'),         
+#             ('80%', '80%'),
+#             ('85%', '85%'), 
+#             ('90%', '90%'),         
+#             ('95%', '95%'),
+#             ('95.5%', '95.5%'),
+#             ('99%', '99%'),                         
+#             )
+        tipo_estudio="DE_PAGO"
+
+        nombre_estudio="Estudio de satisfaccion y conocimiento de proyectos tecnologicos de Servicio delibery En el Salvador"
+        date=datetime.datetime.now()
+        precio=0.15
+        precio_suscrip=10.00
+        precio_est=400
+
+
+        descripcion_del_estudio= "Este estudio tiene como objetivo medir el conocimiento y nivel de aceptaccion que tienenn las APPS de ventas en linea y el servicio delibery que prestan, Se realizara el estudio a nivel de Todo el El Salvador"
+        recomendacion_estudio= "Se recomienda realizar el estudio a personas mayores de edad, tengan acseso a internet y que normalmente utilizen equipo tecnologico de comunicacion movil, que tenga la capacidad de realizar compras en linea"
+        p1=Estudios(precio_del_estudio=precio_est,precio_por_suscripcion=precio_suscrip,costo_por_muestra=precio,nombre=nombre_estudio,descripcion=descripcion_del_estudio, recomendacion=recomendacion_estudio,fecha_inicio=date,fecha_final=date,fecha_ultima_actualizacion=date,tipo_de_estudio="DE_PAGO",n_muestras=600,universo=55000,error="1",confianza='95%')
+        p1.save() 
+
+
+     
+
+        pregunta_est="Seleccione el departamento"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="AHUACHAPAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+        la_opcion="CABAÑAS"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="CUSCATLAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="CHALATENANGO"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="LA LIBERTAD"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="LA PAZ"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="LA UNION"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="MORAZAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SANTA ANA"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN MIGUEL"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SONSONATE"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN SALVADOR"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="SAN VICENTE"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="USULUTAN"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+       
+
+
+
+        pregunta_est="Cual es su Sexo "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Masculino"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Femenino "
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+        pregunta_est="Rango de edad "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="15 a 21 años (Joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="22 a 28 años (Adulto joven)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="29 a 40 años (Adulto)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="41 a 60 años (Adulto mayor)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="60  a 100 años (Tercera edad)"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+
+
+
+        pregunta_est="Sabe usted si en su departamento hay alguna App para entrega de productos a Domicilio (Comida, Productos de canasta basica, muebles, electrodomesticos, etc)"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+      
+
+
+        pregunta_est="¿ independiente si hay o no en su departamento, sabe que es lo que entregan a domicilio? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Solo alimentos , comidas y bebidas"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Alimentos y artículos de canasta basica"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="de todo, Alimentos, artículos de canasta basica, y electrodomésticos, ropa, etc"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+       
+        la_opcion="Ns/Nr"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()    
+
+
+
+
+        pregunta_est="¿Cómo se dio cuenta de la existenci de estas plataformas compras en línea y entregas a domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Un amigo la tiene instalada y la utiliza"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="He visto a unos repartidores, me imagino que eso es"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
                
-                estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+        la_opcion="Escuche en la radio."
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Yo investigue si existían"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="En las redes sociales he visto los anuncios"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ns/Nr"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
 
 
-                if lista_de_codigos.count()==0:
-                  vector_de_estudios_privados_deshabilitados=estudios
+
+
+        pregunta_est="Actualmente hace uso usted de estas plataformas? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Si, muy seguido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Eventualmente"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="A pesar de tener instalada una, No hago uso de ellas"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="No hago uso de ellas, no tengo instalada ninguna"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+
+
+
+        pregunta_est="Porque usted No utiliza una App para compras en linea"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Me da desconfianza y creo que no me van a cumplir con el pedido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Vivo lejos y hasta aqui no vienen"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="No se si confiar, no me inspiran confianza esas cosas"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Ellos le piden a uno pagar con tarjeta de credito, y yo no tengo y ademas no me gusta pagar asi"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        
+        la_opcion="Yo si uso las App de compras en linea y servicio delibery"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+
+
+
+        pregunta_est="Si usted hiciera uso de estas plataformas. cual cree usted que es la mejor forma de pagar? "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Anticipado por medio de una tarjeta de crédito o Debito"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Deposito o transferencia Bancario"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Contra entrega en efectivo."
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+        la_opcion="Siempre y cuando sea seguro, de cualquier forma"
+        p32=Opciones(pregunta=p21,opcion=la_opcion)
+        p32.save()
+
+
+
+        pregunta_est="Supongamos que, Usted es usuario de una App de compras en linea, Usted compra un mueble que vale $70.00 Nuevo enn una empresa seria que usted conoce, Como cree usted que debe hacerce el negocio"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Debe el cliente pagar por Anticipado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="50Xciento anticipado y el otro 50Xciento a la contra entrega"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Pagar cuando le lleven el producto a su casa."          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        pregunta_est="La misma pregunta  solo que suponga que usted es el vendedor, usted vende un mueble que vale $70.00 Nuevo, Como cree usted que debe hacerce el negocio"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="Debe el cliente pagar por Anticipado"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="50Xciento anticipado y el otro 50Xciento a la contra entrega"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Pagar cuando le lleven el producto a su casa."          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+
+        
+        pregunta_est="¿Esta usted deacuerdo en pagar un costo por el servicio a Domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+       
+        
+
+
+        pregunta_est="Como le parece mejor, en cuanto a la forma de pago del servicio a domicilio "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Pagar de acuerdo a una tarifa fija establecida, (cerca, lejos, muy lejos)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Pagar dependiendo de la cantidad de producto solicitado (un porcentaje)"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Depende del tipo de producto, la distancia, el tipo de transporte, hay que hacer un calculo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+            
+        
+
+
+        pregunta_est="Normalmente como hace sus pedidos de comida a domicilio"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Utilizo Whats App"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Uso Redes sociales como Facebook , y mesenger"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Uso Redes sociales como Facebook , y luego llamo por telefono"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="Marco el numero de telefono de la tienda y pido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        la_opcion="No hago compra de comida en linea"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+       
+      
+
+
+
+        pregunta_est="¿Cómo se encuentra de satisfecho con la rapidez de el servicio a Domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Nada satisfecho"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Poco satisfecho"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Satisfecho"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="Muy satisfecho"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+        
+        pregunta_est="Por favor valore la relación calidad-precio del servicio recibido"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Bueno"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Malo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+ 
+
+
+       
+
+      
+
+        pregunta_est="Tiene alguna sugerencia de mejora sobre el servicio de Comidas a Domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Mayor Rapidez"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Menor precio"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Compromiso de entregar lo pedido"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        
+
+
+
+        pregunta_est="¿Recomendaría usted el servicio a domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si lo recomiendo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No lo recomiendo"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        pregunta_est="¿Actualmente es usted usuario/a del algún servicio de COMIDAS A DOMICILIO  "
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Si"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="No"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+      
+
+
+        pregunta_est="¿Desde hace cuánto tiempo hace uso del servicio de Comidas a Domicilio?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Desde hece mas de 3 años"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Desde hace más de 2 Años"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Desde hace más de 1 Años"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="Hace Unos 6 meses"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Hace Unos 3 meses"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+        la_opcion="Hace un mes"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="En estos días"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+
+        pregunta_est="¿Qué tan dispuesto estaría usted a realizar la compras de productos diversos (Ropa, electrodomesticos, muebles, etc ), no específicamente comida?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Nada dispuesto"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Poco dispuesto"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Dispuesto"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+        
+
+        la_opcion="Muy Dispuesto"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+
+
+
+        pregunta_est="¿Cuál sería el tiempo de entrega máximo que usted estará dispuesto a esperar?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+       
+        la_opcion="menos de 1 hora"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="mas de 1 hora"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
                 
-                else:
+        la_opcion="Depende de lo que pida, Comida quiero que sea rapido, otras cosas puedo esperar mas"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
 
-                    for i in lista_de_codigos:
-                          for j in estudios:          
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_privados_habilitados.append(j)
-                              else:
-                                  pass                  
-                   
 
-        return render(request,'lista_de_estudios.html',locals())
-     return render(request,'lista_de_estudios.html',locals())
+        
+
+
+        pregunta_est="¿Cuál seria el promedio de gasto máximo que estaría dispuesto a comprar con esta modalidad de servicio en línea?"
+        p21=Preguntas(estudio=p1, pregunta=pregunta_est)
+        p21.save()
+                    
+        la_opcion="Hasta $10"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        la_opcion="Hasta $20"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()         
+ 
+        la_opcion="mas de $20"          
+        p31=Opciones(pregunta=p21,opcion=la_opcion)
+        p31.save()
+
+        
+
+
+        connection.close()
+        return render(request,'principal.html',locals())
+
+def crear_estudio_NUEVO()
+   pass
+   return render(request,'principal.html',locals())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -335,10 +335,10 @@
 
 
 <br>
-         {% ifnotequal tipo_usuario 'EL_LECTOR' %}
+         {% ifequal tipo_usuario 'ENCUESTADOR' %}
                     <input type="submit" value="FINALIZAR/REALIZAR ENCUESTA">
                     <br>
-         {% endifnotequal %}
+         {% endifequal %}
 
         </form> </center> 
 <br>
