@@ -1491,7 +1491,7 @@ def manual_de_usuario(request):
 
 
 
-class crear_categorias(models.Model):
+def crear_categorias(models.Model):
         
         cat=['POLITICA','ECONOMIA','PHYCOSOCIAL','COMERCIAL', 'ACADEMICO','CIENTIFICA','DEPORTIVA','SOCIAL', 'TECNOLOGICO']
         
