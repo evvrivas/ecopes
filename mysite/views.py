@@ -1529,7 +1529,7 @@ def crear_estudio_CH5NOV(request):
         p21=Preguntas(estudio=p1, pregunta=pregunta_est)
         p21.save()
                     
-        ,="Soy Trabajador"          
+        la_opcion="Soy Trabajador"          
         p31=Opciones(pregunta=p21,opcion=la_opcion)
         p31.save()
 
