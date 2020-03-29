@@ -62,7 +62,6 @@ urlpatterns = [
     url(r'^ver_mis_numeros/$',ver_mis_numeros),
     url(r'^manual_de_usuario/$',manual_de_usuario),
     
-    
     url(r'^crear_estudio_CH5NOV/$',crear_estudio_CH5NOV),
     url(r'^crear_estudio_PDAD/$',crear_estudio_PDAD),
     url(r'^crear_estudio_PADA/$',crear_estudio_PADA),
@@ -70,6 +69,8 @@ urlpatterns = [
     url(r'^crear_estudio_FPMA/$',crear_estudio_FPMA),
     url(r'^crear_estudio_APPS/$',crear_estudio_APPS),
     url(r'^crear_estudio_NUEVO/$',crear_estudio_NUEVO),
+    url(r'^crear_categorias/$',crear_categorias),
+    
      
 
 ]

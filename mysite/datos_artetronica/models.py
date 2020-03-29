@@ -78,8 +78,8 @@ class Codigo(models.Model):
 	#codigo=models.CharField(max_length=8,null=True,blank=True)
 	estudio=models.ForeignKey('Estudios')
 
-	solicitud_de_activacion=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)	
-	estado_del_estudio=models.CharField(max_length=8,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)
+	solicitud_de_activacion=models.CharField(max_length=16,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)	
+	estado_del_estudio=models.CharField(max_length=16,null=True,blank=True,default="DESACTIVADO",choices=TIPO_ACTIVACION)
 
 	cantidad_muestras_asignadas=  models.IntegerField(blank=True,null=True,default=0)
 	cantidad_muestras_realizadas=  models.IntegerField(blank=True,null=True,default=0)
@@ -140,6 +140,7 @@ CONFIANZA_NIVEL=(
 class Estudios(models.Model):
 
 		 categoria=models.ForeignKey('Categoria',blank=True,null=True)
+
 
 		 nombre=models.CharField(max_length=150)
 		 descripcion= models.TextField(blank=True,null=True)

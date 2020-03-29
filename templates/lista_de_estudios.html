@@ -11,8 +11,7 @@
  <hr>       
         <center><h4><p>Estudios de opinion publica *GRATUITOS</p></h4></center>  
                        
-        {% for j in vector_de_estudios_publicos %} 
-       		
+        {% for j in vector_de_estudios_habilitados %}    		
         		
 
                 <center>
@@ -22,33 +21,12 @@
                 <tr  align="center">
                   
 
-              {% ifequal tipo_usuario 'EL_LECTOR' %}                   
+                                 
                   <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a></td>  
-              {% endifequal %} 
-
-              {% ifequal tipo_usuario 'ADMINISTRADOR' %}                   
-                  <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a></td>  
-              {% endifequal %} 
-
-
-
-
-                  
-
-                  {% ifequal tipo_usuario 'ENCUESTADOR' %}
-                  
-                  <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}}</font> </h4> </a>  
-
-                     <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
-           
-                  {% endifequal %}
-
-
-
-
-
-
-                                   
+                                           
+                    
+                               
+                                  
                 </tr >  
 
 
@@ -72,8 +50,77 @@
                 </table>
                 </center>
 
+                <br>
+
                 
         {% endfor %}
+
+{% for j in vector_de_estudios_deshabilitados %}        
+            
+
+                <center>
+                <table BORDER="1" CELLSPACING="1">
+                
+
+                <tr  align="center">
+                  
+
+              {% ifequal tipo_usuario 'EL_LECTOR' %}                   
+                  <td colspan="3" WIDTH="270"><a href="/poner_cuestionario/{{j.id}}"> <h5>  <font color="blue">{{ j.nombre }} </font> </h5> </a></td>  
+              {% endifequal %} 
+
+              {% ifequal tipo_usuario 'ADMINISTRADOR' %}                   
+                   <td colspan="3" WIDTH="270"><a href="/habilitar_estudio/{{j.id}}"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>  
+
+                     <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> </td> 
+            
+              {% endifequal %} 
+
+                  
+
+              {% ifequal tipo_usuario 'ENCUESTADOR' %}
+                  
+                  <td colspan="3" WIDTH="270"><a href="/habilitar_estudio/{{j.id}}"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>  
+
+                     <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> </td> 
+           
+              {% endifequal %}
+
+                                  
+                </tr >  
+
+
+
+                            
+                <tr  align="center">
+                                    
+                  <td WIDTH="90"><a href="/informacion_del_estudio/{{j.id}}"> <h6>  <font color="blue">Más Info</font> </h6> </a></td>  
+                
+                   <td WIDTH="90">                
+
+                </td>                     
+                
+                  <td WIDTH="90"><h6><p> {{j.fecha_ultima_actualizacion}}</p></h6></td>                             
+                                   
+                </tr >                                                   
+
+                </table>
+                </center>
+
+                <br>
+
+                
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
 
 <br>
  <hr> 
@@ -93,10 +140,6 @@
                                                           
                                    
                 </tr >  
-
-
-
-
 
                             
                 <tr  align="center">
@@ -118,6 +161,7 @@
 
                 </table>
                 </center>
+                <br>
                 
                       		
         {% endfor %} 
@@ -133,7 +177,7 @@
                      <tr  align="center">
                                     
                   <td colspan="3" WIDTH="270">
-                    <a href="/habilitar_estudio/{{j.id}}"> <h4>  <font color="red">{{j.nombre}}</font> </h4> </a>  
+                    <a href="/habilitar_estudio/{{j.id}}"> <h5>  <font color="red">{{j.nombre}}</font> </h5> </a>  
 
                      <a href="/habilitar_estudio/{{j.id}}" class="btn btn-success" role="button">Quiero ver este estudio, me interesa</a> 
 
@@ -167,7 +211,8 @@
                 </tr >                                                   
 
                 </table>
-                </center>   
+                </center>  
+                <br> 
 
 
 
@@ -217,7 +262,8 @@
                 </tr >                                                   
 
                 </table>
-                </center>   
+                </center> 
+                <br>  
                            
 
 

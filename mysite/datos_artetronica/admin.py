@@ -26,14 +26,14 @@ class RulesAdmin(admin.ModelAdmin):
     form = CodigoForm
 class CodigoAdmin(admin.ModelAdmin):
         model = Codigo
-        list_display = ['nombre_usuario','nombre_estudio']
+        list_display = ['nombre_usuario','solicitud_de_activacion','estado_del_estudio' ,'cantidad_muestras_asignadas','cantidad_muestras_realizadas','costo_por_muestra', 'nombre_estudio']
         def nombre_usuario(self,instance):
                 return instance.usuario.watsapp
         def nombre_estudio(self,instance):
                 return instance.estudio.nombre      
 admin.site.register(Codigo,CodigoAdmin)
 ####################################################
-        
+    
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = CategoriaForm

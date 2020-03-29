@@ -3,14 +3,14 @@
 {% load staticfiles %} 
  
 
-<br>
+
 <center><h3><p>GRACIAS POR SUSCRIBIRTE A ESTE ESTUDIO</p></h3></center>
-
-<p>Nombre: {{estudio.nombre}}</p>
-<p>Costo Suscripcion $: {{estudio.precio_por_suscripcion}}  (Pago unico)</p>
+estudio_actual
+<p>Nombre: {{estudio_actual.nombre}}</p>
+<p>Costo Suscripcion $: {{estudio_actual.precio_por_suscripcion}}  (Pago unico)</p>
 
 <br>
-<p>Este estudio tienen un costo unico de ${{estudio.precio_por_suscripcion}}
+<p>Este estudio tienen un costo unico de ${{estudio_actual.precio_por_suscripcion}}
 Por el momento usted esta solicitando suscribirse, un administrador se comunicara con usted para gestionar su pago y poder habilitar el acseso al estudio.</p>
 
 <br>
@@ -19,16 +19,14 @@ Por el momento usted esta solicitando suscribirse, un administrador se comunicar
 <p>Pago personal, al encargado del estudio</p>
 <br>
 
-<p>O comuniquese con este numero para agilizar el proceso de Suscripcion</p>
+<p>O envie un mensaje por WhatsApp para agilizar el proceso de Suscripcion</p>
+<br>
+<center>
+<td WIDTH="60"><a href="https://api.whatsapp.com/send?phone=50378218224&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td></center>
 
 <br>
 <p>De igual manera si usted aplica para colaborar como Encuestador, un administrador se comunicara con usted para continuar con el proceso</p>
-<br>
-<td WIDTH="60"><a href="https://api.whatsapp.com/send?phone=50378218224&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>
 
-<br>
-
-
-          
+         
 
 {% endblock %}

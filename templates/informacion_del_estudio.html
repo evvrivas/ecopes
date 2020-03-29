@@ -19,7 +19,7 @@
 
        
 <br>
-        <p>CATEGOORIA: {{estudio.categoria.nombre}}</p>
+      <p>CATEGOORIA: {{estudio.categoria.nombre}},Tipo: {{estudio.tipo_de_estudio}}</p>
 		 
 		 <br>
 		 <p>Descripcion del estudio :{{estudio.descripcion}}</p>
@@ -28,7 +28,7 @@
 		 <p>Fecha inicio {{estudio.fecha_inicio}}</p>
 		 <p>Fecha final {{estudio.fecha_final}}</p>
 		 
-		<p> Tipo de estudio: {{estudio.tipo_de_estudio}}</p>
+		
 <br>
 
 		 <p>Numero de muestras Tomadas: {{estudio.n_muestras}}</p>
@@ -36,6 +36,18 @@
 		 <p>Puntos de Error: {{estudio.error}}</p>
 		 <p>Nivel de confianza: {{estudio.confianza}}</p>
 		 
+		 <br>
+		 <center><p>CUESTIONARIO</p></center>
+		 <br>
+
+		 {% for i in preguntas %}
+		 <p>{{ forloop.counter }}: {{pregunta}}</p>
+         {% endfor %}
+
+
+
+
+
 </center>
 
                        

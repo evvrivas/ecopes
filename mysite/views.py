@@ -169,6 +169,9 @@ def poner_lista_de_estudios(request,bandera):
         lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
         
         vector_de_estudios_publicos=[]
+
+        vector_de_estudios_publicos_habilitados=[]
+        vector_de_estudios_publicos_deshabilitados=[]
         
         vector_de_estudios_de_pago_habilitados=[]
         vector_de_estudios_de_pago_deshabilitados=[]
@@ -178,78 +181,147 @@ def poner_lista_de_estudios(request,bandera):
           
         if bandera=="TODOS":
                  
+
                 estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO")
-                vector_de_estudios_publicos=estudios
+                #vector_de_estudios_publicos=estudios
+                if estudios.count()>0:
+
+
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_publicos_deshabilitados=estudios
+                    else:
+                        for i in estudios:
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_publicos_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_publicos_deshabilitados.append(i)
+                                      
+                            except:
+                              vector_de_estudios_publicos_deshabilitados.append(i)
+
+
+
+
+
+
+
+
+
+
 
 
 
                 estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO")
+                
+                if estudios.count()>0:
 
-                if lista_de_codigos.count()==0:
-                    vector_de_estudios_de_pago_deshabilitados=estudios
-                else:
-                    for i in lista_de_codigos:
-                        for j in estudios:             
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_de_pago_habilitados.append(j)
-                              else:
-                                  vector_de_estudios_de_pago_deshabilitados.append(j)
-                    
-             
+
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_de_pago_deshabilitados=estudios
+                    else:
+                        for i in estudios:
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_de_pago_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_de_pago_deshabilitados.append(i)
+                                      
+                            except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)
+
                
                 estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO")
+                if estudios.count()>0:
 
+                    if lista_de_codigos.count()==0:
+                      vector_de_estudios_privados_deshabilitados=estudios
+                    
+                    else:
+                        for i in estudios:
+                          try:  
+                                    x=lista_de_codigos.get(estudio=i)
 
-                if lista_de_codigos.count()==0:
-                  vector_de_estudios_privados_deshabilitados=estudios
-                
-                else:
-
-                    for i in lista_de_codigos:
-                          for j in estudios:          
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_privados_habilitados.append(j)
-                              else:
-                                  pass                  
+                                    if x.estado_del_estudio=="ACTIVO":
+                                              vector_de_estudios_de_pago_habilitados.append(i)
+                                    else:
+                                              vector_de_estudios_de_pago_deshabilitados.append(i)
+                          except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)
 
 
         elif bandera=="PUBLICO":
-                estudios=Estudios.objects.filter(tipo_de_estudio=bandera)
-                vector_de_estudios_publicos=estudios
+                estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO")
+                if estudios.count()>0:
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_publicos_deshabilitados=estudios
+                    else:
+                        for i in estudios:
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_publicos_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_publicos_deshabilitados.append(i)
+                                      
+                            except:
+                              vector_de_estudios_publicos_deshabilitados.append(i)
+
 
 
         
+
+
+
+
+
         elif bandera=="DE_PAGO":
                 estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO")
+                if estudios.count()>0:
 
-                if lista_de_codigos.count()==0:
-                    vector_de_estudios_de_pago_deshabilitados=estudios
-                else:
-                    for i in lista_de_codigos:
-                        for j in estudios:             
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_de_pago_habilitados.append(j)
-                              else:
-                                  vector_de_estudios_de_pago_deshabilitados.append(j)
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_de_pago_deshabilitados=estudios
+                    else:
+                        for i in estudios:
 
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_de_pago_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_de_pago_deshabilitados.append(i)
+                            except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)  
+
+                   
         elif bandera=="PRIVADO":
                 estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO")
+                if estudios.count()>0:
 
-                if lista_de_codigos.count()==0:
-                  vector_de_estudios_privados_deshabilitados=estudios
-                
-                else:
+                    if lista_de_codigos.count()==0:
+                      vector_de_estudios_privados_deshabilitados=estudios
+                    
+                    else:
+                        
+                        for i in estudios:
+                            try:
+                                    x=lista_de_codigos.get(estudio=i)
 
-                    for i in lista_de_codigos:
-                          for j in estudios:          
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_privados_habilitados.append(j)
-                              else:
-                                  pass         
+                                    if x.estado_del_estudio=="ACTIVO":
+                                              vector_de_estudios_de_pago_habilitados.append(i)
+                                    else:
+                                              vector_de_estudios_de_pago_deshabilitados.append(i)
+                            except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)  
+      
+  
+                      
         else:
                pass
                               
@@ -651,7 +723,9 @@ def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
     return render(request,'pagina_de_analisis.html',locals())
 
 def informacion_del_estudio(request,id_estudio):
-    estudio=Estudios.objects.get(id=id_estudio)    
+    estudio=Estudios.objects.get(id=id_estudio)
+    preguntas=preguntas.objects.filter(estudio__id=id_estudio)
+
     return render(request,'informacion_del_estudio.html',locals())
 
 
@@ -948,11 +1022,12 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 def habilitar_estudio(request,id_del_estudio):      
        
         usuario_actual=request.user.username
+        perfil_usuario_actual=UserProfile.objects.get(watsapp=usuario_actual)
         estudio_actual=Estudios.objects.get(id=id_del_estudio)
         precio_de_la_muestra=estudio_actual.costo_por_muestra
 
 
-        existe=Codigo.objects.filter(usuario=usuario_actual,estudio=estudio_actual).count()
+        existe=Codigo.objects.filter(usuario=perfil_usuario_actual,estudio=estudio_actual).count()
         
         if existe>0:
 
@@ -960,7 +1035,7 @@ def habilitar_estudio(request,id_del_estudio):
 
         else:
             date=datetime.datetime.now()  
-            nuevo=Codigo(usuario=usuario_actual,estudio=estudio_actual,solicitud_de_activacion="ACTIVAR",estado_del_estudio="DESACTIVADO",cantidad_muestras_asignadas=0,cantidad_muestras_realizadas=0,costo_por_muestra=precio_de_la_muestra,fecha_inicio=date,comodin=0)
+            nuevo=Codigo(usuario=perfil_usuario_actual,estudio=estudio_actual,solicitud_de_activacion="ACTIVAR",estado_del_estudio="DESACTIVADO",cantidad_muestras_asignadas=0,cantidad_muestras_realizadas=0,costo_por_muestra=precio_de_la_muestra,fecha_inicio=date,comodin=0)
             nuevo.save()
 
             return render(request,'solicitud_de_suscripcion.html',locals())  
@@ -1331,50 +1406,80 @@ def busqueda(request):
         lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
         
         vector_de_estudios_publicos=[]
+        vector_de_estudios_publicos_habilitados
+        vector_de_estudios_publicos_deshabilitados
         
         vector_de_estudios_de_pago_habilitados=[]
         vector_de_estudios_de_pago_deshabilitados=[]
         
         vector_de_estudios_privados_habilitados=[]
-        
-          
+
+
+
         if bandera=="TODOS":
                  
+
                 estudios=Estudios.objects.filter(tipo_de_estudio="PUBLICO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
-                vector_de_estudios_publicos=estudios
+                #vector_de_estudios_publicos=estudios
+                if estudios.count()>0:
+
+
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_publicos_deshabilitados=estudios
+                    else:
+                        for i in estudios:
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_publicos_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_publicos_deshabilitados.append(i)
+                                      
+                            except:
+                              vector_de_estudios_publicos_deshabilitados.append(i)
+
 
 
                 estudios=Estudios.objects.filter(tipo_de_estudio="DE_PAGO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
+                
+                if estudios.count()>0:
 
-                if lista_de_codigos.count()==0:
-                    vector_de_estudios_de_pago_deshabilitados=estudios
-                else:
-                    for i in lista_de_codigos:
-                        for j in estudios:             
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_de_pago_habilitados.append(j)
-                              else:
-                                  vector_de_estudios_de_pago_deshabilitados.append(j)
-                    
-             
+
+                    if lista_de_codigos.count()==0:
+                        vector_de_estudios_de_pago_deshabilitados=estudios
+                    else:
+                        for i in estudios:
+                            try:
+                                x=lista_de_codigos.get(estudio=i)
+
+                                if x.estado_del_estudio=="ACTIVO":
+                                          vector_de_estudios_de_pago_habilitados.append(i)
+                                else:
+                                          vector_de_estudios_de_pago_deshabilitados.append(i)
+                                      
+                            except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)
+
                
                 estudios=Estudios.objects.filter(tipo_de_estudio="PRIVADO").filter(Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) | Q(categoria__nombre__icontains=palabra))
+                if estudios.count()>0:
 
+                    if lista_de_codigos.count()==0:
+                      vector_de_estudios_privados_deshabilitados=estudios
+                    
+                    else:
+                        for i in estudios:
+                          try:  
+                                    x=lista_de_codigos.get(estudio=i)
 
-                if lista_de_codigos.count()==0:
-                  vector_de_estudios_privados_deshabilitados=estudios
-                
-                else:
-
-                    for i in lista_de_codigos:
-                          for j in estudios:          
-                     
-                              if j.id==i.estudio.id:
-                                  vector_de_estudios_privados_habilitados.append(j)
-                              else:
-                                  pass                  
-                   
+                                    if x.estado_del_estudio=="ACTIVO":
+                                              vector_de_estudios_de_pago_habilitados.append(i)
+                                    else:
+                                              vector_de_estudios_de_pago_deshabilitados.append(i)
+                          except:
+                              vector_de_estudios_de_pago_deshabilitados.append(i)
+                 
 
         return render(request,'lista_de_estudios.html',locals())
      return render(request,'lista_de_estudios.html',locals())
@@ -1383,6 +1488,19 @@ def busqueda(request):
 def manual_de_usuario(request):
     
     return render(request,'manual_de_usuario.html',locals())
+
+
+
+class crear_categorias(models.Model):
+        
+        cat=['POLITICA','ECONOMIA','PHYCOSOCIAL','COMERCIAL', 'ACADEMICO','CIENTIFICA','DEPORTIVA','SOCIAL', 'TECNOLOGICO']
+        
+        cat=["NACIONAL","AHUACHAPAN","CABAÑAS","CUSCATLAN","CHALATENANGO","LA LIBERTAD","LA PAZ","LA UNION","MORAZAN","SANTA ANA","SAN MIGUEL","SONSONATE","SAN SALVADOR","SAN VICENTE","USULUTAN"]          
+        
+        for i in cat:
+            p1=Estudios(nombre=i)
+            p1.save() 
+        return render(request,'principal.html',locals())
 
 def crear_estudio_CH5NOV(request):        
               
@@ -1411,7 +1529,7 @@ def crear_estudio_CH5NOV(request):
         p21=Preguntas(estudio=p1, pregunta=pregunta_est)
         p21.save()
                     
-        la_opcion="Soy Trabajador"          
+        ,="Soy Trabajador"          
         p31=Opciones(pregunta=p21,opcion=la_opcion)
         p31.save()
 
@@ -1686,7 +1804,7 @@ def crear_estudio_FPMA(request):
 #             )
         tipo_estudio="DE_PAGO"
 
-        nombre_estudio="EStudio: Nivel de Aceptacion de Figuras Publicas del Municipio de Ahuachapán (Marzo 2020)"
+        nombre_estudio="Encuesta: Coyuntura actual y nivel de aceptacion de Diputados y Alcalde del Municipio de Ahuachapán (Marzo 2020)"
         date=datetime.datetime.now()
         precio=0.15
         precio_suscrip=10.00
@@ -2488,7 +2606,7 @@ def crear_estudio_PDAD(request):
 #             )
         tipo_estudio="DE_PAGO"
 
-        nombre_estudio="Se lleva un registro Mensual del indice de popularidad de Alcaldes y Diputados del departamento de Ahuachapanecas)"
+        nombre_estudio="Registro (Mensual)  del indice de popularidad de Diputados del departamento de Ahuachapán)"
         date=datetime.datetime.now()
         precio=0.15
         precio_suscrip=10.00
@@ -2853,7 +2971,7 @@ def crear_estudio_PADA(request):
 #             )
         tipo_estudio="DE_PAGO"
 
-        nombre_estudio="Se lleva un registro Mensual del indice de popularidad de Alcaldes y Diputados del departamento de Ahuachapanecas)"
+        nombre_estudio="Encuesta Que mide el nivel de popularidad de los alcaldes del Departamento de Ahuachapan)"
         date=datetime.datetime.now()
         precio=0.15
         precio_suscrip=10.00
@@ -3030,7 +3148,7 @@ def crear_estudio_APPS(request):
 #             )
         tipo_estudio="DE_PAGO"
 
-        nombre_estudio="Estudio de satisfaccion y conocimiento de proyectos tecnologicos de Servicio delibery En el Salvador"
+        nombre_estudio="Investigacion sobre Apps y/o proyectos de ventas Online y Servicio delibery En el Salvador"
         date=datetime.datetime.now()
         precio=0.15
         precio_suscrip=10.00
@@ -3443,12 +3561,7 @@ def crear_estudio_APPS(request):
 
         la_opcion="Malo"          
         p31=Opciones(pregunta=p21,opcion=la_opcion)
-        p31.save()
-
- 
-
-
-       
+        p31.save()      
 
       
 
