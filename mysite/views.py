@@ -159,7 +159,7 @@ def editar_usuario(request):
            
              return render(request,'formulario_ingreso.html',locals())
 
-
+@login_required
 def poner_lista_de_estudios(request,bandera):
 
         usuario=UserProfile.objects.get(watsapp=request.user.username)
@@ -332,7 +332,7 @@ def poner_lista_de_estudios(request,bandera):
         return render(request,'lista_de_estudios.html',locals())
      
 
-
+@login_required
 def poner_cuestionario(request,id_estudio):
 
       vector_de_opciones=[]
@@ -356,7 +356,7 @@ def poner_cuestionario(request,id_estudio):
 
 
      
-     
+@login_required     
 def agregar_encuesta(request,id_estudio):
     
     if request.POST:
@@ -589,7 +589,7 @@ def agregar_encuesta(request,id_estudio):
     return render(request,'principal.html',locals())
 
 
-
+@login_required
 def actualizar_previo_a_graficar(request,id_estudio):     
          
       id_estudio=id_estudio
@@ -659,7 +659,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       estudio_actual.save()      
       return render(request,'confirmar_encuesta.html',locals())
 
-
+@login_required
 def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
          
              #keys = list_freq.keys();
@@ -700,7 +700,7 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
                   p.save() 
 
 
-
+@login_required
 def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
 
     pregunta=Preguntas.objects.get(id=id_pregunta)
@@ -721,7 +721,7 @@ def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
    
     #tabla_resultados=Cuestionario_principal.objects.filter(estudio__nombre=pregunta.estudio.nombre)
     return render(request,'pagina_de_analisis.html',locals())
-
+@login_required
 def informacion_del_estudio(request,id_estudio):
     estudio=Estudios.objects.get(id=id_estudio)
     preguntas=preguntas.objects.filter(estudio__id=id_estudio)
@@ -729,7 +729,7 @@ def informacion_del_estudio(request,id_estudio):
     return render(request,'informacion_del_estudio.html',locals())
 
 
-
+@login_required
 def hacer_grafico_de_barras(request,id_pregunta):
         vector_de_opciones=[]
         vector_de_repeticiones=[]
@@ -796,7 +796,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
 
 
 
-
+@login_required
 def hacer_grafico_de_pastel(request,id_pregunta):
         vector_de_opciones=[]
         vector_de_repeticiones=[]
@@ -854,7 +854,7 @@ def hacer_grafico_de_pastel(request,id_pregunta):
         
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
-
+@login_required
 def hacer_grafico_de_secuencia(request,id_pregunta):
        
        opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta__id=id_pregunta)
@@ -944,7 +944,7 @@ def hacer_grafico_de_secuencia(request,id_pregunta):
         
        return HttpResponse (buffer.getvalue(), content_type="Image/png")
 
-
+@login_required
 def hacer_grafico_de_tendencia(request,id_pregunta):
        
        opcion_secuencial=Opciones_acumuladas.objects.filter(pregunta__id=id_pregunta)
@@ -1018,7 +1018,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 
 
 
-
+@login_required
 def habilitar_estudio(request,id_del_estudio):      
        
         usuario_actual=request.user.username
@@ -1040,7 +1040,7 @@ def habilitar_estudio(request,id_del_estudio):
 
             return render(request,'solicitud_de_suscripcion.html',locals())  
 
-
+@login_required
 def ver_mis_numeros(request):
       usuario_actual=request.user.username
       perfil_del_usuario=UserProfile.objects.get(watsapp=usuario_actual)
@@ -1050,7 +1050,7 @@ def ver_mis_numeros(request):
     
 
       return render(request,'ver_mis_numeros.html',locals())
-
+@login_required
 def filtro_casero(id_del_estudio,x,opcion):
 
       if x==2:
@@ -1156,7 +1156,7 @@ def filtro_casero(id_del_estudio,x,opcion):
       else: 
         pass
       return arreglo_filtrado_con_la_opcion 
-
+@login_required
 def filtro_casero_2(vector,x,opcion):
       if x==2:
           arreglo_filtrado_con_la_opcion=vector.filter(respuesta_1=opcion).count()
@@ -1262,7 +1262,7 @@ def filtro_casero_2(vector,x,opcion):
         pass
       return arreglo_filtrado_con_la_opcion 
 
-
+@login_required
 def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta_hijo):
         pregunta_padre=Preguntas.objects.get(id=id_pregunta_padre)
         pregunta_hijo=Preguntas.objects.get(id=id_pregunta_hijo)
@@ -1393,7 +1393,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
         return HttpResponse (buffer.getvalue(), content_type="Image/png")
          
 
-
+@login_required
 def busqueda(request):     
      bandera="TODOS"  
      if request.POST:
@@ -1491,7 +1491,7 @@ def manual_de_usuario(request):
 
 
 
-def crear_categorias(models.Model):
+def crear_categorias(request):
         
         cat=['POLITICA','ECONOMIA','PHYCOSOCIAL','COMERCIAL', 'ACADEMICO','CIENTIFICA','DEPORTIVA','SOCIAL', 'TECNOLOGICO']
         
