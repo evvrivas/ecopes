@@ -962,7 +962,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 
        x=len(nombre_opcion)+2
        for i in range(3,x):
-            vector1=opc bnb nion_secuencial.values_list(texto[i], flat=True)
+            vector1=opcion_secuencial.values_list(texto[i], flat=True)
             
             total=sum(vector1)            
             vector22=np.array(vector1)
