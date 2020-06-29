@@ -101,7 +101,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = Cuestionario_temporalForm
 class Cuestionario_temporalAdmin(admin.ModelAdmin):
         model = Cuestionario_temporal
-        list_display = ['nombre_estudio','respuesta_1','respuesta_2','respuesta_3','respuesta_4','respuesta_5']
+        list_display = ['nombre_estudio','respuesta_1','respuesta_2','respuesta_3','respuesta_4','respuesta_5','respuesta_6','respuesta_7','respuesta_8','respuesta_9','respuesta_10']
         def nombre_estudio(self,instance):
                 return instance.estudio.nombre
 

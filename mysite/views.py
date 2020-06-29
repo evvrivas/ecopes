@@ -542,7 +542,8 @@ def agregar_encuesta(request,id_estudio):
 
             usuario_actual=request.user.username
 
-            codigo=Codigo.objects.get(usuario__watsapp=usuario_actual)
+            codigo=Codigo.objects.get(usuario__watsapp=usuario_actual,estudio__id=id_estudio )
+
             a=codigo.cantidad_muestras_realizadas
             a=a+1
             codigo.cantidad_muestras_realizadas=a
@@ -659,7 +660,7 @@ def actualizar_previo_a_graficar(request,id_estudio):
       estudio_actual.save()      
       return render(request,'confirmar_encuesta.html',locals())
 
-@login_required
+
 def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
          
              #keys = list_freq.keys();
@@ -700,15 +701,19 @@ def guardar_en_acumulados(vector_de_acumulados,pregunta_actual):
                   p.save() 
 
 
+
+
+
+
 @login_required
 def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
 
-    pregunta=Preguntas.objects.get(id=id_pregunta)
-    id_estudio=pregunta.estudio.id
+    preguntar=Preguntas.objects.get(id=id_pregunta)
+    id_estudio=preguntar.estudio.id
 
-    lista_de_opciones=Opciones.objects.filter(pregunta__pregunta=pregunta.pregunta) 
+    lista_de_opciones=Opciones.objects.filter(pregunta__pregunta=preguntar.pregunta) 
     
-    nombre_de_pregunta=pregunta.pregunta   
+    nombre_de_pregunta=preguntar.pregunta   
     id_pregunta=id_pregunta
     bandera=bandera
     id_pregunta_de_cruze=id_pregunta_de_cruze
@@ -724,7 +729,7 @@ def pagina_de_analisis(request, id_pregunta,id_pregunta_de_cruze,bandera):
 @login_required
 def informacion_del_estudio(request,id_estudio):
     estudio=Estudios.objects.get(id=id_estudio)
-    preguntas=preguntas.objects.filter(estudio__id=id_estudio)
+    preguntas=Preguntas.objects.filter(estudio__id=id_estudio)
 
     return render(request,'informacion_del_estudio.html',locals())
 
@@ -745,7 +750,7 @@ def hacer_grafico_de_barras(request,id_pregunta):
         total=sum(vector_de_repeticiones)
         a=np.array(vector_de_repeticiones)
         b=a*100/total
-        b=round(b,2)
+        b=numpy.round(b,2)
   
         X= np.arange(len(vector_de_opciones))
         X=X+1
@@ -813,6 +818,7 @@ def hacer_grafico_de_pastel(request,id_pregunta):
         total=sum(vector_de_repeticiones)
         a=np.array(vector_de_repeticiones)
         b=a*100/total
+        b=numpy.round(b,2)
   
         X= np.arange(len(vector_de_opciones))
         X=X+1
@@ -956,7 +962,7 @@ def hacer_grafico_de_tendencia(request,id_pregunta):
 
        x=len(nombre_opcion)+2
        for i in range(3,x):
-            vector1=opcion_secuencial.values_list(texto[i], flat=True)
+            vector1=opc bnb nion_secuencial.values_list(texto[i], flat=True)
             
             total=sum(vector1)            
             vector22=np.array(vector1)
@@ -1050,7 +1056,7 @@ def ver_mis_numeros(request):
     
 
       return render(request,'ver_mis_numeros.html',locals())
-@login_required
+#@login_required
 def filtro_casero(id_del_estudio,x,opcion):
 
       if x==2:
@@ -1156,7 +1162,7 @@ def filtro_casero(id_del_estudio,x,opcion):
       else: 
         pass
       return arreglo_filtrado_con_la_opcion 
-@login_required
+
 def filtro_casero_2(vector,x,opcion):
       if x==2:
           arreglo_filtrado_con_la_opcion=vector.filter(respuesta_1=opcion).count()
@@ -1359,7 +1365,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             total=sum(i)
             a=np.array(i)
             b=a*100/total
-            b=round(b, 2)
+            b=numpy.round(b,2)
 
             Y1 = np.asarray(b)
             X= np.arange(len(i))
@@ -1370,7 +1376,7 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             bar_width = 0.45
             plt.bar(X, Y1, bar_width, color='b')
             plt.yticks()
-            plt.xticks()
+            plt.xticks(X)
             z=0 
             for x, y in zip(X, Y1):
                 plt.text(x, y ,str(y), ha='center', va= 'center')
@@ -1379,11 +1385,11 @@ def graficar_cruse_de_datos(request,id_del_estudio,id_pregunta_padre,id_pregunta
             a=titulos[tit]
             plt.title(a)            
             tit=tit+1
-                
+        f.tight_layout()        
         #plt.xticks(X)
         buffer = io.BytesIO()
         canvas = pylab.get_current_fig_manager().canvas
-        canvas.setPageSize((5*inch, 8*inch))
+        #canvas.setPageSize((5*inch, 8*inch))
         canvas.draw()        
         graphIMG = PIL.Image.fromstring('RGB', canvas.get_width_height(), canvas.tostring_rgb())
         graphIMG.save(buffer, "PNG")
@@ -1406,8 +1412,8 @@ def busqueda(request):
         lista_de_codigos=Codigo.objects.filter(usuario__watsapp=usuario_actual)
         
         vector_de_estudios_publicos=[]
-        vector_de_estudios_publicos_habilitados
-        vector_de_estudios_publicos_deshabilitados
+        vector_de_estudios_publicos_habilitados=[]
+        vector_de_estudios_publicos_deshabilitados=[]
         
         vector_de_estudios_de_pago_habilitados=[]
         vector_de_estudios_de_pago_deshabilitados=[]
@@ -1498,7 +1504,7 @@ def crear_categorias(request):
         cat=["NACIONAL","AHUACHAPAN","CABAÑAS","CUSCATLAN","CHALATENANGO","LA LIBERTAD","LA PAZ","LA UNION","MORAZAN","SANTA ANA","SAN MIGUEL","SONSONATE","SAN SALVADOR","SAN VICENTE","USULUTAN"]          
         
         for i in cat:
-            p1=Estudios(nombre=i)
+            p1=Categoria(nombre=i)
             p1.save() 
         return render(request,'principal.html',locals())
 

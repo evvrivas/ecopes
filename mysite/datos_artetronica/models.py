@@ -89,6 +89,7 @@ class Codigo(models.Model):
 	fecha_inicio= models.DateField(default=datetime.now)
 
 	comodin=models.CharField(max_length=12,blank=True,null=True)
+	comodin2=models.CharField(max_length=12,blank=True,null=True)
 
 
 	def __str__(self):
