@@ -17,7 +17,7 @@ django-resized
 #django-toolbelt==0.0.1
 #gunicorn==19.3.0
 
-Pillow==2.7.0
+Pillow==10.0.1
 django-dbbackup
 numpy
 scipy
